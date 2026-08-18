@@ -103,7 +103,7 @@ body {
 @media (max-width: 780px) { .topnav { display: none; } }
 
 /* HERO — full-bleed photo, explicit light text (not var(--ink), which is dark now) */
-.hero { position:relative; padding: 140px 0 60px; text-align: center; overflow:hidden; background:var(--dark); color:#f2ede0; }
+.hero { position:relative; min-height:94vh; display:flex; flex-direction:column; justify-content:center; padding: 140px 0 60px; text-align: center; overflow:hidden; background:var(--dark); color:#f2ede0; }
 .hero img.bg{position:absolute; inset:-3%; width:106%; height:106%; object-fit:cover; opacity:0.55; animation:heroDrift 34s ease-in-out infinite alternate;}
 @keyframes heroDrift{0%{transform:scale(1.03) translate(0,0);} 100%{transform:scale(1.09) translate(-1.2%,-1%);}}
 .hero .clouds{position:absolute; inset:-20% -40%; pointer-events:none; mix-blend-mode:soft-light; opacity:0.6;
@@ -126,6 +126,16 @@ body {
 .meta-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .2em; color: #a39c8c; text-transform: uppercase; }
 .meta-value { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: #f2ede0; margin-top: 4px; }
 .meta-value em { color: #d9b471; font-style: italic; }
+
+/* ============ 3D GLOBE ============ */
+.globe-section{position:relative; height:100vh; min-height:600px; background:var(--dark); overflow:hidden;}
+.globe-caption{position:absolute; top:60px; left:0; right:0; z-index:3; text-align:center; pointer-events:none;}
+.globe-caption .section-title{max-width:none;}
+#globe-canvas-wrap{position:absolute; inset:0; z-index:1; cursor:grab;}
+#globe-canvas-wrap:active{cursor:grabbing;}
+#globe-canvas{display:block; width:100%; height:100%;}
+#globe-tooltip{position:absolute; z-index:4; pointer-events:none; background:rgba(14,12,9,0.92); border:1px solid rgba(217,180,113,0.4); color:#f2ede0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:8px 14px; border-radius:2px; opacity:0; transition:opacity .15s; white-space:nowrap;}
+#globe-tooltip.show{opacity:1;}
 
 /* ============ COUNTRY > STATE > CITY BROWSER ============ */
 .browse-section { padding: 80px 0; border-top: 1px solid var(--line); }
@@ -523,6 +533,17 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
     <div class="meta-item"><div class="meta-label">Published</div><div class="meta-value">Ongoing</div></div>
   </div>
   </div>
+</section>
+
+<!-- 3D GLOBE -->
+<section class="globe-section" id="globe-section">
+  <div class="globe-caption">
+    <div class="section-label" style="color:#d9b471;">§ Where in the world</div>
+    <h2 class="section-title" style="color:#f2ede0;">Spin it. <em>Click a country.</em></h2>
+    <p class="section-intro" style="color:#a39c8c;">Drag to rotate. Click a lit country to jump straight to its issues below.</p>
+  </div>
+  <div id="globe-canvas-wrap"><canvas id="globe-canvas"></canvas></div>
+  <div id="globe-tooltip"></div>
 </section>
 
 <!-- COUNTRY > STATE > CITY BROWSER -->
@@ -1071,6 +1092,194 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
       .then(() => { form.style.display='none'; document.getElementById('subSuccess').style.display='block'; })
       .catch(() => { form.style.display='none'; document.getElementById('subSuccess').style.display='block'; });
     e.preventDefault(); return false;
+  }
+</script>
+
+<script type="module">
+  import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+
+  const wrap = document.getElementById('globe-canvas-wrap');
+  const canvas = document.getElementById('globe-canvas');
+  const tooltip = document.getElementById('globe-tooltip');
+  if (wrap && canvas) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
+    camera.position.z = 6.2;
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+
+    // starfield / milky way — thousands of procedural points, no external image needed
+    function makeStars(count, radius, size, color, opacity) {
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        const r = radius * (0.6 + Math.random() * 0.4);
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        positions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+        positions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+        positions[i*3+2] = r * Math.cos(phi);
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const mat = new THREE.PointsMaterial({ color, size, transparent: true, opacity, depthWrite: false });
+      return new THREE.Points(geo, mat);
+    }
+    scene.add(makeStars(2600, 40, 0.045, 0xf2ede0, 0.85));
+    scene.add(makeStars(1400, 25, 0.03, 0xd9b471, 0.5));
+
+    // faint milky-way band — a flattened, tilted disc of denser stars
+    const bandGroup = new THREE.Group();
+    bandGroup.add(makeStars(1800, 30, 0.05, 0xffffff, 0.35));
+    bandGroup.scale.set(1, 0.15, 1);
+    bandGroup.rotation.z = 0.5;
+    bandGroup.rotation.x = 0.3;
+    scene.add(bandGroup);
+
+    // shooting stars — a handful of line trails that periodically streak across
+    const shootingStars = [];
+    function spawnShootingStar() {
+      const startR = 12 + Math.random()*6;
+      const theta = Math.random()*Math.PI*2, phi = Math.acos(2*Math.random()-1);
+      const start = new THREE.Vector3(startR*Math.sin(phi)*Math.cos(theta), startR*Math.sin(phi)*Math.sin(theta), startR*Math.cos(phi));
+      const dir = start.clone().negate().normalize().add(new THREE.Vector3((Math.random()-0.5)*0.6,(Math.random()-0.5)*0.6,(Math.random()-0.5)*0.6)).normalize();
+      const trailLen = 1.4;
+      const geo = new THREE.BufferGeometry().setFromPoints([start, start.clone().add(dir.clone().multiplyScalar(-trailLen))]);
+      const mat = new THREE.LineBasicMaterial({ color: 0xf2ede0, transparent: true, opacity: 0.9 });
+      const line = new THREE.Line(geo, mat);
+      scene.add(line);
+      shootingStars.push({ line, pos: start, dir, life: 0, maxLife: 1.4 + Math.random() });
+    }
+    setInterval(() => { if (Math.random() < 0.7) spawnShootingStar(); }, 1400);
+
+    // the globe itself — dotted/wireframe sphere, no texture image (keeps this reliable, no guessed-URL risk)
+    const globeGroup = new THREE.Group();
+    scene.add(globeGroup);
+    const R = 2;
+    const wireGeo = new THREE.SphereGeometry(R, 28, 20);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0x8a6425, wireframe: true, transparent: true, opacity: 0.28 });
+    globeGroup.add(new THREE.Mesh(wireGeo, wireMat));
+    const coreGeo = new THREE.SphereGeometry(R*0.985, 32, 24);
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0x0e0c09, transparent: true, opacity: 0.65 });
+    globeGroup.add(new THREE.Mesh(coreGeo, coreMat));
+    const glowGeo = new THREE.SphereGeometry(R*1.04, 32, 24);
+    const glowMat = new THREE.MeshBasicMaterial({ color: 0xd9b471, transparent: true, opacity: 0.06, side: THREE.BackSide });
+    globeGroup.add(new THREE.Mesh(glowGeo, glowMat));
+
+    // real lat/lng for the 5 countries in the data model
+    const countries = [
+      { id: 'india',    name: 'India',      lat: 22.0,  lng: 79.0,  live: true  },
+      { id: 'thailand', name: 'Thailand',   lat: 15.9,  lng: 101.0, live: true  },
+      { id: 'nepal',    name: 'Nepal',      lat: 28.4,  lng: 84.1,  live: false },
+      { id: 'bhutan',   name: 'Bhutan',     lat: 27.5,  lng: 90.4,  live: false },
+      { id: 'srilanka', name: 'Sri Lanka',  lat: 7.9,   lng: 80.8,  live: false },
+    ];
+    function latLngToVec3(lat, lng, r) {
+      const phi = (90 - lat) * Math.PI / 180;
+      const theta = (lng + 180) * Math.PI / 180;
+      return new THREE.Vector3(
+        -r * Math.sin(phi) * Math.cos(theta),
+         r * Math.cos(phi),
+         r * Math.sin(phi) * Math.sin(theta)
+      );
+    }
+    const markers = [];
+    countries.forEach(c => {
+      const pos = latLngToVec3(c.lat, c.lng, R * 1.01);
+      const dotGeo = new THREE.SphereGeometry(c.live ? 0.05 : 0.035, 12, 12);
+      const dotMat = new THREE.MeshBasicMaterial({ color: c.live ? 0xd9b471 : 0x5c564c });
+      const dot = new THREE.Mesh(dotGeo, dotMat);
+      dot.position.copy(pos);
+      dot.userData = c;
+      globeGroup.add(dot);
+      markers.push(dot);
+      if (c.live) {
+        const ringGeo = new THREE.RingGeometry(0.08, 0.1, 24);
+        const ringMat = new THREE.MeshBasicMaterial({ color: 0xd9b471, transparent: true, opacity: 0.55, side: THREE.DoubleSide });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.position.copy(pos);
+        ring.lookAt(0, 0, 0);
+        globeGroup.add(ring);
+      }
+    });
+
+    // interaction: drag to rotate, auto-rotate when idle, click a marker to jump to it
+    let dragging = false, lastX = 0, lastY = 0, autoRotate = true, velX = 0.0018;
+    wrap.addEventListener('pointerdown', e => { dragging = true; autoRotate = false; lastX = e.clientX; lastY = e.clientY; });
+    window.addEventListener('pointerup', () => { dragging = false; setTimeout(() => autoRotate = true, 2500); });
+    window.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX, dy = e.clientY - lastY;
+      globeGroup.rotation.y += dx * 0.005;
+      globeGroup.rotation.x += dy * 0.005;
+      globeGroup.rotation.x = Math.max(-1.1, Math.min(1.1, globeGroup.rotation.x));
+      lastX = e.clientX; lastY = e.clientY;
+    });
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let hovered = null;
+    function pickMarker(clientX, clientY) {
+      const rect = wrap.getBoundingClientRect();
+      mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const hits = raycaster.intersectObjects(markers);
+      return hits.length ? hits[0].object : null;
+    }
+    wrap.addEventListener('pointermove', e => {
+      if (dragging) { tooltip.classList.remove('show'); return; }
+      const m = pickMarker(e.clientX, e.clientY);
+      if (m) {
+        hovered = m;
+        tooltip.textContent = m.userData.live ? m.userData.name + ' — live' : m.userData.name + ' — coming soon';
+        tooltip.style.left = (e.clientX + 16) + 'px';
+        tooltip.style.top = (e.clientY - 10) + 'px';
+        tooltip.classList.add('show');
+        wrap.style.cursor = 'pointer';
+      } else {
+        hovered = null;
+        tooltip.classList.remove('show');
+        wrap.style.cursor = 'grab';
+      }
+    });
+    wrap.addEventListener('click', e => {
+      const m = pickMarker(e.clientX, e.clientY);
+      if (!m) return;
+      const c = m.userData;
+      if (c.live && typeof sel !== 'undefined') {
+        sel.country = c.id; sel.state = c.id === 'india' ? 'himachal' : Object.keys(slowMap[c.id].states)[0];
+        renderCountries(); renderStates(); renderCities(); updatePath();
+        document.getElementById('browse').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (!c.live) {
+        tooltip.textContent = c.name + ' — coming soon';
+        tooltip.classList.add('show');
+        setTimeout(() => tooltip.classList.remove('show'), 1600);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = wrap.clientWidth / wrap.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+    });
+
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const dt = clock.getDelta();
+      if (autoRotate) globeGroup.rotation.y += velX;
+      bandGroup.rotation.y += 0.0003;
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const s = shootingStars[i];
+        s.life += dt;
+        s.line.position.addScaledVector(s.dir, dt * 9);
+        s.line.material.opacity = Math.max(0, 0.9 * (1 - s.life / s.maxLife));
+        if (s.life > s.maxLife) { scene.remove(s.line); s.line.geometry.dispose(); s.line.material.dispose(); shootingStars.splice(i, 1); }
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
   }
 </script>
 
