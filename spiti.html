@@ -41,7 +41,8 @@
 
   /* HERO — video, stays dark */
   .hero{position:relative; min-height:94vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--dark);}
-  .hero video, .hero img.poster{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.55;}
+  .hero video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.1s ease;}
+  .hero video.ready{opacity:0.55;}
   .hero::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(14,12,9,0.6) 0%, rgba(14,12,9,0.1) 32%, rgba(14,12,9,0.4) 66%, rgba(14,12,9,0.98) 100%);}
   .hero-content{position:relative; z-index:2; padding:0 32px 60px; max-width:1180px; margin:0 auto; width:100%; color:#f2ede0;}
   .pill{display:inline-block; border:1px solid rgba(242,237,224,0.5); border-radius:20px; padding:6px 16px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2.5px; font-weight:500; margin-bottom:22px;}
@@ -169,7 +170,7 @@
 </nav>
 
 <div class="hero">
-  <video class="poster" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=60">
+  <video id="hero-video" autoplay muted loop playsinline>
     <source src="https://videos.pexels.com/video-files/856323/856323-hd_1920_1080_30fps.mp4" type="video/mp4">
   </video>
   <div class="hero-content">
@@ -454,6 +455,16 @@
 </footer>
 
 <script>
+  // fade the hero video in once it actually has a frame to show, instead of
+  // jump-cutting from a mismatched poster image to the real footage
+  (function(){
+    var v = document.getElementById('hero-video');
+    if(!v) return;
+    var reveal = function(){ v.classList.add('ready'); };
+    if(v.readyState >= 2) reveal();
+    v.addEventListener('loadeddata', reveal, {once:true});
+  })();
+
   function jump(id){
     var el = document.getElementById('v-' + id);
     if(!el) return;
