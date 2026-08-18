@@ -102,19 +102,9 @@ body {
 .topnav a:hover { color: var(--amber); }
 @media (max-width: 780px) { .topnav { display: none; } }
 
-/* HERO — full-bleed photo, explicit light text (not var(--ink), which is dark now) */
-.hero { position:relative; min-height:94vh; display:flex; flex-direction:column; justify-content:center; padding: 140px 0 60px; text-align: center; overflow:hidden; background:var(--dark); color:#f2ede0; }
-.hero img.bg{position:absolute; inset:-3%; width:106%; height:106%; object-fit:cover; opacity:0.55; animation:heroDrift 34s ease-in-out infinite alternate;}
-@keyframes heroDrift{0%{transform:scale(1.03) translate(0,0);} 100%{transform:scale(1.09) translate(-1.2%,-1%);}}
-.hero .clouds{position:absolute; inset:-20% -40%; pointer-events:none; mix-blend-mode:soft-light; opacity:0.6;
-  background:
-    radial-gradient(ellipse 26% 14% at 20% 30%, rgba(255,255,255,0.9), transparent 70%),
-    radial-gradient(ellipse 34% 16% at 55% 18%, rgba(255,255,255,0.75), transparent 70%),
-    radial-gradient(ellipse 22% 12% at 80% 40%, rgba(255,255,255,0.8), transparent 70%);
-  animation:cloudDrift 70s linear infinite;}
-@keyframes cloudDrift{0%{transform:translateX(-6%);} 100%{transform:translateX(6%);}}
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(14,12,9,0.35) 0%, rgba(14,12,9,0.15) 30%, rgba(14,12,9,0.55) 70%, rgba(14,12,9,0.96) 100%);}
-.hero .container{position:relative; z-index:2;}
+/* HERO — the rotating 3D globe IS the visual now, explicit light text */
+.hero { position:relative; height:100vh; min-height:640px; display:flex; flex-direction:column; justify-content:center; padding: 140px 0 60px; text-align: center; overflow:hidden; background:var(--dark); color:#f2ede0; }
+.hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg, rgba(14,12,9,0.15) 0%, rgba(14,12,9,0.05) 22%, rgba(14,12,9,0.35) 62%, rgba(14,12,9,0.92) 100%);}
 .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .25em; color: var(--amber-soft); text-transform: uppercase; margin-bottom: 22px; display: flex; align-items: center; justify-content: center; gap: 14px; }
 .hero-eyebrow::before, .hero-eyebrow::after { content:''; height:1px; width:60px; background: linear-gradient(90deg, transparent, var(--amber-soft), transparent); }
 .hero h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(56px, 9vw, 128px); line-height: .92; letter-spacing: -.03em; color:#f2ede0; }
@@ -128,10 +118,7 @@ body {
 .meta-value em { color: #d9b471; font-style: italic; }
 
 /* ============ 3D GLOBE ============ */
-.globe-section{position:relative; height:100vh; min-height:600px; background:var(--dark); overflow:hidden;}
-.globe-caption{position:absolute; top:60px; left:0; right:0; z-index:3; text-align:center; pointer-events:none;}
-.globe-caption .section-title{max-width:none;}
-#globe-canvas-wrap{position:absolute; inset:0; z-index:1; cursor:grab;}
+#globe-canvas-wrap{position:absolute; inset:0; z-index:0; cursor:grab;}
 #globe-canvas-wrap:active{cursor:grabbing;}
 #globe-canvas{display:block; width:100%; height:100%;}
 #globe-tooltip{position:absolute; z-index:4; pointer-events:none; background:rgba(14,12,9,0.92); border:1px solid rgba(217,180,113,0.4); color:#f2ede0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:8px 14px; border-radius:2px; opacity:0; transition:opacity .15s; white-space:nowrap;}
@@ -478,6 +465,31 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
 .share-btn.copied { color: var(--moss); border-color: var(--moss); }
 @media (max-width: 780px) { .share-bar { right: 14px; bottom: 14px; } .share-btn { width: 36px; height: 36px; } }
 
+/* AI CHAT */
+#chatTrigger { position: fixed; left: 24px; bottom: 24px; z-index: 91; width: 54px; height: 54px; border-radius: 14px; border: none; background: var(--amber); color: var(--dark); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 28px -10px rgba(184,134,58,0.55); transition: transform .2s, background .2s; }
+#chatTrigger:hover { transform: translateY(-2px) scale(1.04); background: var(--clay); }
+#chatTrigger svg { width: 22px; height: 22px; }
+#chatPanel { position: fixed; left: 24px; bottom: 92px; z-index: 92; width: 360px; max-width: calc(100vw - 48px); height: 480px; max-height: calc(100vh - 140px); background: var(--card); border: 1px solid var(--line-strong); border-radius: 8px; box-shadow: 0 24px 60px -20px rgba(23,20,16,0.35); display: none; flex-direction: column; overflow: hidden; }
+#chatPanel.open { display: flex; }
+#chatHeader { display: flex; justify-content: space-between; align-items: flex-start; padding: 18px 20px; border-bottom: 1px solid var(--line); background: var(--dark); }
+#chatTitle { font-family: 'Fraunces', serif; font-size: 16px; color: #f2ede0; }
+#chatSub { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #a39c8c; margin-top: 4px; }
+#chatClose { background: none; border: none; color: #a39c8c; font-size: 22px; line-height: 1; cursor: pointer; padding: 0 2px; }
+#chatClose:hover { color: #f2ede0; }
+#chatMessages { flex: 1; overflow-y: auto; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+.chat-msg { font-size: 13.5px; line-height: 1.55; padding: 10px 14px; border-radius: 6px; max-width: 92%; }
+.chat-msg.bot { background: var(--bg-3); color: var(--ink-dim); align-self: flex-start; }
+.chat-msg.user { background: var(--amber); color: #fff; align-self: flex-end; }
+.chat-chips { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.chat-chip { text-align: left; font-family: 'Inter', sans-serif; font-size: 12.5px; padding: 9px 12px; border: 1px solid var(--line-strong); background: transparent; border-radius: 6px; color: var(--ink-dim); cursor: pointer; transition: all .15s; }
+.chat-chip:hover { border-color: var(--amber); color: var(--amber); }
+#chatForm { display: flex; gap: 8px; padding: 14px 16px; border-top: 1px solid var(--line); }
+#chatInput { flex: 1; border: 1px solid var(--line-strong); border-radius: 6px; padding: 10px 12px; font-family: 'Inter', sans-serif; font-size: 13px; background: var(--bg-3); color: var(--ink); }
+#chatInput:focus { outline: none; border-color: var(--amber); }
+#chatSend { width: 38px; border: none; border-radius: 6px; background: var(--amber); color: #fff; font-size: 16px; cursor: pointer; }
+#chatSend:hover { background: var(--clay); }
+@media (max-width: 480px) { #chatTrigger { left: 16px; bottom: 16px; } #chatPanel { left: 16px; bottom: 84px; } }
+
 </style>
 </head>
 <body>
@@ -495,13 +507,12 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
       <div class="brand-mark"></div>
       <div>
         <div>The Slow Map</div>
-        <div class="brand-sub">A Travel Brand · India</div>
+        <div class="brand-sub">A Travel Brand</div>
       </div>
     </a>
     <nav class="topnav">
       <a href="#browse">Browse</a>
       <a href="#issues">Issues</a>
-      <a href="#combos">Combined Trips</a>
       <a href="#manifesto">Manifesto</a>
       <a href="#subscribe">Subscribe</a>
     </nav>
@@ -515,16 +526,43 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
   <button class="share-btn" id="copyLinkBtn" title="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg></button>
 </div>
 
+<!-- AI CHAT -->
+<button id="chatTrigger" aria-label="Ask The Slow Map">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L21 20 L3 20 Z" fill="currentColor"/></svg>
+</button>
+<div id="chatPanel">
+  <div id="chatHeader">
+    <div>
+      <div id="chatTitle">Ask The Slow Map</div>
+      <div id="chatSub">Real answers, once we're wired up</div>
+    </div>
+    <button id="chatClose" aria-label="Close">&times;</button>
+  </div>
+  <div id="chatMessages">
+    <div class="chat-msg bot">Hi — ask me anything about a destination. Once the AI is connected I'll answer using this site's actual research, not generic guesses.</div>
+    <div class="chat-chips">
+      <button class="chat-chip">4-day Spiti itinerary</button>
+      <button class="chat-chip">Top cafés in Spiti</button>
+      <button class="chat-chip">Best time to see the Milky Way</button>
+    </div>
+  </div>
+  <form id="chatForm">
+    <input id="chatInput" type="text" placeholder="Ask a travel question…" autocomplete="off">
+    <button type="submit" id="chatSend" aria-label="Send">→</button>
+  </form>
+</div>
+
 <div class="container">
 
 <!-- HERO -->
-<section class="hero">
-  <img class="bg" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80" alt="Quiet corner of India">
-  <div class="clouds"></div>
+<!-- HERO — the rotating earth IS the hero visual now -->
+<section class="hero globe-section" id="globe-section">
+  <div id="globe-canvas-wrap"><canvas id="globe-canvas"></canvas></div>
+  <div id="globe-tooltip"></div>
   <div class="container" style="position:relative; z-index:2;">
-  <div class="hero-eyebrow">A Travel Brand · India</div>
-  <h1>One quiet corner<br>of India at <em>a time</em>.</h1>
-  <p class="hero-sub">Honest, verified, hand-made field guides for the places the tourist buses skip. No algorithms. No sponsors pretending to be reviews. Just slow mornings, good food, and the walk behind the waterfall.</p>
+  <div class="hero-eyebrow">A Travel Brand</div>
+  <h1>One quiet corner<br>of the world at <em>a time</em>.</h1>
+  <p class="hero-sub">Honest, verified, hand-made field guides for the places the tourist buses skip. Drag the globe, click a lit country. No algorithms. No sponsors pretending to be reviews.</p>
 
   <div class="meta-line">
     <div class="meta-item"><div class="meta-label">Issues live</div><div class="meta-value">01<em> · 1 country</em></div></div>
@@ -533,17 +571,6 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
     <div class="meta-item"><div class="meta-label">Published</div><div class="meta-value">Ongoing</div></div>
   </div>
   </div>
-</section>
-
-<!-- 3D GLOBE -->
-<section class="globe-section" id="globe-section">
-  <div class="globe-caption">
-    <div class="section-label" style="color:#d9b471;">§ Where in the world</div>
-    <h2 class="section-title" style="color:#f2ede0;">Spin it. <em>Click a country.</em></h2>
-    <p class="section-intro" style="color:#a39c8c;">Drag to rotate. Click a lit country to jump straight to its issues below.</p>
-  </div>
-  <div id="globe-canvas-wrap"><canvas id="globe-canvas"></canvas></div>
-  <div id="globe-tooltip"></div>
 </section>
 
 <!-- COUNTRY > STATE > CITY BROWSER -->
@@ -769,129 +796,6 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
   </div>
 </section>
 
-<!-- TRIP COMBINATORS -->
-<section id="combos" class="combos-section">
-  <div class="combos-head">
-    <div class="section-label">§ Trip Combinators</div>
-    <h2 class="section-title">Doing more than <em>one corner</em>?</h2>
-    <p class="section-intro">For longer trips — when you want to string two issues into one real journey. Each combinator stitches together full guides you can read on their own.</p>
-  </div>
-
-  <div class="combos-grid">
-
-    <!-- UTTARAKHAND COMBO · LIVE -->
-    <a href="uttarakhand-10-days.html" class="combo-card">
-      <div class="combo-doodle">
-        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
-          <g class="doodle" stroke="#c47a4a" fill="none" stroke-width="1.5" stroke-linecap="round">
-            <!-- cottage -->
-            <rect x="8" y="18" width="14" height="10" fill="#c47a4a" fill-opacity="0.25"/>
-            <path d="M 6,18 L 15,10 L 24,18"/>
-            <!-- dashed bridge -->
-            <path d="M 26,24 Q 40,20 54,24" stroke-dasharray="2 2"/>
-            <!-- lake -->
-            <path d="M 56,24 L 62,20 L 70,22 L 72,28 L 64,30 L 56,28 Z" fill="#c47a4a" fill-opacity="0.25"/>
-          </g>
-        </svg>
-      </div>
-      <div class="combo-tag">Combinator №01 · Live</div>
-      <div class="combo-title">The Uttarakhand <em>10-Day</em> Slow Trip</div>
-      <div class="combo-chain">Landour <span class="plus">+</span> Naukuchiatal</div>
-      <div class="combo-meta">
-        <span>10 <strong>days</strong></span>
-        <span>~900 <strong>km</strong></span>
-        <span>2 <strong>issues</strong></span>
-        <span>₹83k–₹2L</span>
-      </div>
-      <p>Start on a colonial ridge in Garhwal. End by a nine-cornered lake in Kumaon. One transition day through Rishikesh ties them together.</p>
-      <div class="combo-arrow">Read the itinerary</div>
-    </a>
-
-    <!-- KERALA COMBO · COMING -->
-    <div class="combo-card coming">
-      <div class="combo-doodle">
-        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
-          <g class="doodle" fill="none" stroke-width="1.5">
-            <!-- pine hill -->
-            <path d="M 8,18 l -2,-4 l 2,0 l 0,-4 l 2,4 l 2,0 l -2,4 z" fill="currentColor" opacity="0.6"/>
-            <path d="M 14,22 l -2,-5 l 2,0 l 0,-5 l 2,5 l 2,0 l -2,5 z" fill="currentColor" opacity="0.6"/>
-            <!-- dashed bridge -->
-            <path d="M 22,26 Q 38,22 54,26" stroke-dasharray="2 2"/>
-            <!-- palm + wave -->
-            <line x1="62" y1="26" x2="62" y2="12"/>
-            <path d="M 62,12 q -6,-2 -8,-6 M 62,12 q 6,-2 8,-6"/>
-            <path d="M 56,32 q 4,-2 8,0 q 4,2 8,0"/>
-          </g>
-        </svg>
-      </div>
-      <div class="combo-tag">Combinator №02 · Coming</div>
-      <div class="combo-title">The Kerala <em>12-Day</em> Slow Trip</div>
-      <div class="combo-chain">Vagamon <span class="plus">+</span> Marari Beach</div>
-      <div class="combo-meta">
-        <span>12 <strong>days</strong></span>
-        <span>2 <strong>issues</strong></span>
-        <span>Nov 2026</span>
-      </div>
-      <p>Pine hills of Vagamon above Munnar, then slow down by the unbusy backwater-beach at Marari. Ready after Kerala issue ships.</p>
-      <div class="combo-arrow">Tell me when it's out</div>
-    </div>
-
-    <!-- HIMACHAL COMBO · COMING -->
-    <div class="combo-card coming">
-      <div class="combo-doodle">
-        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
-          <g class="doodle" fill="none" stroke-width="1.5">
-            <!-- mountain -->
-            <path d="M 4,28 L 14,14 L 22,20 L 30,10 L 38,28 Z" fill="currentColor" opacity="0.25"/>
-            <!-- dashed bridge -->
-            <path d="M 40,24 Q 52,20 62,24" stroke-dasharray="2 2"/>
-            <!-- second mountain -->
-            <path d="M 58,28 L 68,16 L 76,28 Z" fill="currentColor" opacity="0.25"/>
-          </g>
-        </svg>
-      </div>
-      <div class="combo-tag">Combinator №03 · Coming</div>
-      <div class="combo-title">The Himachal <em>14-Day</em> Slow Trip</div>
-      <div class="combo-chain">Tirthan <span class="plus">+</span> Jibhi</div>
-      <div class="combo-meta">
-        <span>14 <strong>days</strong></span>
-        <span>2 <strong>issues</strong></span>
-        <span>Aug 2026</span>
-      </div>
-      <p>River, fly-fishing, and pine-hut quiet across the Tirthan-Jibhi valley. A proper Manali alternative done right. Ready after Tirthan issue.</p>
-      <div class="combo-arrow">Tell me when it's out</div>
-    </div>
-
-    <!-- RAJASTHAN COMBO · COMING -->
-    <div class="combo-card coming">
-      <div class="combo-doodle">
-        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
-          <g class="doodle" fill="none" stroke-width="1.5">
-            <!-- haveli -->
-            <rect x="6" y="18" width="14" height="10" fill="currentColor" opacity="0.25"/>
-            <path d="M 10,18 L 10,14 M 16,18 L 16,14"/>
-            <!-- dashed bridge -->
-            <path d="M 22,24 Q 38,20 54,24" stroke-dasharray="2 2"/>
-            <!-- lake palace silhouette -->
-            <path d="M 56,26 L 74,26 L 72,20 L 68,18 L 62,18 L 58,20 Z" fill="currentColor" opacity="0.25"/>
-            <path d="M 62,18 L 62,12 M 68,18 L 68,12"/>
-          </g>
-        </svg>
-      </div>
-      <div class="combo-tag">Combinator №04 · Coming</div>
-      <div class="combo-title">The Rajasthan <em>Slow</em> Circuit</div>
-      <div class="combo-chain">Bundi <span class="plus">+</span> Dungarpur</div>
-      <div class="combo-meta">
-        <span>12 <strong>days</strong></span>
-        <span>2 <strong>issues</strong></span>
-        <span>Dec 2026</span>
-      </div>
-      <p>Blue-painted Bundi with the stepwells, then the quietest royal town in Rajasthan — Dungarpur. No crowds, no camel-selfies, just old stone.</p>
-      <div class="combo-arrow">Tell me when it's out</div>
-    </div>
-
-  </div>
-</section>
 
 <!-- MANIFESTO -->
 <section id="manifesto" class="manifesto">
@@ -923,7 +827,7 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
     <div class="brand-mark"></div>
     <div>
       <div style="font-family: 'Fraunces', serif; font-size: 18px;">The Slow Map</div>
-      <div class="brand-sub">A Travel Brand · India</div>
+      <div class="brand-sub">A Travel Brand</div>
     </div>
   </div>
   <p>"We travel slowly, on purpose."</p>
@@ -1093,6 +997,38 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
       .catch(() => { form.style.display='none'; document.getElementById('subSuccess').style.display='block'; });
     e.preventDefault(); return false;
   }
+
+  // AI chat — honest placeholder UI, no fake responses (real answers land once an API key is wired in)
+  (function(){
+    const trigger = document.getElementById('chatTrigger');
+    const panel = document.getElementById('chatPanel');
+    const closeBtn = document.getElementById('chatClose');
+    const form = document.getElementById('chatForm');
+    const input = document.getElementById('chatInput');
+    const messages = document.getElementById('chatMessages');
+    if (!trigger || !panel) return;
+    trigger.addEventListener('click', () => panel.classList.add('open'));
+    closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+    function addMsg(text, who) {
+      const el = document.createElement('div');
+      el.className = 'chat-msg ' + who;
+      el.textContent = text;
+      messages.appendChild(el);
+      messages.scrollTop = messages.scrollHeight;
+    }
+    function ask(q) {
+      addMsg(q, 'user');
+      setTimeout(() => addMsg("The live AI isn't connected yet — once it is, I'll answer this using the site's real research, not a generic guess.", 'bot'), 350);
+    }
+    document.querySelectorAll('.chat-chip').forEach(chip => chip.addEventListener('click', () => ask(chip.textContent)));
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = input.value.trim();
+      if (!v) return;
+      ask(v);
+      input.value = '';
+    });
+  })();
 </script>
 
 <script type="module">
@@ -1104,12 +1040,27 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
   if (wrap && canvas) {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
-    camera.position.z = 6.2;
+    camera.position.z = 7;
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(wrap.clientWidth, wrap.clientHeight);
 
-    // starfield / milky way — thousands of procedural points, no external image needed
+    // soft round glow texture, generated on a canvas — used for star points, the
+    // Milky Way band, and shooting-star heads, so nothing here depends on an
+    // external image URL (keeps this reliable)
+    function makeGlowTexture(){
+      const c = document.createElement('canvas'); c.width = c.height = 128;
+      const ctx = c.getContext('2d');
+      const g = ctx.createRadialGradient(64,64,0,64,64,64);
+      g.addColorStop(0, 'rgba(255,255,255,1)');
+      g.addColorStop(0.35, 'rgba(255,255,255,0.5)');
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = g; ctx.fillRect(0,0,128,128);
+      return new THREE.CanvasTexture(c);
+    }
+    const glowTex = makeGlowTexture();
+
+    // starfield — thousands of glowing points, no external image needed
     function makeStars(count, radius, size, color, opacity) {
       const positions = new Float32Array(count * 3);
       for (let i = 0; i < count; i++) {
@@ -1122,48 +1073,85 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
       }
       const geo = new THREE.BufferGeometry();
       geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const mat = new THREE.PointsMaterial({ color, size, transparent: true, opacity, depthWrite: false });
+      const mat = new THREE.PointsMaterial({ color, size, map: glowTex, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending });
       return new THREE.Points(geo, mat);
     }
-    scene.add(makeStars(2600, 40, 0.045, 0xf2ede0, 0.85));
-    scene.add(makeStars(1400, 25, 0.03, 0xd9b471, 0.5));
+    scene.add(makeStars(3200, 40, 0.09, 0xf2ede0, 0.9));
+    scene.add(makeStars(1600, 25, 0.06, 0xd9b471, 0.6));
 
-    // faint milky-way band — a flattened, tilted disc of denser stars
+    // real Milky Way band — a wide hazy glow texture on a tilted plane, plus a
+    // dense strip of bright stars scattered along it for texture/character
+    function makeMilkyWayTexture(){
+      const c = document.createElement('canvas'); c.width = 1024; c.height = 256;
+      const ctx = c.getContext('2d');
+      const g = ctx.createLinearGradient(0,0,0,256);
+      g.addColorStop(0,   'rgba(217,180,113,0)');
+      g.addColorStop(0.5, 'rgba(242,237,224,0.55)');
+      g.addColorStop(1,   'rgba(217,180,113,0)');
+      ctx.fillStyle = g; ctx.fillRect(0,0,1024,256);
+      // add subtle horizontal density noise so it doesn't look like a flat bar
+      for (let i=0;i<900;i++){
+        const x = Math.random()*1024, y = 128 + (Math.random()-0.5)*160;
+        const r = 1 + Math.random()*2.5;
+        const a = Math.random()*0.5;
+        ctx.fillStyle = 'rgba(255,255,255,'+a+')';
+        ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+      }
+      return new THREE.CanvasTexture(c);
+    }
     const bandGroup = new THREE.Group();
-    bandGroup.add(makeStars(1800, 30, 0.05, 0xffffff, 0.35));
-    bandGroup.scale.set(1, 0.15, 1);
-    bandGroup.rotation.z = 0.5;
-    bandGroup.rotation.x = 0.3;
+    const bandPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(60, 15),
+      new THREE.MeshBasicMaterial({ map: makeMilkyWayTexture(), transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide })
+    );
+    bandGroup.add(bandPlane);
+    bandGroup.add(makeStars(500, 26, 0.08, 0xffffff, 0.8));
+    bandGroup.rotation.z = 0.55;
+    bandGroup.rotation.x = 0.35;
     scene.add(bandGroup);
 
-    // shooting stars — a handful of line trails that periodically streak across
+    // shooting stars — bright glowing head + a fading gradient trail, real streaks
     const shootingStars = [];
     function spawnShootingStar() {
-      const startR = 12 + Math.random()*6;
+      const startR = 11 + Math.random()*5;
       const theta = Math.random()*Math.PI*2, phi = Math.acos(2*Math.random()-1);
       const start = new THREE.Vector3(startR*Math.sin(phi)*Math.cos(theta), startR*Math.sin(phi)*Math.sin(theta), startR*Math.cos(phi));
       const dir = start.clone().negate().normalize().add(new THREE.Vector3((Math.random()-0.5)*0.6,(Math.random()-0.5)*0.6,(Math.random()-0.5)*0.6)).normalize();
-      const trailLen = 1.4;
-      const geo = new THREE.BufferGeometry().setFromPoints([start, start.clone().add(dir.clone().multiplyScalar(-trailLen))]);
-      const mat = new THREE.LineBasicMaterial({ color: 0xf2ede0, transparent: true, opacity: 0.9 });
+      const trailLen = 2.2;
+      const tail = start.clone().add(dir.clone().multiplyScalar(-trailLen));
+      const geo = new THREE.BufferGeometry().setFromPoints([start, tail]);
+      const colors = new Float32Array([1,0.98,0.9, 0.85,0.7,0.35]);
+      geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      const mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 1, blending: THREE.AdditiveBlending, depthWrite: false });
       const line = new THREE.Line(geo, mat);
-      scene.add(line);
-      shootingStars.push({ line, pos: start, dir, life: 0, maxLife: 1.4 + Math.random() });
+      const headMat = new THREE.SpriteMaterial({ map: glowTex, color: 0xfffaf0, transparent: true, opacity: 1, blending: THREE.AdditiveBlending, depthWrite: false });
+      const head = new THREE.Sprite(headMat);
+      head.scale.set(0.5, 0.5, 1);
+      head.position.copy(start);
+      scene.add(line); scene.add(head);
+      shootingStars.push({ line, head, dir, life: 0, maxLife: 1.1 + Math.random()*0.8 });
     }
-    setInterval(() => { if (Math.random() < 0.7) spawnShootingStar(); }, 1400);
+    setInterval(() => { if (Math.random() < 0.85) spawnShootingStar(); }, 1100);
 
-    // the globe itself — dotted/wireframe sphere, no texture image (keeps this reliable, no guessed-URL risk)
+    // the globe itself — real NASA Blue Marble equirectangular texture (Wikimedia
+    // Commons, public domain), verified reachable before use, not a wireframe
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
-    const R = 2;
-    const wireGeo = new THREE.SphereGeometry(R, 28, 20);
-    const wireMat = new THREE.MeshBasicMaterial({ color: 0x8a6425, wireframe: true, transparent: true, opacity: 0.28 });
+    const R = 2.2;
+    const earthTex = new THREE.TextureLoader().load(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Blue_Marble_Next_Generation_%2B_topography_%2B_bathymetry.jpg/1920px-Blue_Marble_Next_Generation_%2B_topography_%2B_bathymetry.jpg'
+    );
+    earthTex.colorSpace = THREE.SRGBColorSpace;
+    const earthGeo = new THREE.SphereGeometry(R, 64, 48);
+    const earthMat = new THREE.MeshBasicMaterial({ map: earthTex });
+    globeGroup.add(new THREE.Mesh(earthGeo, earthMat));
+    // thin gold latitude/longitude overlay for brand character, sitting just above the surface
+    const wireGeo = new THREE.SphereGeometry(R*1.002, 24, 16);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0xd9b471, wireframe: true, transparent: true, opacity: 0.12 });
     globeGroup.add(new THREE.Mesh(wireGeo, wireMat));
-    const coreGeo = new THREE.SphereGeometry(R*0.985, 32, 24);
-    const coreMat = new THREE.MeshBasicMaterial({ color: 0x0e0c09, transparent: true, opacity: 0.65 });
-    globeGroup.add(new THREE.Mesh(coreGeo, coreMat));
-    const glowGeo = new THREE.SphereGeometry(R*1.04, 32, 24);
-    const glowMat = new THREE.MeshBasicMaterial({ color: 0xd9b471, transparent: true, opacity: 0.06, side: THREE.BackSide });
+    // soft gold atmosphere glow on the rim
+    const glowGeo = new THREE.SphereGeometry(R*1.05, 32, 24);
+    const glowMat = new THREE.MeshBasicMaterial({ color: 0xd9b471, transparent: true, opacity: 0.1, side: THREE.BackSide });
     globeGroup.add(new THREE.Mesh(glowGeo, glowMat));
 
     // real lat/lng for the 5 countries in the data model
@@ -1273,9 +1261,18 @@ footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; 
       for (let i = shootingStars.length - 1; i >= 0; i--) {
         const s = shootingStars[i];
         s.life += dt;
-        s.line.position.addScaledVector(s.dir, dt * 9);
-        s.line.material.opacity = Math.max(0, 0.9 * (1 - s.life / s.maxLife));
-        if (s.life > s.maxLife) { scene.remove(s.line); s.line.geometry.dispose(); s.line.material.dispose(); shootingStars.splice(i, 1); }
+        const move = s.dir.clone().multiplyScalar(dt * 10);
+        s.line.position.add(move);
+        s.head.position.add(move);
+        const fade = Math.max(0, 1 - s.life / s.maxLife);
+        s.line.material.opacity = fade;
+        s.head.material.opacity = fade;
+        s.head.scale.setScalar(0.5 * fade + 0.08);
+        if (s.life > s.maxLife) {
+          scene.remove(s.line); scene.remove(s.head);
+          s.line.geometry.dispose(); s.line.material.dispose(); s.head.material.dispose();
+          shootingStars.splice(i, 1);
+        }
       }
       renderer.render(scene, camera);
     }
