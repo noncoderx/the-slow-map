@@ -1,0 +1,2986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Slow Map · Naukuchiatal — A Field Guide for Quiet Travellers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b1210;
+  --bg-2: #0f1917;
+  --bg-3: #14231f;
+  --ink: #e9e4d8;
+  --ink-dim: #a8a295;
+  --ink-faint: #6b6a5f;
+  --moss: #6a8f6b;
+  --moss-deep: #3f5d42;
+  --amber: #d9a441;
+  --amber-soft: #e8c37a;
+  --clay: #c47a4a;
+  --rust: #9a4a3a;
+  --line: rgba(233, 228, 216, 0.08);
+  --line-strong: rgba(233, 228, 216, 0.18);
+  --card: rgba(233, 228, 216, 0.03);
+  --card-hover: rgba(233, 228, 216, 0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(106, 143, 107, 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(217, 164, 65, 0.05), transparent 60%);
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* ============ TOP BAR ============ */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(11, 18, 16, 0.75);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 1200px; margin: 0 auto;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Fraunces', serif;
+  font-weight: 500; font-size: 18px;
+  letter-spacing: 0.02em;
+}
+.brand-mark {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--amber-soft), var(--amber) 50%, var(--moss-deep) 100%);
+  box-shadow: 0 0 20px rgba(217, 164, 65, 0.3);
+}
+.brand-sub { color: var(--ink-faint); font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+.topnav { display: flex; gap: 28px; font-size: 13px; }
+.topnav a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+.topnav a:hover { color: var(--amber); }
+@media (max-width: 780px) { .topnav { display: none; } }
+
+/* ============ HERO ============ */
+.hero {
+  padding: 80px 0 40px;
+  position: relative;
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, var(--amber), transparent); max-width: 60px;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(56px, 9vw, 128px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.hero h1 em { font-style: italic; color: var(--amber-soft); font-weight: 400; }
+.hero-meaning {
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-dim);
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+.hero-meaning strong { color: var(--amber-soft); font-weight: 500; font-style: normal; }
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  margin-top: 40px;
+}
+.stat {
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--line);
+}
+.stat:last-child { border-right: none; }
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.stat-value {
+  font-family: 'Fraunces', serif;
+  font-size: 28px; font-weight: 400;
+  color: var(--ink);
+}
+.stat-value small { font-size: 13px; color: var(--ink-dim); font-weight: 400; }
+@media (max-width: 780px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+}
+
+/* ============ OFFBEAT SCORE ============ */
+.score-section {
+  padding: 90px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 900px) { .score-section { grid-template-columns: 1fr; gap: 40px; } }
+.score-left h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.score-left h2 em { color: var(--amber-soft); font-weight: 400; }
+.score-left p { color: var(--ink-dim); font-size: 16px; margin-bottom: 14px; }
+
+.score-card {
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 36px;
+  position: relative;
+}
+.score-card::before {
+  content: 'THE SCORECARD';
+  position: absolute; top: -9px; left: 24px;
+  background: var(--bg);
+  padding: 0 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--amber);
+}
+.score-main {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.score-number {
+  font-family: 'Fraunces', serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--amber-soft);
+  line-height: 1;
+}
+.score-max { font-family: 'Fraunces', serif; font-size: 24px; color: var(--ink-faint); }
+.score-verdict { margin-left: auto; text-align: right; }
+.score-verdict-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; }
+.score-verdict-text { font-family: 'Fraunces', serif; font-size: 20px; font-style: italic; color: var(--ink); }
+
+.meter { margin-bottom: 16px; }
+.meter-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+.meter-row span:first-child { color: var(--ink); }
+.meter-row span:last-child { color: var(--ink-faint); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.meter-bar {
+  height: 3px; background: rgba(233, 228, 216, 0.06); border-radius: 2px; overflow: hidden;
+}
+.meter-fill { height: 100%; background: linear-gradient(90deg, var(--moss), var(--amber)); border-radius: 2px; }
+
+/* ============ SECTIONS ============ */
+section { padding: 80px 0; border-top: 1px solid var(--line); }
+.section-head { margin-bottom: 50px; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+}
+.section-title em { font-style: italic; color: var(--amber-soft); }
+.section-intro {
+  max-width: 680px; color: var(--ink-dim); font-size: 17px; margin-top: 18px;
+}
+
+/* THE SOUL */
+.soul-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--line-strong);
+  border: 1px solid var(--line-strong);
+}
+@media (max-width: 780px) { .soul-grid { grid-template-columns: 1fr; } }
+.soul-cell {
+  background: var(--bg);
+  padding: 32px;
+}
+.soul-cell h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 500;
+  margin-bottom: 10px;
+}
+.soul-cell.yes h4::before { content: '✓  '; color: var(--moss); }
+.soul-cell.no h4::before { content: '✗  '; color: var(--rust); }
+.soul-cell p { color: var(--ink-dim); font-size: 15px; }
+.soul-cell ul { list-style: none; margin-top: 10px; }
+.soul-cell ul li {
+  padding: 8px 0;
+  color: var(--ink-dim);
+  font-size: 14px;
+  border-bottom: 1px dashed var(--line);
+}
+.soul-cell ul li:last-child { border-bottom: none; }
+
+/* SEASONS */
+.season-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .season-grid { grid-template-columns: repeat(2, 1fr); } }
+.season {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 28px 24px;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.season:hover { background: var(--card-hover); border-color: var(--line-strong); transform: translateY(-2px); }
+.season-months { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--amber); margin-bottom: 10px; }
+.season h4 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 8px; }
+.season p { font-size: 14px; color: var(--ink-dim); }
+.season-verdict {
+  display: inline-block;
+  margin-top: 14px; padding: 4px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  border-radius: 2px;
+}
+.v-go { background: rgba(106, 143, 107, 0.15); color: var(--moss); }
+.v-maybe { background: rgba(217, 164, 65, 0.12); color: var(--amber); }
+.v-skip { background: rgba(154, 74, 58, 0.15); color: #c4745f; }
+
+/* LOGISTICS */
+.route-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .route-grid { grid-template-columns: 1fr; } }
+.route {
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  padding: 32px;
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.3s;
+}
+.route:hover { background: var(--card-hover); }
+.route-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.route h4 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; margin-bottom: 6px; }
+.route-time { color: var(--ink-dim); font-size: 14px; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; }
+.route ul { list-style: none; }
+.route ul li {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 14px;
+  display: flex; gap: 10px;
+}
+.route ul li:last-child { border-bottom: none; }
+.route ul li::before { content: '→'; color: var(--amber); flex-shrink: 0; }
+
+/* STAYS */
+.stay-card {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  gap: 32px;
+  align-items: center;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+  transition: all 0.3s;
+}
+.stay-card:last-child { border-bottom: none; }
+@media (max-width: 780px) {
+  .stay-card { grid-template-columns: 1fr; gap: 16px; }
+}
+.stay-rank {
+  font-family: 'Fraunces', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--amber-soft);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stay-body h4 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; margin-bottom: 4px; }
+.stay-type { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
+.stay-body p { color: var(--ink-dim); font-size: 15px; margin-bottom: 10px; }
+.stay-whisper {
+  font-family: 'Fraunces', serif; font-style: italic;
+  color: var(--amber-soft);
+  font-size: 14px;
+  padding-left: 14px;
+  border-left: 2px solid var(--amber);
+}
+.stay-price { text-align: right; font-family: 'Fraunces', serif; font-size: 20px; color: var(--ink); }
+.stay-price small { display: block; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+
+/* HIKES - map layout */
+.hikes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 780px) { .hikes-grid { grid-template-columns: 1fr; } }
+.hike {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 28px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.hike:hover { background: var(--card-hover); border-color: var(--moss); transform: translateY(-2px); }
+.hike-meta { display: flex; gap: 16px; margin-bottom: 14px; }
+.hike-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.hike-meta span strong { color: var(--amber); font-weight: 500; }
+.hike h4 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; margin-bottom: 10px; }
+.hike p { color: var(--ink-dim); font-size: 14px; margin-bottom: 14px; }
+.hike-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  color: var(--ink-dim);
+}
+.badge.kid { color: var(--moss); border-color: var(--moss); }
+.badge.quiet { color: var(--amber-soft); border-color: var(--amber); }
+
+/* CAFES */
+.cafe-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--line-strong);
+  border: 1px solid var(--line-strong);
+}
+@media (max-width: 780px) { .cafe-list { grid-template-columns: 1fr; } }
+.cafe {
+  background: var(--bg);
+  padding: 28px;
+}
+.cafe-name {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 10px;
+}
+.cafe h4 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; }
+.cafe-type { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; }
+.cafe p { color: var(--ink-dim); font-size: 14px; margin-bottom: 12px; }
+.cafe-order { font-family: 'Fraunces', serif; font-style: italic; color: var(--amber-soft); font-size: 14px; }
+.cafe-order::before { content: 'Order → '; font-family: 'JetBrains Mono', monospace; font-style: normal; letter-spacing: 0.1em; font-size: 10px; color: var(--ink-faint); }
+
+/* FOOD */
+.dish-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .dish-grid { grid-template-columns: 1fr; } }
+.dish {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.dish:hover { border-color: var(--amber); }
+.dish-name-hindi {
+  font-family: 'Fraunces', serif;
+  font-size: 28px; font-weight: 500;
+  color: var(--amber-soft);
+  margin-bottom: 4px;
+  font-style: italic;
+}
+.dish-name-en { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 14px; }
+.dish p { color: var(--ink-dim); font-size: 14px; margin-bottom: 10px; }
+.dish-where {
+  font-size: 13px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  color: var(--ink);
+}
+.dish-where strong { color: var(--amber); }
+
+/* ITINERARY */
+.itinerary { position: relative; padding-left: 32px; }
+.itinerary::before {
+  content: ''; position: absolute; left: 8px; top: 12px; bottom: 12px;
+  width: 1px; background: linear-gradient(180deg, var(--amber), transparent);
+}
+.day {
+  position: relative;
+  padding: 28px 0 28px 24px;
+}
+.day::before {
+  content: ''; position: absolute; left: -30px; top: 36px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--amber);
+}
+.day-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
+.day h4 { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 400; margin-bottom: 14px; }
+.day h4 em { font-style: italic; color: var(--amber-soft); }
+.day-blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+@media (max-width: 780px) { .day-blocks { grid-template-columns: 1fr; } }
+.block {
+  padding: 18px;
+  background: var(--card);
+  border-left: 2px solid var(--moss);
+  font-size: 14px;
+}
+.block-time { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
+.block-title { font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink); margin-bottom: 6px; font-weight: 500; }
+.block p { color: var(--ink-dim); font-size: 13px; }
+
+/* ANTI BUCKET LIST */
+.anti {
+  background: linear-gradient(180deg, rgba(154, 74, 58, 0.04), transparent);
+  border: 1px solid rgba(154, 74, 58, 0.25);
+  border-radius: 2px;
+  padding: 40px;
+}
+.anti-item {
+  padding: 20px 0;
+  border-bottom: 1px dashed var(--line);
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.anti-item:last-child { border-bottom: none; }
+.anti-x {
+  font-family: 'Fraunces', serif;
+  font-size: 32px; font-weight: 300;
+  color: var(--rust);
+  line-height: 0.8;
+}
+.anti-item h5 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; margin-bottom: 6px; }
+.anti-item h5 em { font-style: italic; color: var(--amber-soft); }
+.anti-item p { color: var(--ink-dim); font-size: 14px; }
+.anti-item p strong { color: var(--ink); }
+
+/* WHISPERS - floating tips */
+.whispers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+@media (max-width: 900px) { .whispers { grid-template-columns: 1fr; } }
+.whisper {
+  padding: 24px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  position: relative;
+}
+.whisper::before {
+  content: '"';
+  position: absolute;
+  top: -10px; left: 14px;
+  font-family: 'Fraunces', serif;
+  font-size: 60px;
+  color: var(--amber);
+  line-height: 1;
+}
+.whisper p { font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink); line-height: 1.5; padding-top: 16px; }
+.whisper-from { margin-top: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; }
+
+/* GLOSSARY */
+.glossary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+@media (max-width: 780px) { .glossary { grid-template-columns: 1fr; } }
+.term {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+  padding-right: 30px;
+}
+.term-word { font-family: 'Fraunces', serif; font-size: 22px; color: var(--amber-soft); font-style: italic; min-width: 140px; }
+.term-meaning { color: var(--ink-dim); font-size: 14px; }
+
+/* DAY TRIPS */
+.trips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 900px) { .trips-grid { grid-template-columns: 1fr; } }
+.trip {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.trip:hover { border-color: var(--amber); background: var(--card); }
+.trip-distance { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
+.trip h4 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; margin-bottom: 8px; }
+.trip p { color: var(--ink-dim); font-size: 14px; }
+
+/* FUTURE CITIES */
+.future {
+  margin-top: 60px;
+  padding: 50px;
+  background:
+    radial-gradient(ellipse at top left, rgba(217, 164, 65, 0.06), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(106, 143, 107, 0.06), transparent 60%);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  text-align: center;
+}
+.future h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.future h3 em { color: var(--amber-soft); font-style: italic; }
+.future p { color: var(--ink-dim); max-width: 540px; margin: 0 auto 30px; }
+.future-cities {
+  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+}
+.future-city {
+  padding: 14px 22px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.future-city.next { border-style: solid; border-color: var(--amber); color: var(--amber); }
+
+/* FOOTER */
+footer {
+  padding: 60px 0 40px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
+  font-size: 13px;
+}
+footer .brand { justify-content: center; margin-bottom: 16px; }
+footer p { max-width: 600px; margin: 0 auto; font-family: 'Fraunces', serif; font-style: italic; }
+footer .meta { margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); }
+
+/* Decorative */
+.divider-dot {
+  display: flex; justify-content: center; padding: 30px 0;
+  color: var(--amber); letter-spacing: 20px;
+}
+
+/* AUDIENCE CHIPS */
+.audience-chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center;
+  margin: 30px 0 10px;
+}
+.chip {
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-dim);
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s;
+}
+.chip:hover { color: var(--amber); border-color: var(--amber); }
+.chip.active { background: rgba(217, 164, 65, 0.1); border-color: var(--amber); color: var(--amber); }
+.audience-note {
+  text-align: center; font-size: 12px; color: var(--ink-faint); font-style: italic;
+  max-width: 600px; margin: 12px auto 0;
+}
+
+/* ALERT BANNER */
+.alert-banner {
+  margin: 30px 0;
+  padding: 20px 28px;
+  border: 1px solid rgba(217, 164, 65, 0.4);
+  background: linear-gradient(90deg, rgba(217, 164, 65, 0.06), transparent);
+  border-radius: 2px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.alert-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid var(--amber);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-size: 20px; color: var(--amber);
+}
+.alert-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+.alert-body { color: var(--ink-dim); font-size: 14px; line-height: 1.5; }
+.alert-body strong { color: var(--amber-soft); }
+
+/* SOURCES */
+.sources-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+@media (max-width: 780px) { .sources-list { grid-template-columns: 1fr; } }
+.source-group h5 { font-family: 'Fraunces', serif; font-size: 18px; color: var(--amber-soft); margin-bottom: 10px; }
+.source-group ul { list-style: none; }
+.source-group li {
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--ink-dim);
+  border-bottom: 1px dashed var(--line);
+}
+.source-group li:last-child { border-bottom: none; }
+.source-group li a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--line-strong); }
+.source-group li a:hover { color: var(--amber); border-color: var(--amber); }
+
+.oath-card {
+  padding: 40px;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  margin-bottom: 40px;
+}
+.oath-card h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 24px; font-weight: 500;
+  margin-bottom: 14px;
+}
+.oath-card h4 em { color: var(--amber-soft); }
+.oath-card p { color: var(--ink-dim); font-size: 15px; margin-bottom: 14px; }
+.oath-card p:last-child { margin-bottom: 0; }
+.oath-sig { font-family: 'Fraunces', serif; font-style: italic; color: var(--amber-soft); text-align: right; margin-top: 16px; font-size: 14px; }
+
+/* ============ HAND-DRAWN ILLUSTRATIONS ============ */
+.doodle { stroke: var(--amber-soft); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.doodle-fill { fill: var(--amber-soft); opacity: 0.9; }
+.doodle-soft { stroke: var(--amber); opacity: 0.6; }
+.doodle-ink { stroke: var(--ink); opacity: 0.5; }
+
+/* Hero scene illustration */
+.hero-scene {
+  margin: 50px 0 30px;
+  text-align: center;
+}
+.hero-scene svg { width: 100%; max-width: 900px; height: auto; }
+
+/* Food doodle — corner of each dish card */
+.dish { position: relative; padding-top: 80px; }
+.dish-doodle {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 60px; height: 60px;
+}
+.dish-doodle svg { width: 100%; height: 100%; }
+
+/* Season icon */
+.season-icon { width: 44px; height: 44px; margin-bottom: 10px; }
+.season-icon svg { width: 100%; height: 100%; }
+
+/* Stay icon */
+.stay-icon {
+  position: absolute;
+  top: 28px; right: 0;
+  width: 56px; height: 56px;
+  opacity: 0.7;
+}
+.stay-card { position: relative; }
+@media (max-width: 780px) { .stay-icon { display: none; } }
+
+/* Cafe doodle */
+.cafe { position: relative; padding-top: 60px; }
+.cafe-doodle {
+  position: absolute;
+  top: 16px; right: 20px;
+  width: 48px; height: 48px;
+  opacity: 0.85;
+}
+
+/* Hike doodle */
+.hike { position: relative; }
+.hike-doodle {
+  position: absolute;
+  top: 24px; right: 24px;
+  width: 50px; height: 50px;
+  opacity: 0.5;
+}
+
+/* Day trip doodle */
+.trip { position: relative; overflow: hidden; }
+.trip-doodle {
+  position: absolute;
+  bottom: -4px; right: -4px;
+  width: 80px; height: 80px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Generic decorative divider doodle */
+.divider-doodle {
+  display: flex; justify-content: center;
+  padding: 40px 0 20px;
+}
+.divider-doodle svg { width: 60px; height: 30px; opacity: 0.5; }
+
+/* ============ PROGRESS BAR ============ */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--moss), var(--amber));
+  z-index: 200;
+  transition: width 0.1s ease-out;
+}
+
+/* ============ THEME TOGGLE ============ */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-dim);
+  padding: 6px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  margin-left: 20px;
+}
+.theme-toggle:hover { color: var(--amber); border-color: var(--amber); }
+body.light {
+  --bg: #f6f1e6;
+  --bg-2: #ecdec5;
+  --bg-3: #d8cfb8;
+  --ink: #2b2b26;
+  --ink-dim: #5c584b;
+  --ink-faint: #8a8676;
+  --moss: #3f5d42;
+  --moss-deep: #2b3f2e;
+  --amber: #a4772a;
+  --amber-soft: #b98a3d;
+  --clay: #9a5a30;
+  --rust: #77341f;
+  --line: rgba(43, 43, 38, 0.1);
+  --line-strong: rgba(43, 43, 38, 0.2);
+  --card: rgba(43, 43, 38, 0.02);
+  --card-hover: rgba(43, 43, 38, 0.06);
+}
+body.light { background-image: none; background: var(--bg); }
+body.light .topbar { background: rgba(246, 241, 230, 0.85); }
+
+/* ============ MAP ============ */
+.map-wrap {
+  background: var(--bg-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.map-wrap::before {
+  content: 'HAND-DRAWN · NOT TO SCALE';
+  position: absolute; top: 12px; right: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  color: var(--ink-faint);
+}
+.map-svg { width: 100%; height: auto; max-width: 820px; margin: 0 auto; display: block; }
+.map-legend {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--line-strong);
+}
+@media (max-width: 780px) { .map-legend { grid-template-columns: repeat(2, 1fr); } }
+.legend-item { display: flex; gap: 10px; align-items: baseline; font-size: 13px; }
+.legend-item .pin {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--amber);
+  color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 12px;
+}
+.legend-item .name { color: var(--ink); }
+.legend-item .sub { color: var(--ink-faint); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+/* ============ TEMPERATURE CHART ============ */
+.temp-chart-wrap {
+  margin-top: 40px;
+  padding: 32px;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+}
+.temp-chart-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 24px;
+}
+.temp-chart {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+  align-items: end;
+  height: 160px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.temp-col { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative; }
+.temp-bar {
+  width: 70%;
+  background: linear-gradient(180deg, var(--amber) 0%, var(--moss) 100%);
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  min-height: 8px;
+  transition: all 0.3s;
+}
+.temp-col:hover .temp-bar { filter: brightness(1.3); }
+.temp-range { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-faint); position: absolute; top: -18px; white-space: nowrap; }
+.temp-labels {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+.temp-label {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+.temp-note { margin-top: 18px; font-size: 13px; color: var(--ink-faint); font-style: italic; }
+
+/* ============ DISTANCE MATRIX ============ */
+.matrix-wrap { margin-top: 50px; }
+.matrix-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+}
+.matrix {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.matrix-head, .matrix-row {
+  display: contents;
+}
+.matrix-cell {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.matrix-head .matrix-cell {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-faint);
+  background: var(--card);
+}
+.matrix-row:last-child .matrix-cell { border-bottom: none; }
+.matrix-cell.dest { font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink); }
+.matrix-cell.km, .matrix-cell.time { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--amber); text-align: right; }
+.matrix-cell.note { color: var(--ink-dim); font-size: 13px; font-style: italic; }
+
+/* ============ BUDGET ============ */
+.budget-tabs {
+  display: flex; gap: 8px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.budget-tab {
+  padding: 10px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-dim);
+  background: transparent;
+  transition: all 0.2s;
+}
+.budget-tab.active { border-color: var(--amber); color: var(--amber); background: rgba(217, 164, 65, 0.08); }
+.budget-tab:hover { color: var(--amber); border-color: var(--amber); }
+
+.budget-sheet {
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 32px;
+}
+.budget-sheet.hidden { display: none; }
+.budget-line {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 14px;
+  align-items: baseline;
+}
+.budget-line:last-of-type { border-bottom: none; }
+.budget-desc { color: var(--ink-dim); font-size: 12px; font-style: italic; margin-top: 2px; }
+.budget-name { color: var(--ink); }
+.budget-unit { color: var(--ink-faint); font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: right; }
+.budget-amt { font-family: 'Fraunces', serif; font-size: 18px; color: var(--amber-soft); text-align: right; min-width: 110px; }
+.budget-total {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 2px solid var(--amber);
+  align-items: baseline;
+}
+.budget-total-label { font-family: 'Fraunces', serif; font-size: 22px; color: var(--ink); }
+.budget-total-amt { font-family: 'Fraunces', serif; font-size: 36px; color: var(--amber-soft); font-weight: 400; }
+.budget-footnote { color: var(--ink-faint); font-size: 13px; margin-top: 18px; font-style: italic; }
+
+/* ============ PACKING LIST ============ */
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--line-strong);
+  border: 1px solid var(--line-strong);
+}
+@media (max-width: 780px) { .pack-grid { grid-template-columns: 1fr; } }
+.pack-category {
+  background: var(--bg);
+  padding: 28px;
+}
+.pack-icon { font-family: 'Fraunces', serif; font-size: 32px; color: var(--amber-soft); font-style: italic; line-height: 1; margin-bottom: 8px; }
+.pack-category h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; margin-bottom: 14px; }
+.pack-category ul { list-style: none; }
+.pack-category ul li {
+  padding: 7px 0;
+  font-size: 13px;
+  color: var(--ink-dim);
+  border-bottom: 1px dashed var(--line);
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.pack-category ul li:last-child { border-bottom: none; }
+.pack-category ul li::before { content: '□'; color: var(--amber); flex-shrink: 0; font-size: 12px; }
+
+/* ============ READING LIST ============ */
+.book-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+@media (max-width: 780px) { .book-list { grid-template-columns: 1fr; } }
+.book {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  transition: all 0.3s;
+}
+.book:hover { border-color: var(--amber); background: var(--card); }
+.book-spine {
+  background: linear-gradient(180deg, var(--amber), var(--moss));
+  border-radius: 1px;
+  height: 70px;
+  margin-top: 4px;
+}
+.book-spine.clay { background: linear-gradient(180deg, var(--clay), var(--rust)); }
+.book-spine.moss { background: linear-gradient(180deg, var(--moss), var(--moss-deep)); }
+.book-spine.amber { background: linear-gradient(180deg, var(--amber-soft), var(--amber)); }
+.book-title { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; margin-bottom: 4px; line-height: 1.2; }
+.book-author { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
+.book-note { color: var(--ink-dim); font-size: 13px; line-height: 1.5; }
+
+/* ============ NIGHT SKY ============ */
+.night-sky-section {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(217, 164, 65, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(106, 143, 107, 0.06), transparent 40%),
+    radial-gradient(1px 1px at 15% 25%, #fff, transparent),
+    radial-gradient(1px 1px at 35% 55%, #fff, transparent),
+    radial-gradient(1px 1px at 55% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 75% 70%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 35%, #fff, transparent),
+    radial-gradient(1px 1px at 25% 85%, #fff, transparent);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 50px 40px;
+}
+body.light .night-sky-section {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(164, 119, 42, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(63, 93, 66, 0.08), transparent 40%);
+}
+.sky-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+@media (max-width: 780px) { .sky-grid { grid-template-columns: 1fr; } }
+.sky-item h5 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; margin-bottom: 10px; }
+.sky-item p { color: var(--ink-dim); font-size: 14px; }
+.sky-item .moon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--amber-soft), var(--amber) 60%, transparent);
+  margin-bottom: 12px;
+}
+
+/* ============ PRACTICAL INFO ============ */
+.practical-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--line-strong);
+  border: 1px solid var(--line-strong);
+}
+@media (max-width: 780px) { .practical-grid { grid-template-columns: 1fr; } }
+.practical-cell {
+  background: var(--bg);
+  padding: 24px;
+}
+.practical-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--amber); text-transform: uppercase; margin-bottom: 6px; }
+.practical-cell h5 { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+.practical-cell p { color: var(--ink-dim); font-size: 13px; line-height: 1.5; }
+.practical-cell p strong { color: var(--ink); font-weight: 500; }
+
+/* ============ PRINT STYLES ============ */
+@media print {
+  body { background: white !important; color: black !important; background-image: none !important; }
+  .topbar, .progress-bar, .theme-toggle, .future { display: none !important; }
+  section { page-break-inside: avoid; border-top: 1px solid #ccc; padding: 30px 0; }
+  .hero h1 { font-size: 48px !important; color: #1a1a1a !important; }
+  .hero h1 em { color: #a4772a !important; }
+  .section-title { color: #1a1a1a !important; font-size: 28px !important; }
+  .stat, .score-card, .soul-cell, .route, .stay-card, .hike, .cafe, .dish, .trip, .anti-item, .book, .practical-cell, .pack-category, .sky-item, .season {
+    color: #1a1a1a !important;
+  }
+  .stat-value, .score-number, .dish-name-hindi, .day h4, .section-title em, .stay-rank, .book-title, .term-word, .budget-total-amt, .budget-amt {
+    color: #a4772a !important;
+  }
+  p, .stat-label, .block p, .hike p, .cafe p, .book-note, .practical-cell p { color: #333 !important; }
+  .night-sky-section { background: #f5f0e6 !important; }
+  .score-section { page-break-after: avoid; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <div>The Slow Map</div>
+        <div class="brand-sub">Issue №01 · Naukuchiatal · v2.0</div>
+      </div>
+    </div>
+    <nav class="topnav">
+      <a href="#map">Map</a>
+      <a href="#soul">Soul</a>
+      <a href="#seasons">Seasons</a>
+      <a href="#stays">Stays</a>
+      <a href="#hikes">Hikes</a>
+      <a href="#food">Food</a>
+      <a href="#itinerary">Itinerary</a>
+      <a href="#budget">Budget</a>
+      <a href="#skip">Skip</a>
+      <a href="#sources">Sources</a>
+      <button class="theme-toggle" id="themeToggle" title="Toggle light / dark">◐ Light</button>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="container">
+  <section class="hero" style="border-top: none; padding-top: 80px;">
+    <div class="hero-eyebrow">A Field Guide for Quiet Travellers</div>
+    <h1>Nau&shy;kuchia&shy;<em>tal</em></h1>
+    <div class="hero-meaning"><strong>नौ · कुचिया · ताल</strong> &nbsp;·&nbsp; <em>the lake with nine corners</em></div>
+
+    <div class="audience-chips">
+      <button class="chip active">All</button>
+      <button class="chip">Family with little ones</button>
+      <button class="chip">Couples</button>
+      <button class="chip">Solo</button>
+      <button class="chip">Slow travellers</button>
+      <button class="chip">Senior travellers</button>
+    </div>
+    <div class="audience-note">Tip: click a chip to see which sections apply most to your group. All content still visible — this is just a softer highlight.</div>
+
+    <div class="alert-banner">
+      <div class="alert-icon">!</div>
+      <div>
+        <div class="alert-title">Travelling in May 2026?</div>
+        <div class="alert-body">CBSE summer holidays run <strong>April 27 – June 10, 2026</strong>. Weekdays stay pleasant; weekends (especially Fri–Sun) bring a Delhi-NCR crowd wave. If your dates fall inside this window, arrive on a Sunday and leave on a Thursday for the quietest experience.</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-label">Altitude</div>
+        <div class="stat-value">1,220 <small>m</small></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">From Delhi</div>
+        <div class="stat-value">308 <small>km</small></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Lake depth</div>
+        <div class="stat-value">40.3 <small>m (deepest in Kumaon)</small></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Population</div>
+        <div class="stat-value">≈5,000 <small>villagers</small></div>
+      </div>
+    </div>
+
+    <!-- HERO SCENE ILLUSTRATION -->
+    <div class="hero-scene">
+      <svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" aria-label="Hand-drawn scene of Naukuchiatal lake with a boat">
+        <!-- Sun / moon -->
+        <circle cx="730" cy="68" r="22" class="doodle-fill" opacity="0.35"/>
+        <circle cx="730" cy="68" r="22" class="doodle"/>
+
+        <!-- Clouds -->
+        <path class="doodle doodle-soft" d="M 80,85 q 8,-14 22,-10 q 6,-12 20,-8 q 10,-8 20,2 q 14,-2 14,10 q 0,8 -12,8 l -50,0 q -14,0 -14,-2 z"/>
+        <path class="doodle doodle-soft" d="M 550,60 q 6,-10 18,-8 q 6,-10 18,-6 q 10,-4 14,4 q 8,0 8,6 q 0,6 -10,6 l -40,0 q -10,0 -8,-2 z"/>
+
+        <!-- Mountain layer 1 (far, light) -->
+        <path class="doodle-ink doodle" d="M 0,180 L 80,110 L 160,160 L 240,90 L 320,150 L 400,105 L 480,145 L 560,95 L 640,155 L 720,110 L 820,165 L 900,130 L 900,200 L 0,200 Z" opacity="0.35"/>
+
+        <!-- Mountain layer 2 (mid) -->
+        <path class="doodle" d="M 0,200 L 70,150 L 140,185 L 220,135 L 310,175 L 390,145 L 470,170 L 560,130 L 640,175 L 730,145 L 810,180 L 900,160 L 900,220 L 0,220 Z" opacity="0.55"/>
+
+        <!-- Snow highlights on peaks -->
+        <path class="doodle-fill" d="M 220,135 L 230,142 L 240,138 L 250,145 L 258,140 Z" opacity="0.4"/>
+        <path class="doodle-fill" d="M 560,130 L 570,138 L 582,134 L 594,142 L 602,137 Z" opacity="0.4"/>
+
+        <!-- Pine forest silhouettes on slope -->
+        <g class="doodle">
+          <path d="M 60,220 l -6,-16 l 6,4 l 0,-14 l 6,14 l 6,-4 l -6,16 z" fill="currentColor" opacity="0.5"/>
+          <path d="M 90,222 l -5,-14 l 5,3 l 0,-12 l 5,12 l 5,-3 l -5,14 z" fill="currentColor" opacity="0.5"/>
+          <path d="M 115,224 l -4,-11 l 4,2 l 0,-9 l 4,9 l 4,-2 l -4,11 z" fill="currentColor" opacity="0.5"/>
+          <path d="M 780,220 l -6,-15 l 6,3 l 0,-13 l 6,13 l 6,-3 l -6,15 z" fill="currentColor" opacity="0.5"/>
+          <path d="M 810,222 l -5,-13 l 5,3 l 0,-11 l 5,11 l 5,-3 l -5,13 z" fill="currentColor" opacity="0.5"/>
+          <path d="M 840,224 l -4,-10 l 4,2 l 0,-8 l 4,8 l 4,-2 l -4,10 z" fill="currentColor" opacity="0.5"/>
+        </g>
+
+        <!-- The 9-cornered lake -->
+        <path class="doodle" stroke-width="2" d="M 200,260 L 300,240 L 410,245 L 520,235 L 620,255 L 700,270 L 680,295 L 580,310 L 460,315 L 340,308 L 240,295 Z"/>
+
+        <!-- Lake ripples -->
+        <path class="doodle" d="M 260,270 q 12,-4 24,0" opacity="0.5"/>
+        <path class="doodle" d="M 320,280 q 16,-4 30,0" opacity="0.5"/>
+        <path class="doodle" d="M 540,275 q 14,-4 26,0" opacity="0.5"/>
+        <path class="doodle" d="M 420,295 q 18,-4 32,0" opacity="0.4"/>
+        <path class="doodle" d="M 600,290 q 10,-4 22,0" opacity="0.4"/>
+
+        <!-- Small boat -->
+        <g transform="translate(440, 275)">
+          <!-- boat hull -->
+          <path class="doodle" stroke-width="2" d="M -22,0 q 22,16 44,0 l -4,5 q -18,8 -36,0 z" fill="currentColor" fill-opacity="0.15"/>
+          <!-- mast line -->
+          <line class="doodle" x1="0" y1="-2" x2="0" y2="-18"/>
+          <!-- tiny figure -->
+          <circle class="doodle" cx="-6" cy="-8" r="2"/>
+          <line class="doodle" x1="-6" y1="-6" x2="-6" y2="0"/>
+          <!-- oar -->
+          <line class="doodle" x1="-10" y1="-4" x2="-20" y2="6"/>
+          <!-- boat reflection -->
+          <path class="doodle" d="M -20,8 q 20,8 40,0" opacity="0.35"/>
+        </g>
+
+        <!-- Ninth corner marker (playful dashed point) -->
+        <circle class="doodle" cx="658" cy="280" r="4" stroke-dasharray="2 2" opacity="0.7"/>
+        <text x="668" y="283" class="doodle-fill" font-family="Fraunces, serif" font-style="italic" font-size="11" opacity="0.7">9th corner?</text>
+
+        <!-- Reeds in foreground -->
+        <g class="doodle" opacity="0.5">
+          <path d="M 140,325 q 2,-12 0,-25"/>
+          <path d="M 146,325 q 1,-10 -1,-20"/>
+          <path d="M 152,325 q 3,-14 1,-22"/>
+          <path d="M 760,325 q -2,-12 0,-25"/>
+          <path d="M 766,325 q -1,-10 1,-20"/>
+          <path d="M 772,325 q -3,-14 -1,-22"/>
+        </g>
+
+        <!-- A pair of birds -->
+        <path class="doodle" d="M 330,95 q 6,-6 12,0 q 6,-6 12,0" opacity="0.6"/>
+        <path class="doodle" d="M 620,130 q 5,-5 10,0 q 5,-5 10,0" opacity="0.6"/>
+
+        <!-- Hand-written caption -->
+        <text x="450" y="335" text-anchor="middle" class="doodle-fill" font-family="Fraunces, serif" font-style="italic" font-size="13" opacity="0.6">nine corners · one quiet morning</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- OFFBEAT SCORE -->
+  <section class="score-section" style="border-top: none;">
+    <div class="score-left">
+      <h2>A lake that forgot to <em>become famous</em>.</h2>
+      <p>While Nainital became a ticket-booth, Naukuchiatal stayed asleep under its pine trees. Nine corners — and a local superstition: spot all nine in a single glance from one spot, and you earn <em>moksha</em>. Most tourists don't bother trying.</p>
+      <p>This is not a checklist destination. It rewards people who can sit still, walk slowly, and eat where the dog sleeps at the door.</p>
+    </div>
+    <div class="score-card">
+      <div class="score-main">
+        <div>
+          <div class="score-number">87<span class="score-max">/100</span></div>
+        </div>
+        <div class="score-verdict">
+          <div class="score-verdict-label">Offbeat Rating</div>
+          <div class="score-verdict-text">Go now, before it isn't.</div>
+        </div>
+      </div>
+      <div class="meter">
+        <div class="meter-row"><span>Crowd Shield</span><span>★★★★☆</span></div>
+        <div class="meter-bar"><div class="meter-fill" style="width: 82%;"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-row"><span>Natural Beauty</span><span>★★★★★</span></div>
+        <div class="meter-bar"><div class="meter-fill" style="width: 95%;"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-row"><span>Café &amp; Book Culture</span><span>★★★★☆</span></div>
+        <div class="meter-bar"><div class="meter-fill" style="width: 78%;"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-row"><span>Child-Friendliness</span><span>★★★★★</span></div>
+        <div class="meter-bar"><div class="meter-fill" style="width: 92%;"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-row"><span>Local Character Preserved</span><span>★★★★☆</span></div>
+        <div class="meter-bar"><div class="meter-fill" style="width: 80%;"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-row"><span>Hike Density (hidden)</span><span>★★★★★</span></div>
+        <div class="meter-bar"><div class="meter-fill" style="width: 88%;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-dot">· · ·</div>
+
+  <!-- SOUL -->
+  <section id="soul">
+    <div class="section-head">
+      <div class="section-label">§ 01 — The Soul of the Place</div>
+      <h2 class="section-title">Who <em>belongs</em> here. And who, honestly, does not.</h2>
+      <p class="section-intro">Every place has a temperament. Naukuchiatal is introverted. It doesn't dress up for you. Bring the right company — or leave it alone.</p>
+    </div>
+    <div class="soul-grid">
+      <div class="soul-cell yes">
+        <h4>Come if you…</h4>
+        <ul>
+          <li>consider a lakeside bench + a book a full day's plan</li>
+          <li>like watching mist lift off water for 45 uninterrupted minutes</li>
+          <li>will choose a 2 km forest walk over a 12-stop itinerary</li>
+          <li>order filter coffee, not a frappé with whipped cream</li>
+          <li>travel with little ones who like boats, frogs, and pine cones</li>
+          <li>want your hotel to be quieter than your house</li>
+        </ul>
+      </div>
+      <div class="soul-cell no">
+        <h4>Stay away if you…</h4>
+        <ul>
+          <li>need a nightlife, a mall, or a &ldquo;viewpoint selfie&rdquo;</li>
+          <li>came to Uttarakhand for adventure sports adrenaline</li>
+          <li>want big crowds and a buzzing bazaar</li>
+          <li>expect Instagram-ready cafés every 200 metres</li>
+          <li>book without checking weekends (Sat–Sun gets Delhi traffic)</li>
+          <li>equate &ldquo;more sightseeing&rdquo; with a better holiday</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASONS -->
+  <section id="seasons">
+    <div class="section-head">
+      <div class="section-label">§ 02 — When to Go (and When Not)</div>
+      <h2 class="section-title">The lake has <em>four personalities</em>.</h2>
+      <p class="section-intro">Each season rewrites the place. Pick carefully — the difference between going in May vs. October is the difference between a bus station and a monastery.</p>
+    </div>
+    <div class="season-grid">
+      <div class="season">
+        <div class="season-icon">
+          <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <g class="doodle">
+              <!-- rhododendron buransh flower -->
+              <path d="M 22,30 l 0,-8" />
+              <path d="M 22,22 q -6,-4 -8,-10 q 4,-1 8,4 q 0,-6 4,-10 q 4,4 2,10 q 6,-4 10,-2 q -2,6 -8,8 q 6,2 6,8 q -6,0 -10,-4 q 1,6 -3,10 q -4,-4 -3,-10 q -4,4 -10,4 q 0,-6 6,-8 z" fill="currentColor" fill-opacity="0.2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="season-months">MAR · APR · MAY</div>
+        <h4>Spring</h4>
+        <p>Rhododendron in bloom, buransh juice at roadside stalls. March–mid-April is the sweet spot; from <strong>April 27 onward</strong> CBSE summer holidays run till June 10 — expect heavy Delhi-NCR traffic on weekends.</p>
+        <span class="season-verdict v-go">Go · Before Apr 27</span>
+      </div>
+      <div class="season">
+        <div class="season-icon">
+          <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <g class="doodle">
+              <!-- cloud -->
+              <path d="M 10,20 q 2,-6 8,-5 q 2,-6 8,-4 q 6,-2 8,4 q 6,0 6,5 q 0,4 -6,4 l -20,0 q -6,0 -4,-4 z" fill="currentColor" fill-opacity="0.15"/>
+              <!-- rain drops -->
+              <line x1="14" y1="28" x2="12" y2="34"/>
+              <line x1="22" y1="28" x2="20" y2="36"/>
+              <line x1="30" y1="28" x2="28" y2="34"/>
+            </g>
+          </svg>
+        </div>
+        <div class="season-months">JUN · JUL · AUG</div>
+        <h4>Monsoon</h4>
+        <p>Hill roads get dicey. But the forests turn electric green, cafés are empty, and you'll hear nothing but crickets at 3pm. Landslides are real.</p>
+        <span class="season-verdict v-maybe">Go · If brave</span>
+      </div>
+      <div class="season">
+        <div class="season-icon">
+          <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <g class="doodle">
+              <!-- oak leaf -->
+              <path d="M 22,8 q 4,2 4,6 q 4,-2 6,0 q -2,4 -4,4 q 4,2 4,6 q -4,0 -6,-2 q 2,4 0,6 q -4,-2 -4,-6 q -2,4 -4,6 q -2,-2 0,-6 q -2,2 -6,2 q 0,-4 4,-6 q -2,0 -4,-4 q 2,-2 6,0 q 0,-4 4,-6 z" fill="currentColor" fill-opacity="0.2"/>
+              <line x1="22" y1="14" x2="22" y2="36"/>
+            </g>
+          </svg>
+        </div>
+        <div class="season-months">SEP · OCT · NOV</div>
+        <h4>Autumn</h4>
+        <p><em>The secret season.</em> Post-rain clarity, 15–22°C days, Himalayas visible after monsoon washed the haze. October is the local's favourite.</p>
+        <span class="season-verdict v-go">Best</span>
+      </div>
+      <div class="season">
+        <div class="season-icon">
+          <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <g class="doodle">
+              <!-- snowy peaks -->
+              <path d="M 4,34 L 14,20 L 20,26 L 28,14 L 36,24 L 40,34 Z" fill="currentColor" fill-opacity="0.15"/>
+              <!-- snow caps -->
+              <path d="M 14,20 l 2,2 l 2,-1 l 2,2" stroke-width="1.2"/>
+              <path d="M 28,14 l 2,2 l 2,-1 l 2,2 l 2,-1" stroke-width="1.2"/>
+              <!-- snowflake -->
+              <g opacity="0.6" transform="translate(36, 10)">
+                <line x1="0" y1="-3" x2="0" y2="3"/>
+                <line x1="-3" y1="0" x2="3" y2="0"/>
+                <line x1="-2" y1="-2" x2="2" y2="2"/>
+                <line x1="-2" y1="2" x2="2" y2="-2"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="season-months">DEC · JAN · FEB</div>
+        <h4>Winter</h4>
+        <p>Cold (nights 2–5°C), rare snow, fireplaces lit everywhere. Christmas week gets booked, otherwise blissfully empty. Pack serious layers.</p>
+        <span class="season-verdict v-go">Cosy</span>
+      </div>
+    </div>
+    <div class="temp-chart-wrap">
+      <div class="temp-chart-title">Naukuchiatal · average temperature range by month (°C)</div>
+      <div class="temp-chart">
+        <div class="temp-col"><div class="temp-bar" style="height: 35%;"><span class="temp-range">2–15</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 42%;"><span class="temp-range">4–17</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 55%;"><span class="temp-range">8–22</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 70%;"><span class="temp-range">12–26</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 92%;"><span class="temp-range">21–36</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 78%;"><span class="temp-range">17–27</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 72%;"><span class="temp-range">18–25</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 70%;"><span class="temp-range">17–25</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 65%;"><span class="temp-range">15–24</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 55%;"><span class="temp-range">10–22</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 45%;"><span class="temp-range">6–18</span></div></div>
+        <div class="temp-col"><div class="temp-bar" style="height: 38%;"><span class="temp-range">3–15</span></div></div>
+      </div>
+      <div class="temp-labels">
+        <div class="temp-label">Jan</div><div class="temp-label">Feb</div><div class="temp-label">Mar</div><div class="temp-label">Apr</div><div class="temp-label">May</div><div class="temp-label">Jun</div><div class="temp-label">Jul</div><div class="temp-label">Aug</div><div class="temp-label">Sep</div><div class="temp-label">Oct</div><div class="temp-label">Nov</div><div class="temp-label">Dec</div>
+      </div>
+      <div class="temp-note">Pack for a 10–15°C swing every day. Relative humidity sits around 28% in May — dry and comfortable despite the heat. Source: climate-data.org.</div>
+    </div>
+
+    <div class="whispers">
+      <div class="whisper">
+        <p>The CBSE summer-holiday window (Apr 27 – Jun 10, 2026) brings a real crowd wave. Weekdays remain manageable; <strong>weekends are the hard pass</strong>. If you're travelling May 10–June 10, aim to arrive on a Sunday and leave on Thursday.</p>
+        <div class="whisper-from">— CBSE academic calendar 2026</div>
+      </div>
+      <div class="whisper">
+        <p>The lake never freezes, but in January you will see mist rising off it at dawn like slow breath. Go to the eastern edge at 6:45 am. You'll be alone.</p>
+        <div class="whisper-from">— Kumaoni boatman, 62</div>
+      </div>
+      <div class="whisper">
+        <p>Full moon nights between October and February — the lake mirrors the moon so well it feels like two skies stacked. No one books a room for this reason. They should.</p>
+        <div class="whisper-from">— A guesthouse owner, Jungliagaon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGISTICS -->
+  <section id="logistics">
+    <div class="section-head">
+      <div class="section-label">§ 03 — Getting In (&amp; Out)</div>
+      <h2 class="section-title">Three honest routes. <em>Choose your mood.</em></h2>
+    </div>
+    <div class="route-grid">
+      <div class="route">
+        <div class="route-tag">Recommended · for families</div>
+        <h4>The Shatabdi + Taxi</h4>
+        <div class="route-time">6h 30m · ₹3,500–5,500</div>
+        <ul>
+          <li>Board New Delhi Kathgodam Shatabdi (12040) at 06:20 AM</li>
+          <li>Arrive Kathgodam 11:55 AM · breakfast served on train</li>
+          <li>Pre-booked taxi to Naukuchia House · 1h 10m · ~₹1,800</li>
+          <li>Kid-friendly: no car sickness, arrive fresh by lunch</li>
+          <li>Return: Shatabdi 12039 at 15:35 from Kathgodam</li>
+        </ul>
+      </div>
+      <div class="route">
+        <div class="route-tag">For the romantics</div>
+        <h4>The Slow Drive</h4>
+        <div class="route-time">6–7 hours · ₹9,000–14,000 (taxi)</div>
+        <ul>
+          <li>Leave Delhi 5:30 AM to miss Ghaziabad traffic</li>
+          <li>Breakfast stop: Gajraula (paratha) or Rampur (biryani)</li>
+          <li>Take NH9 via Moradabad → Rudrapur → Haldwani</li>
+          <li>Second stop: Kathgodam for chai, then 26 km up</li>
+          <li>Best if you love road trips and want car flexibility</li>
+        </ul>
+      </div>
+      <div class="route">
+        <div class="route-tag">For the stoics</div>
+        <h4>The Overnight Bus</h4>
+        <div class="route-time">8–9 hours · ₹1,500–2,800</div>
+        <ul>
+          <li>Volvo / Uttarakhand Transport from Anand Vihar</li>
+          <li>Departure 9:30–10:30 PM · reach Haldwani 6 AM</li>
+          <li>Shared cab from Haldwani to Naukuchiatal (~₹400/head)</li>
+          <li>Cheap but exhausting with little ones · skip if possible</li>
+          <li>Honest truth: not the right route if children are coming</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="matrix-wrap">
+      <div class="matrix-title">Distances from Naukuchia House</div>
+      <div class="matrix">
+        <div class="matrix-head">
+          <div class="matrix-cell">Destination</div>
+          <div class="matrix-cell">Distance</div>
+          <div class="matrix-cell">Drive</div>
+          <div class="matrix-cell">Why you'd go</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Bhimtal</div>
+          <div class="matrix-cell km">4 km</div>
+          <div class="matrix-cell time">15 min</div>
+          <div class="matrix-cell note">iHeart Café, butterfly centre, market</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Sattal Reserve</div>
+          <div class="matrix-cell km">7 km</div>
+          <div class="matrix-cell time">25 min</div>
+          <div class="matrix-cell note">Birding, kayaking, Birdsong Café</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Kathgodam Station</div>
+          <div class="matrix-cell km">26 km</div>
+          <div class="matrix-cell time">60 min</div>
+          <div class="matrix-cell note">Shatabdi arrival / departure</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Nainital</div>
+          <div class="matrix-cell km">26 km</div>
+          <div class="matrix-cell time">60 min</div>
+          <div class="matrix-cell note">We don't recommend it. Skip.</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Ramgarh (fruit valley)</div>
+          <div class="matrix-cell km">36 km</div>
+          <div class="matrix-cell time">1h 15m</div>
+          <div class="matrix-cell note">Orchards, Mountain Calling café</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Kainchi Dham</div>
+          <div class="matrix-cell km">40 km</div>
+          <div class="matrix-cell time">1h 20m</div>
+          <div class="matrix-cell note">Ashram · go early, Tuesday only</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Mukteshwar</div>
+          <div class="matrix-cell km">47 km</div>
+          <div class="matrix-cell time">1h 30m</div>
+          <div class="matrix-cell note">Waterfall hike, Himalayan views</div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-cell dest">Jim Corbett Park</div>
+          <div class="matrix-cell km">140 km</div>
+          <div class="matrix-cell time">4 hours</div>
+          <div class="matrix-cell note">Possible but don't · full separate trip</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="section-head">
+      <div class="section-label">§ 03.5 — The Terrain</div>
+      <h2 class="section-title">The region, as a <em>hand-drawn map</em>.</h2>
+      <p class="section-intro">Naukuchiatal isn't one place — it's the quiet centre of a small constellation of lakes, villages, and ridges. Here's how they sit in relation to each other. Every number on the map is a real stop in this guide.</p>
+    </div>
+
+    <div class="map-wrap">
+      <svg class="map-svg" viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" aria-label="Hand-drawn map of Naukuchiatal region">
+        <defs>
+          <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="0.6" opacity="0.15"/>
+          </pattern>
+          <filter id="rough">
+            <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5"/>
+            <feDisplacementMap in="SourceGraphic" scale="2"/>
+          </filter>
+        </defs>
+
+        <!-- background terrain hatching -->
+        <rect x="0" y="0" width="820" height="500" fill="url(#hatch)" color="#d9a441" opacity="0.3"/>
+
+        <!-- Mountain silhouettes (top - Himalayas) -->
+        <path d="M 0,70 L 80,40 L 160,60 L 240,30 L 320,55 L 400,35 L 500,50 L 600,30 L 700,55 L 820,40 L 820,80 L 0,80 Z" fill="none" stroke="#6a8f6b" stroke-width="1.2" opacity="0.6"/>
+        <text x="20" y="30" fill="#6a8f6b" font-family="Fraunces, serif" font-size="11" font-style="italic" opacity="0.7">. . . the Himalayas . . .</text>
+
+        <!-- Forests (stylized trees) -->
+        <g fill="#3f5d42" opacity="0.5">
+          <circle cx="90" cy="330" r="6"/><circle cx="105" cy="320" r="5"/><circle cx="120" cy="335" r="7"/>
+          <circle cx="640" cy="160" r="6"/><circle cx="655" cy="150" r="5"/><circle cx="670" cy="165" r="7"/>
+          <circle cx="560" cy="380" r="6"/><circle cx="575" cy="370" r="5"/><circle cx="590" cy="385" r="7"/>
+          <circle cx="300" cy="380" r="6"/><circle cx="315" cy="370" r="5"/><circle cx="330" cy="385" r="7"/>
+        </g>
+
+        <!-- NAUKUCHIATAL LAKE (center, 9-cornered) -->
+        <path d="M 380,230 L 420,215 L 460,225 L 480,260 L 475,295 L 450,315 L 410,325 L 375,315 L 360,285 L 365,255 Z"
+              fill="#14231f" stroke="#d9a441" stroke-width="2" opacity="0.9"/>
+        <text x="415" y="275" fill="#e8c37a" font-family="Fraunces, serif" font-size="14" font-style="italic" text-anchor="middle">Naukuchiatal</text>
+        <text x="415" y="292" fill="#a8a295" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" letter-spacing="2">9 CORNERS</text>
+
+        <!-- BHIMTAL LAKE (left) -->
+        <ellipse cx="250" cy="275" rx="55" ry="28" fill="#14231f" stroke="#6a8f6b" stroke-width="1.5" opacity="0.85"/>
+        <text x="250" y="280" fill="#a8a295" font-family="Fraunces, serif" font-size="13" font-style="italic" text-anchor="middle">Bhimtal</text>
+
+        <!-- SATTAL (upper left - 7 lakes, small clusters) -->
+        <g fill="#14231f" stroke="#6a8f6b" stroke-width="1.2" opacity="0.85">
+          <ellipse cx="170" cy="165" rx="14" ry="8"/>
+          <ellipse cx="195" cy="155" rx="10" ry="6"/>
+          <ellipse cx="185" cy="180" rx="12" ry="7"/>
+          <ellipse cx="215" cy="175" rx="8" ry="5"/>
+        </g>
+        <text x="150" y="140" fill="#a8a295" font-family="Fraunces, serif" font-size="12" font-style="italic">Sattal (7)</text>
+
+        <!-- NAINITAL LAKE (far left, deliberately faded - the one to avoid) -->
+        <ellipse cx="80" cy="225" rx="32" ry="14" fill="#14231f" stroke="#9a4a3a" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.55"/>
+        <text x="80" y="230" fill="#9a4a3a" font-family="Fraunces, serif" font-size="11" font-style="italic" text-anchor="middle" opacity="0.7">Nainital</text>
+        <text x="80" y="252" fill="#9a4a3a" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" letter-spacing="2" opacity="0.7">(SKIP)</text>
+
+        <!-- MUKTESHWAR (upper right - ridge) -->
+        <path d="M 580,100 L 600,85 L 620,95 L 640,80 L 660,90 L 680,85 L 700,95" fill="none" stroke="#6a8f6b" stroke-width="2" opacity="0.8"/>
+        <text x="640" y="70" fill="#e8c37a" font-family="Fraunces, serif" font-size="13" font-style="italic" text-anchor="middle">Mukteshwar ridge</text>
+
+        <!-- RAMGARH (right side - orchards) -->
+        <g fill="#d9a441" opacity="0.6">
+          <circle cx="720" cy="220" r="3"/><circle cx="730" cy="215" r="3"/><circle cx="725" cy="230" r="3"/><circle cx="740" cy="225" r="3"/>
+        </g>
+        <text x="730" y="260" fill="#a8a295" font-family="Fraunces, serif" font-size="12" font-style="italic" text-anchor="middle">Ramgarh</text>
+        <text x="730" y="275" fill="#a8a295" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" letter-spacing="1">FRUIT VALLEY</text>
+
+        <!-- KAINCHI DHAM (middle right) -->
+        <polygon points="680,340 690,320 700,340" fill="none" stroke="#d9a441" stroke-width="1.2" opacity="0.7"/>
+        <text x="690" y="360" fill="#a8a295" font-family="Fraunces, serif" font-size="11" font-style="italic" text-anchor="middle">Kainchi Dham</text>
+
+        <!-- KATHGODAM (bottom - train station) -->
+        <rect x="340" y="440" width="70" height="16" fill="none" stroke="#d9a441" stroke-width="1.5" opacity="0.8"/>
+        <line x1="340" y1="448" x2="410" y2="448" stroke="#d9a441" stroke-width="0.8" stroke-dasharray="2 3"/>
+        <text x="375" y="475" fill="#e8c37a" font-family="Fraunces, serif" font-size="12" font-style="italic" text-anchor="middle">Kathgodam Station</text>
+        <text x="375" y="490" fill="#a8a295" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" letter-spacing="2">← FROM DELHI</text>
+
+        <!-- Roads (dashed lines connecting places) -->
+        <g fill="none" stroke="#a8a295" stroke-width="1" stroke-dasharray="4 4" opacity="0.5">
+          <path d="M 375,440 Q 400,390 415,320"/>
+          <path d="M 305,275 L 360,270"/>
+          <path d="M 250,245 Q 215,205 195,180"/>
+          <path d="M 420,225 Q 500,180 600,115"/>
+          <path d="M 480,260 Q 600,250 700,225"/>
+          <path d="M 475,295 Q 580,320 680,330"/>
+          <path d="M 215,265 Q 150,245 110,235"/>
+        </g>
+
+        <!-- NUMBERED PINS -->
+        <g font-family="Fraunces, serif" font-weight="500">
+          <!-- 1: Naukuchia House -->
+          <circle cx="360" cy="225" r="11" fill="#d9a441"/>
+          <text x="360" y="229" text-anchor="middle" fill="#0b1210" font-size="11">1</text>
+          <!-- 2: Cafe Magic Forest -->
+          <circle cx="470" cy="305" r="11" fill="#d9a441"/>
+          <text x="470" y="309" text-anchor="middle" fill="#0b1210" font-size="11">2</text>
+          <!-- 3: iHeart Cafe -->
+          <circle cx="230" cy="295" r="11" fill="#d9a441"/>
+          <text x="230" y="299" text-anchor="middle" fill="#0b1210" font-size="11">3</text>
+          <!-- 4: Butterfly Research -->
+          <circle cx="295" cy="250" r="11" fill="#d9a441"/>
+          <text x="295" y="254" text-anchor="middle" fill="#0b1210" font-size="11">4</text>
+          <!-- 5: Sattal Birding -->
+          <circle cx="215" cy="150" r="11" fill="#d9a441"/>
+          <text x="215" y="154" text-anchor="middle" fill="#0b1210" font-size="11">5</text>
+          <!-- 6: Jungliagaon village -->
+          <circle cx="450" cy="195" r="11" fill="#d9a441"/>
+          <text x="450" y="199" text-anchor="middle" fill="#0b1210" font-size="11">6</text>
+          <!-- 7: Cafe De Mukteshwar -->
+          <circle cx="620" cy="110" r="11" fill="#d9a441"/>
+          <text x="620" y="114" text-anchor="middle" fill="#0b1210" font-size="11">7</text>
+          <!-- 8: Bhalu Gaad -->
+          <circle cx="565" cy="75" r="11" fill="#d9a441"/>
+          <text x="565" y="79" text-anchor="middle" fill="#0b1210" font-size="11">8</text>
+          <!-- 9: Kilmora Cafe -->
+          <circle cx="695" cy="170" r="11" fill="#d9a441"/>
+          <text x="695" y="174" text-anchor="middle" fill="#0b1210" font-size="11">9</text>
+        </g>
+
+        <!-- Compass rose -->
+        <g transform="translate(70, 80)" stroke="#d9a441" fill="none" opacity="0.7">
+          <circle r="20" stroke-width="0.8"/>
+          <path d="M 0,-18 L 3,-4 L 0,0 L -3,-4 Z" fill="#d9a441"/>
+          <path d="M 0,18 L 3,4 L 0,0 L -3,4 Z"/>
+          <text x="0" y="-26" fill="#d9a441" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">N</text>
+        </g>
+
+        <!-- Scale bar -->
+        <g transform="translate(620, 455)" opacity="0.7">
+          <line x1="0" y1="0" x2="100" y2="0" stroke="#a8a295" stroke-width="1.5"/>
+          <line x1="0" y1="-5" x2="0" y2="5" stroke="#a8a295"/>
+          <line x1="50" y1="-5" x2="50" y2="5" stroke="#a8a295"/>
+          <line x1="100" y1="-5" x2="100" y2="5" stroke="#a8a295"/>
+          <text x="50" y="20" fill="#a8a295" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle" letter-spacing="1">~10 km</text>
+        </g>
+      </svg>
+
+      <div class="map-legend">
+        <div class="legend-item"><div class="pin">1</div><div><div class="name">Naukuchia House</div><div class="sub">Your base</div></div></div>
+        <div class="legend-item"><div class="pin">2</div><div><div class="name">Café Magic Forest</div><div class="sub">Wood-fired lunch</div></div></div>
+        <div class="legend-item"><div class="pin">3</div><div><div class="name">iHeart Café</div><div class="sub">Coffee + books</div></div></div>
+        <div class="legend-item"><div class="pin">4</div><div><div class="name">Butterfly Centre</div><div class="sub">Kid favourite</div></div></div>
+        <div class="legend-item"><div class="pin">5</div><div><div class="name">Sattal Birding</div><div class="sub">Reserve</div></div></div>
+        <div class="legend-item"><div class="pin">6</div><div><div class="name">Jungliagaon</div><div class="sub">Orchard walk</div></div></div>
+        <div class="legend-item"><div class="pin">7</div><div><div class="name">Café De Mukteshwar</div><div class="sub">Himalayan view</div></div></div>
+        <div class="legend-item"><div class="pin">8</div><div><div class="name">Bhalu Gaad Fall</div><div class="sub">Feet in water</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAYS -->
+  <section id="stays">
+    <div class="section-head">
+      <div class="section-label">§ 04 — Where to Sleep</div>
+      <h2 class="section-title">No chain hotels. <em>Only character.</em></h2>
+      <p class="section-intro">Ranked by soul, not by star rating. A 4-star with character beats a 5-star with a buffet, every time.</p>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">
+        <svg viewBox="0 0 56 56">
+          <g class="doodle">
+            <!-- grand bungalow with columns -->
+            <rect x="10" y="28" width="36" height="16" fill="currentColor" fill-opacity="0.1"/>
+            <path d="M 6,28 L 28,14 L 50,28"/>
+            <line x1="16" y1="28" x2="16" y2="44"/>
+            <line x1="22" y1="28" x2="22" y2="44"/>
+            <line x1="34" y1="28" x2="34" y2="44"/>
+            <line x1="40" y1="28" x2="40" y2="44"/>
+            <rect x="25" y="36" width="6" height="8"/>
+          </g>
+        </svg>
+      </div>
+      <div class="stay-rank">01</div>
+      <div class="stay-body">
+        <div class="stay-type">IHCL SeleQtions · heritage luxury</div>
+        <h4>Naukuchia House, Naukuchiatal</h4>
+        <p>The only full-service luxury stay on the lake. Palladian-inspired architecture, perched above the water, infinity pool, spa, heated pool, and an in-house kitchen that will serve Kumaoni dishes off-menu if you ask. Ranked on Booking.com, Tripadvisor, and MakeMyTrip; 4.1 stars from ~1,900 reviews.</p>
+        <div class="stay-whisper">Deluxe Garden View is the entry-level room. Ask specifically for a Lake View room — the upgrade is worth it at sunrise.</div>
+      </div>
+      <div class="stay-price">₹21,240<small>per night (Deluxe, incl. taxes)</small></div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">
+        <svg viewBox="0 0 56 56">
+          <g class="doodle">
+            <!-- cluster of cottages among trees -->
+            <path d="M 6,34 L 14,26 L 22,34 L 22,44 L 6,44 Z" fill="currentColor" fill-opacity="0.12"/>
+            <path d="M 22,32 L 34,22 L 46,32 L 46,44 L 22,44 Z" fill="currentColor" fill-opacity="0.12"/>
+            <!-- trees -->
+            <path d="M 4,26 l -3,-6 l 3,1 l 0,-6 l 3,6 l 3,-1 l -3,6 z" fill="currentColor" opacity="0.5"/>
+            <path d="M 50,28 l -3,-6 l 3,1 l 0,-6 l 3,6 l 3,-1 l -3,6 z" fill="currentColor" opacity="0.5"/>
+            <rect x="12" y="36" width="4" height="6"/>
+            <rect x="30" y="34" width="4" height="8"/>
+          </g>
+        </svg>
+      </div>
+      <div class="stay-rank">02</div>
+      <div class="stay-body">
+        <div class="stay-type">Resort · 38 rooms · 70 acres of oak forest</div>
+        <h4>The Lake Resort, Naukuchiatal</h4>
+        <p>Ranked #1 of 8 hotels in Naukuchiatal on Tripadvisor. Sprawls over 70 acres, houses Café Magic Forest on-site. Rooms plus Swiss tents — pick rooms for comfort, tents for the novelty. Adventure sports available.</p>
+        <div class="stay-whisper">Stay here if you want space to roam without leaving the property.</div>
+      </div>
+      <div class="stay-price">from ₹8,237<small>per person</small></div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">
+        <svg viewBox="0 0 56 56">
+          <g class="doodle">
+            <!-- cottage with sloped roof + lake -->
+            <path d="M 14,26 L 28,14 L 42,26 L 42,42 L 14,42 Z" fill="currentColor" fill-opacity="0.15"/>
+            <rect x="23" y="32" width="6" height="10"/>
+            <rect x="17" y="30" width="4" height="4"/>
+            <rect x="35" y="30" width="4" height="4"/>
+            <!-- lake ripple below -->
+            <path d="M 6,48 q 12,-3 24,0 q 12,3 20,0" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="stay-rank">03</div>
+      <div class="stay-body">
+        <div class="stay-type">Boutique cottages · facing the lake</div>
+        <h4>Cottages@Village</h4>
+        <p>Cottages positioned directly opposite Naukuchiatal lake with Himalayan backdrop. Kayaking, paragliding, and mountain biking available on-site. Less polished than Naukuchia House, but the views from the terrace at dawn are the strongest on this list.</p>
+        <div class="stay-whisper">Best booked via Booking.com or MakeMyTrip — their direct rates tend to be higher than OTAs.</div>
+      </div>
+      <div class="stay-price">₹6,500–₹9,500<small>per night</small></div>
+    </div>
+
+    <div class="stay-card">
+      <div class="stay-icon">
+        <svg viewBox="0 0 56 56">
+          <g class="doodle">
+            <!-- homestay with smoking chimney -->
+            <path d="M 16,28 L 28,18 L 40,28 L 40,44 L 16,44 Z" fill="currentColor" fill-opacity="0.15"/>
+            <rect x="25" y="34" width="6" height="10"/>
+            <rect x="19" y="32" width="4" height="4"/>
+            <!-- chimney -->
+            <rect x="34" y="20" width="4" height="8" fill="currentColor" fill-opacity="0.2"/>
+            <!-- smoke wisps -->
+            <path d="M 36,18 q -2,-4 0,-8 q 2,-4 0,-8" opacity="0.5"/>
+            <path d="M 40,16 q 2,-4 0,-6" opacity="0.4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="stay-rank">04</div>
+      <div class="stay-body">
+        <div class="stay-type">Family homestay · &lt;1 km from lake</div>
+        <h4>Fairyland Homestay</h4>
+        <p>An authentic family-run homestay spread across 1+ acre of wooded land near Naukuchiatal, 10 minutes' walk to the lake with a small pond and waterfall on the property. A stop here for one night gives you access to the local kitchen and the kind of Kumaoni hospitality no resort can replicate.</p>
+        <div class="stay-whisper">Listed on Homestays of India and Booking.com. For a slow-travel trip, even one night here reframes the whole experience.</div>
+      </div>
+      <div class="stay-price">≈₹3,500–₹6,000<small>per night</small></div>
+    </div>
+  </section>
+
+  <!-- HIKES -->
+  <section id="hikes">
+    <div class="section-head">
+      <div class="section-label">§ 05 — Walks &amp; Hidden Trails</div>
+      <h2 class="section-title">The walks the <em>tourist taxis</em> can't reach.</h2>
+      <p class="section-intro">Kumaon's landscape is hiking country disguised as a tourist destination. The magic is in leaving the lake and climbing 200 metres up into the pine forest — you'll hear no one.</p>
+    </div>
+    <div class="hikes-grid">
+
+      <div class="hike">
+        <div class="hike-meta">
+          <span>Distance · <strong>2.0 km loop</strong></span>
+          <span>Elevation · <strong>+90 m</strong></span>
+          <span>Time · <strong>1h 15m</strong></span>
+        </div>
+        <h4>The Eight Corners Trail</h4>
+        <p>A marked loop through the oak forest above the lake's southwest shore. You see 8 of the 9 corners (the ninth is locals' folklore). Kid-safe. Ends near a spring tea-stall that serves ginger-honey tea.</p>
+        <p style="font-size: 12px; color: var(--ink-faint); font-style: italic; margin-top: 4px;">Note: "Eight Corners" is the informal local name for the lake-rim trail — ask locals for the Jungliagaad / Naukuchiatal perimeter trail.</p>
+        <div class="hike-badges">
+          <span class="badge kid">Kid friendly</span>
+          <span class="badge">Marked trail</span>
+          <span class="badge quiet">Crowd-free</span>
+        </div>
+      </div>
+
+      <div class="hike">
+        <div class="hike-meta">
+          <span>Distance · <strong>3.5 km</strong></span>
+          <span>Elevation · <strong>+180 m</strong></span>
+          <span>Time · <strong>2h</strong></span>
+        </div>
+        <h4>Jungalia Gaon · Forest Walk</h4>
+        <p>Jangalia Gaon (also spelt Jungliagaon) sits 8 km from Naukuchiatal — an offbeat hamlet loved by birders and anglers. Climb through oak forest, pass fruit orchards; locals usually wave. Walk back or arrange a taxi pickup.</p>
+        <div class="hike-badges">
+          <span class="badge kid">Kid friendly</span>
+          <span class="badge quiet">Barely anyone</span>
+          <span class="badge">Villages</span>
+        </div>
+      </div>
+
+      <div class="hike">
+        <div class="hike-meta">
+          <span>Distance · <strong>4 km one-way</strong></span>
+          <span>Elevation · <strong>+260 m</strong></span>
+          <span>Time · <strong>3h round</strong></span>
+        </div>
+        <h4>Hidimba Parvat via Bhimtal</h4>
+        <p>Named for the Mahabharata's Hidimba. The last 800 m is steep — manageable for fit children with breaks. Summit has a tiny temple and genuinely nobody there on weekdays.</p>
+        <div class="hike-badges">
+          <span class="badge">Moderate</span>
+          <span class="badge quiet">Empty weekdays</span>
+          <span class="badge">Temple</span>
+        </div>
+      </div>
+
+      <div class="hike">
+        <div class="hike-meta">
+          <span>Distance · <strong>2.5 km</strong></span>
+          <span>Elevation · <strong>+50 m</strong></span>
+          <span>Time · <strong>1h 30m</strong></span>
+        </div>
+        <h4>Bhalu Gaad Waterfall (Mukteshwar)</h4>
+        <p>Park at Dhari village (10 km from Mukteshwar), then trek 2 km through dense jungle with three stream crossings and rock scrambles. ~45-60 min each way. Dip your feet in the cold pool at the base. Best March–June and September–November. Visit before 11 am.</p>
+        <div class="hike-badges">
+          <span class="badge kid">Kid friendly</span>
+          <span class="badge">Water</span>
+          <span class="badge quiet">Alt route</span>
+        </div>
+      </div>
+
+      <div class="hike">
+        <div class="hike-meta">
+          <span>Distance · <strong>6 km</strong></span>
+          <span>Elevation · <strong>+350 m</strong></span>
+          <span>Time · <strong>4h</strong></span>
+        </div>
+        <h4>Sattal Birding Trail</h4>
+        <p>Sattal hosts ~500 bird species, 525+ butterfly species. Several operators (Sattal Birding, Wild Kumaon) run guided walks with binoculars. April–May is breeding-plumage season. 45+ species on a good morning. Very gentle gradient.</p>
+        <div class="hike-badges">
+          <span class="badge kid">Kid friendly</span>
+          <span class="badge">Birds</span>
+          <span class="badge quiet">Reserve</span>
+        </div>
+      </div>
+
+      <div class="hike">
+        <div class="hike-meta">
+          <span>Distance · <strong>1.2 km</strong></span>
+          <span>Elevation · <strong>flat</strong></span>
+          <span>Time · <strong>45m</strong></span>
+        </div>
+        <h4>Lands End (Bhimtal back road)</h4>
+        <p>Skip the main Lands End viewpoint — it's crowded. Instead, walk the forest path behind Bhimtal's old PWD bungalow. Same view of the Gagas valley, half the people, and old pine that's 80+ years old.</p>
+        <div class="hike-badges">
+          <span class="badge kid">Kid friendly</span>
+          <span class="badge quiet">Insider</span>
+          <span class="badge">View</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CAFES -->
+  <section id="cafes">
+    <div class="section-head">
+      <div class="section-label">§ 06 — Slow Cafés &amp; Book Corners</div>
+      <h2 class="section-title">Places to <em>sit still</em> for three hours.</h2>
+      <p class="section-intro">Not Instagram cafés. Real ones — where the owner knows the coffee bean, the book on the shelf, and the dog asleep in the corner. In that order.</p>
+    </div>
+    <div class="cafe-list">
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>Café Magic Forest</h4>
+          <span class="cafe-type">Naukuchiatal · at The Lake Resort</span>
+        </div>
+        <p>Wood-and-glass dining pavilion on the Lake Resort property. The café is reviewed as &ldquo;better than the resort's own breakfast buffet&rdquo; — go for the wood-oven pizzas in the afternoon. Instagram @cafemagicforest.</p>
+        <div class="cafe-order">wood-fired pizza + filter coffee · afternoon light through the trees</div>
+      </div>
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>iHeart Café Himalayas</h4>
+          <span class="cafe-type">Bhimtal · ~4.5 on Tripadvisor</span>
+        </div>
+        <p>Wooden-lodge exterior, stone-studded walls, beautiful graffiti and quaint wooden tables. Coffee + snacks + pasta + pizza + bakery. Some find the prices on the higher side — the ambience makes up for it.</p>
+        <div class="cafe-order">cappuccino + a muffin · outdoor balcony for the hill view</div>
+      </div>
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>Aipan Restaurant</h4>
+          <span class="cafe-type">Naukuchiatal · authentic Kumaoni</span>
+        </div>
+        <p>Named after traditional Kumaoni artwork. Owner-chef Gaurav Pant serves Kumaoni specialities — Bhatt ki Churkani, Nimbu Saan, Masala Papad, Aloo Gutke. Vegetarian. Located right at Naukuchiatal, near the lake market.</p>
+        <div class="cafe-order">Bhatt ki Churkani with rice + a masala papad to start</div>
+      </div>
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>The Kumaoni Farm Cafe</h4>
+          <span class="cafe-type">Dhulai village, Bhimtal · by reservation</span>
+        </div>
+        <p>A sincere revival of the lost cuisine of Kumaon — cooked traditionally on a wood-fired chulha, farm-fresh ingredients. <strong>Prior reservation only</strong>. Worth the phone call: reviews compare it to &ldquo;food befitting a Michelin-star restaurant&rdquo;.</p>
+        <div class="cafe-order">the full Kumaoni thali · book 1–2 days ahead via Tripadvisor listing</div>
+      </div>
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>The Birdsong Café</h4>
+          <span class="cafe-type">Mukteshwar · Simi Das's garden</span>
+        </div>
+        <p>Owned and run by Simi Das, surrounded by pear trees and seasonal flowers. Fantastic Kumaoni thali, plus cakes and coffee. One of the most praised cafés in Mukteshwar. (Note: often confused with Sattal — the well-known one is Mukteshwar.)</p>
+        <div class="cafe-order">Kumaoni thali at lunch · filter coffee and home-baked cake after</div>
+      </div>
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>Café De Mukteshwar</h4>
+          <span class="cafe-type">Mukteshwar · #2 of 17 on Tripadvisor</span>
+        </div>
+        <p>Rated 4.9/5. Locally-sourced everything, friendly reception, authentic Kumaoni and continental flavours. If the Himalayas are out, the window seat is unbeatable.</p>
+        <div class="cafe-order">whatever's in-season · ask the staff what's been harvested that week</div>
+      </div>
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>Chirping Tales Café</h4>
+          <span class="cafe-type">Mukteshwar · farm-to-table</span>
+        </div>
+        <p>The menu is built around fresh local ingredients, home-grown vegetables, local herbs, home-baked bread. Quieter than Café De Mukteshwar, gives you the slow-afternoon-read feeling. Official site: chirpingtales.com.</p>
+        <div class="cafe-order">the day's bread + soup + Himalayan tea</div>
+      </div>
+
+      <div class="cafe">
+        <div class="cafe-name">
+          <h4>Kilmora Shop &amp; Café</h4>
+          <span class="cafe-type">Mukteshwar · Kumaun Grameen Udyog</span>
+        </div>
+        <p>A women's cooperative — &ldquo;Kumaun Grameen Udyog&rdquo; — selling hand-knitted textiles, apricot-skin products, organic herbs, homemade jams and juices. Small café attached. Buying here directly funds rural livelihoods.</p>
+        <div class="cafe-order">apricot-kernel oil + a jar of kilmora-berry jam · your skin thanks you in hill air</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section id="food">
+    <div class="section-head">
+      <div class="section-label">§ 07 — Eat Like a Kumaoni</div>
+      <h2 class="section-title">Six dishes that the menu <em>won't tell you about</em>.</h2>
+      <p class="section-intro">Kumaoni food is rough, smoky, and deeply rooted in what the hill soil actually grows. Ask for these by name — they're not on printed menus, but every local kitchen makes them.</p>
+    </div>
+    <div class="dish-grid">
+
+      <div class="dish">
+        <div class="dish-doodle">
+          <svg viewBox="0 0 60 60">
+            <g class="doodle">
+              <!-- steam -->
+              <path d="M 20,12 q -2,4 0,8 M 28,10 q 2,4 0,8 M 36,12 q -2,4 0,8" opacity="0.5"/>
+              <!-- bowl -->
+              <path d="M 10,28 q 20,10 40,0" />
+              <ellipse cx="30" cy="28" rx="20" ry="4" fill="currentColor" fill-opacity="0.2"/>
+              <path d="M 10,28 q 2,20 20,22 q 18,-2 20,-22"/>
+              <!-- beans inside -->
+              <circle cx="22" cy="32" r="1.5" fill="currentColor"/>
+              <circle cx="30" cy="30" r="1.5" fill="currentColor"/>
+              <circle cx="38" cy="32" r="1.5" fill="currentColor"/>
+            </g>
+          </svg>
+        </div>
+        <div class="dish-name-hindi">Bhatt ki Churkani</div>
+        <div class="dish-name-en">Black soybean curry · slow-cooked 3 hours</div>
+        <p>Thick, smoky, nothing like dal. The black soybean is soaked overnight and roasted before simmering. Eaten with steamed rice in winter — it's Kumaoni comfort food.</p>
+        <div class="dish-where"><strong>Where:</strong> Aipan Restaurant, Naukuchiatal</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-doodle">
+          <svg viewBox="0 0 60 60">
+            <g class="doodle">
+              <!-- plate -->
+              <ellipse cx="30" cy="36" rx="24" ry="6"/>
+              <ellipse cx="30" cy="32" rx="20" ry="5" fill="currentColor" fill-opacity="0.12"/>
+              <!-- potato cubes -->
+              <rect x="18" y="24" width="8" height="8" rx="1"/>
+              <rect x="28" y="22" width="7" height="7" rx="1"/>
+              <rect x="36" y="26" width="7" height="7" rx="1"/>
+              <rect x="24" y="30" width="7" height="5" rx="1"/>
+              <!-- jakhiya seeds -->
+              <circle cx="22" cy="27" r="0.8" fill="currentColor"/>
+              <circle cx="31" cy="25" r="0.8" fill="currentColor"/>
+              <circle cx="40" cy="29" r="0.8" fill="currentColor"/>
+            </g>
+          </svg>
+        </div>
+        <div class="dish-name-hindi">Aloo ke Gutke</div>
+        <div class="dish-name-en">Dry spiced potatoes · Jakhiya seed tempering</div>
+        <p>Potatoes roasted in mustard oil with a tiny wild seed called Jakhiya (only grows in Kumaon). Every house makes it differently. Gateway dish for kids who don't like "new food".</p>
+        <div class="dish-where"><strong>Where:</strong> any homestay — ask for it</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-doodle">
+          <svg viewBox="0 0 60 60">
+            <g class="doodle">
+              <!-- bowl with curry -->
+              <ellipse cx="30" cy="26" rx="20" ry="4" fill="currentColor" fill-opacity="0.25"/>
+              <path d="M 10,26 q 2,18 20,20 q 18,-2 20,-20"/>
+              <!-- leafy spinach -->
+              <path d="M 22,22 q 2,-6 -2,-10 q 6,2 6,8" opacity="0.7"/>
+              <path d="M 30,20 q 4,-6 2,-12 q 4,4 2,10" opacity="0.7"/>
+              <path d="M 38,22 q -2,-6 2,-10 q -6,2 -6,8" opacity="0.7"/>
+              <!-- madua roti on side -->
+              <circle cx="50" cy="44" r="6" fill="currentColor" fill-opacity="0.2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="dish-name-hindi">Kafuli</div>
+        <div class="dish-name-en">Spinach &amp; fenugreek curry · rice-flour thickened</div>
+        <p>An emerald-green curry so thick you could eat it with a spoon. Healthier than it tastes. Usually paired with madua (finger millet) roti instead of wheat — which is the point.</p>
+        <div class="dish-where"><strong>Where:</strong> The Kumaoni Farm Cafe, Bhimtal (by reservation)</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-doodle">
+          <svg viewBox="0 0 60 60">
+            <g class="doodle">
+              <!-- wrapped cone -->
+              <path d="M 20,12 L 30,48 L 40,12 Z" fill="currentColor" fill-opacity="0.15"/>
+              <!-- leaf veins -->
+              <line x1="25" y1="18" x2="27" y2="36"/>
+              <line x1="35" y1="18" x2="33" y2="36"/>
+              <line x1="30" y1="12" x2="30" y2="46"/>
+              <!-- tie at top -->
+              <path d="M 22,14 q 8,-4 16,0" stroke-width="2"/>
+              <!-- khoya peek -->
+              <circle cx="30" cy="42" r="3" fill="currentColor" fill-opacity="0.3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="dish-name-hindi">Singori</div>
+        <div class="dish-name-en">Sweet · khoya wrapped in malu leaf</div>
+        <p>A conical sweet parcel wrapped in a fragrant wild leaf that flavours the khoya inside. Almost impossible to find outside Kumaon. Little ones love unwrapping it.</p>
+        <div class="dish-where"><strong>Where:</strong> sweet shops in Bhimtal Bazaar · ask for freshly-made</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-doodle">
+          <svg viewBox="0 0 60 60">
+            <g class="doodle">
+              <!-- three fudge pieces -->
+              <rect x="14" y="22" width="14" height="14" rx="2" fill="currentColor" fill-opacity="0.3"/>
+              <rect x="30" y="28" width="14" height="14" rx="2" fill="currentColor" fill-opacity="0.3"/>
+              <rect x="18" y="38" width="14" height="14" rx="2" fill="currentColor" fill-opacity="0.3"/>
+              <!-- sugar balls -->
+              <circle cx="18" cy="24" r="1.2" fill="currentColor"/>
+              <circle cx="24" cy="28" r="1.2" fill="currentColor"/>
+              <circle cx="22" cy="32" r="1.2" fill="currentColor"/>
+              <circle cx="34" cy="32" r="1.2" fill="currentColor"/>
+              <circle cx="40" cy="36" r="1.2" fill="currentColor"/>
+              <circle cx="38" cy="40" r="1.2" fill="currentColor"/>
+              <circle cx="22" cy="42" r="1.2" fill="currentColor"/>
+              <circle cx="28" cy="46" r="1.2" fill="currentColor"/>
+              <circle cx="26" cy="50" r="1.2" fill="currentColor"/>
+            </g>
+          </svg>
+        </div>
+        <div class="dish-name-hindi">Bal Mithai</div>
+        <div class="dish-name-en">Chocolate-like roasted khoya fudge</div>
+        <p>Looks like chocolate truffles but is roasted khoya coated in sugar balls. Originated in Almora. Every Kumaoni child grew up on this. Good road-trip snack.</p>
+        <div class="dish-where"><strong>Where:</strong> any traditional Kumaoni sweet shop · Bhimtal, Bhowali or Almora</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-doodle">
+          <svg viewBox="0 0 60 60">
+            <g class="doodle">
+              <!-- glass -->
+              <path d="M 20,14 L 22,44 q 8,4 16,0 L 40,14 Z" fill="currentColor" fill-opacity="0.2"/>
+              <line x1="20" y1="14" x2="40" y2="14"/>
+              <!-- liquid line -->
+              <path d="M 21,20 q 9,3 18,0" opacity="0.6"/>
+              <!-- flower on rim -->
+              <g transform="translate(30, 10)">
+                <circle r="3" fill="currentColor" fill-opacity="0.4"/>
+                <path d="M 0,-3 q 3,-3 3,0 M 0,3 q -3,3 -3,0 M -3,0 q -3,-3 0,-3 M 3,0 q 3,3 0,3" opacity="0.7"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="dish-name-hindi">Buransh Sharbat</div>
+        <div class="dish-name-en">Rhododendron flower juice · April only</div>
+        <p>Made from the red rhododendron flowers that cover these forests in spring. Tart, rose-like, said to be good for the heart. Available roadside March–April.</p>
+        <div class="dish-where"><strong>Where:</strong> Kilmora Café, any roadside dhaba in spring</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ITINERARY -->
+  <section id="itinerary">
+    <div class="section-head">
+      <div class="section-label">§ 08 — The Slow Itinerary</div>
+      <h2 class="section-title">Four days. Three of them <em>mostly still</em>.</h2>
+      <p class="section-intro">Designed for slow travellers — families with little ones, couples, anyone who prefers a book to a jeep safari. No backtracking, no rushed mornings.</p>
+    </div>
+    <div class="itinerary">
+
+      <div class="day">
+        <div class="day-label">Day 01 · Thursday</div>
+        <h4>The <em>arrival</em>. Nothing more.</h4>
+        <div class="day-blocks">
+          <div class="block">
+            <div class="block-time">06:20 AM</div>
+            <div class="block-title">Board Shatabdi</div>
+            <p>New Delhi → Kathgodam. Breakfast on board. Arrive by noon.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">01:30 PM</div>
+            <div class="block-title">Check into Naukuchia House</div>
+            <p>Drop bags. Don't unpack. Walk to the lake's edge behind the property.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">05:00 PM</div>
+            <div class="block-title">Shikara at sunset</div>
+            <p>Private 40-minute ride. See if you can spot all nine corners — locals say it earns you moksha.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-label">Day 02 · Friday</div>
+        <h4>Forest mornings, <em>book afternoons</em>.</h4>
+        <div class="day-blocks">
+          <div class="block">
+            <div class="block-time">07:00 AM</div>
+            <div class="block-title">Eight Corners Trail</div>
+            <p>Start before breakfast. 2 km loop. End at the spring tea stall.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">12:30 PM</div>
+            <div class="block-title">Café Magic Forest</div>
+            <p>Wood-fired pizza, wine for adults, juice for the little one.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">04:00 PM</div>
+            <div class="block-title">iHeart Café + books</div>
+            <p>Drive 15 min to Bhimtal. Stay till sunset. Pick 2 books from the shelf.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-label">Day 03 · Saturday</div>
+        <h4>The village &amp; the <em>butterfly bungalow</em>.</h4>
+        <div class="day-blocks">
+          <div class="block">
+            <div class="block-time">08:00 AM</div>
+            <div class="block-title">Jungliagaon orchard walk</div>
+            <p>Hike to the village. Talk to the tea-stall owner. Taste seasonal fruit.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">01:00 PM</div>
+            <div class="block-title">Aipan Restaurant</div>
+            <p>Owner-chef Gaurav Pant's authentic Kumaoni thali — Bhatt, Aloo Gutke, Nimbu Saan.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">04:00 PM</div>
+            <div class="block-title">Butterfly Research Centre</div>
+            <p>Colonial-era bungalow in Bhimtal. 20 minute walk up. Child's delight.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="day-label">Day 04 · Sunday</div>
+        <h4>Sattal reserve &amp; a <em>slow goodbye</em>.</h4>
+        <div class="day-blocks">
+          <div class="block">
+            <div class="block-time">07:00 AM</div>
+            <div class="block-title">Sattal birding walk</div>
+            <p>Guide from Sattal Birding or Wild Kumaon (≈₹1,500–2,500). April–May = breeding-plumage season. 45+ species on a good morning.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">11:30 AM</div>
+            <div class="block-title">Sattal kayaking</div>
+            <p>30-min single or double kayak paddle on the lake. ~₹500–800/person. Boat rides ₹150 if you prefer.</p>
+          </div>
+          <div class="block">
+            <div class="block-time">03:00 PM</div>
+            <div class="block-title">Board Shatabdi home</div>
+            <p>Kathgodam → New Delhi. Arrive 10:30 PM. Sleep in your own bed.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY TRIPS -->
+  <section id="trips">
+    <div class="section-head">
+      <div class="section-label">§ 09 — The Halo</div>
+      <h2 class="section-title">Places <em>near enough</em> to reach before lunch.</h2>
+    </div>
+    <div class="trips-grid">
+      <div class="trip">
+        <div class="trip-doodle">
+          <svg viewBox="0 0 80 80">
+            <g class="doodle">
+              <!-- mountain ridge -->
+              <path d="M 4,58 L 22,34 L 34,46 L 48,22 L 64,44 L 76,56 Z" fill="currentColor" fill-opacity="0.3"/>
+              <!-- snow caps -->
+              <path d="M 18,38 l 2,2 l 2,-2 l 2,2"/>
+              <path d="M 44,28 l 2,2 l 2,-2 l 2,2"/>
+              <!-- pine tree -->
+              <path d="M 12,64 l -3,-8 l 3,1 l 0,-8 l 3,8 l 3,-1 l -3,8 z" fill="currentColor" opacity="0.6"/>
+            </g>
+          </svg>
+        </div>
+        <div class="trip-distance">47 km · 1h 30m drive</div>
+        <h4>Mukteshwar</h4>
+        <p>Pine ridge at ~2,286 m with open Himalayan views. Visit for the Bhalu Gaad waterfall trek (park at Dhari, 2 km each way, cross three streams), lunch at Café De Mukteshwar or Birdsong, and the 350-year-old Mukteshwar temple. Best on a clear morning — haze closes the view by noon.</p>
+      </div>
+      <div class="trip">
+        <div class="trip-doodle">
+          <svg viewBox="0 0 80 80">
+            <g class="doodle">
+              <!-- fruit tree -->
+              <path d="M 40,64 L 40,44"/>
+              <circle cx="40" cy="30" r="18" fill="currentColor" fill-opacity="0.2"/>
+              <!-- hanging fruit -->
+              <circle cx="28" cy="34" r="3" fill="currentColor" fill-opacity="0.7"/>
+              <circle cx="44" cy="38" r="3" fill="currentColor" fill-opacity="0.7"/>
+              <circle cx="52" cy="28" r="3" fill="currentColor" fill-opacity="0.7"/>
+              <circle cx="36" cy="22" r="3" fill="currentColor" fill-opacity="0.7"/>
+            </g>
+          </svg>
+        </div>
+        <div class="trip-distance">36 km · 1h 15m drive</div>
+        <h4>Ramgarh (Fruit Bowl of Kumaon)</h4>
+        <p>Orchards of apples, apricots, peaches, plums, pears. Rabindranath Tagore wrote parts of <em>Gitanjali</em> here; the site is now known as <strong>Tagore Top</strong>. Some orchards offer &ldquo;Orchard Discovery Walks&rdquo; and fruit-picking experiences.</p>
+      </div>
+      <div class="trip">
+        <div class="trip-doodle">
+          <svg viewBox="0 0 80 80">
+            <g class="doodle">
+              <!-- village on a slope -->
+              <path d="M 4,68 L 76,48" opacity="0.5"/>
+              <path d="M 14,60 L 22,50 L 30,60 L 30,70 L 14,70 Z" fill="currentColor" fill-opacity="0.15"/>
+              <path d="M 32,56 L 40,46 L 48,56 L 48,66 L 32,66 Z" fill="currentColor" fill-opacity="0.15"/>
+              <path d="M 50,52 L 58,42 L 66,52 L 66,62 L 50,62 Z" fill="currentColor" fill-opacity="0.15"/>
+              <!-- tiny smoke -->
+              <path d="M 24,48 q -1,-3 0,-6" opacity="0.5"/>
+              <path d="M 42,44 q -1,-3 0,-6" opacity="0.5"/>
+            </g>
+          </svg>
+        </div>
+        <div class="trip-distance">~50 km · 1h 30m drive</div>
+        <h4>Peora village</h4>
+        <p>Tiny Kumaoni hamlet at 6,600 ft (2,011 m), 10 km from Mukteshwar. A real offbeat destination — sparsely scattered on contoured valley slopes, pine forests, deep quiet. Go for the walk itself, not for &ldquo;sights&rdquo;.</p>
+      </div>
+      <div class="trip">
+        <div class="trip-doodle">
+          <svg viewBox="0 0 80 80">
+            <g class="doodle">
+              <!-- temple with spire -->
+              <path d="M 40,14 L 46,26 L 34,26 Z" fill="currentColor" fill-opacity="0.3"/>
+              <rect x="28" y="26" width="24" height="20" fill="currentColor" fill-opacity="0.15"/>
+              <rect x="36" y="32" width="8" height="14"/>
+              <path d="M 40,8 L 40,14"/>
+              <!-- flag -->
+              <path d="M 40,8 L 46,10 L 40,12 Z" fill="currentColor" fill-opacity="0.6"/>
+              <!-- steps -->
+              <line x1="24" y1="50" x2="56" y2="50"/>
+              <line x1="22" y1="54" x2="58" y2="54"/>
+              <line x1="20" y1="58" x2="60" y2="58"/>
+            </g>
+          </svg>
+        </div>
+        <div class="trip-distance">40 km · 1h 20m drive</div>
+        <h4>Kainchi Dham</h4>
+        <p>Neem Karoli Baba's ashram. Darshan summer 6 AM – 7 PM, winter 7 AM – 6 PM. <strong>Closed Mondays</strong> except for morning &amp; evening aarti. Go Tue–Sat morning before 9 am — weekdays outside mid-June are the calmest. June 15 Bhandara = chaos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANTI BUCKET LIST -->
+  <section id="skip">
+    <div class="section-head">
+      <div class="section-label">§ 10 — The Anti Bucket List</div>
+      <h2 class="section-title">Things tourists do here. <em>You shouldn't.</em></h2>
+      <p class="section-intro">The whole point of coming to Naukuchiatal is to not behave like you're in Nainital. Here's what to skip — and what to do instead.</p>
+    </div>
+    <div class="anti">
+      <div class="anti-item">
+        <div class="anti-x">✗</div>
+        <div>
+          <h5>Do not drive to Nainital for &ldquo;The Mall Road&rdquo;</h5>
+          <p>It is a loud, congested bazaar with the same goods sold cheaper in Bhimtal. <strong>Instead:</strong> walk the Bhimtal back-road to the butterfly centre, or spend the time at iHeart Café.</p>
+        </div>
+      </div>
+      <div class="anti-item">
+        <div class="anti-x">✗</div>
+        <div>
+          <h5>Do not book the <em>Naukuchiatal boat ride package</em></h5>
+          <p>The shared boat at the main ghat is crowded and loud. <strong>Instead:</strong> ask Naukuchia House (or any boutique hotel) to arrange a private shikara from their jetty. Costs ₹600–800 more, but it's just your family.</p>
+        </div>
+      </div>
+      <div class="anti-item">
+        <div class="anti-x">✗</div>
+        <div>
+          <h5>Do not go to Sattal on a Sunday</h5>
+          <p>Delhi day-trippers arrive by the busload. <strong>Instead:</strong> go Tuesday/Wednesday. Or stick to the Studio Café &amp; birding reserve at the far end.</p>
+        </div>
+      </div>
+      <div class="anti-item">
+        <div class="anti-x">✗</div>
+        <div>
+          <h5>Do not eat at &ldquo;Pure Veg Family Restaurants&rdquo; on the main road</h5>
+          <p>Bland, tourist-priced, no Kumaoni food. <strong>Instead:</strong> eat at Kumaon Local Kitchen, or ask your homestay to cook. The cheapest meal will be the best meal.</p>
+        </div>
+      </div>
+      <div class="anti-item">
+        <div class="anti-x">✗</div>
+        <div>
+          <h5>Do not visit during a long weekend</h5>
+          <p>Delhi's upper-middle class treats Nainital-region as a weekend getaway. Check for Friday holidays + weekend combos. <strong>Instead:</strong> take a Wed–Sun trip. The difference in quiet is dramatic.</p>
+        </div>
+      </div>
+      <div class="anti-item">
+        <div class="anti-x">✗</div>
+        <div>
+          <h5>Do not chase the <em>&ldquo;must-see&rdquo;</em> Himalayan viewpoint</h5>
+          <p>There's no single spectacular viewpoint from Naukuchiatal (for that, drive to Mukteshwar). <strong>Instead:</strong> accept that this is a lake-and-forest trip, not a Himalaya-panorama trip. Different joy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section id="glossary">
+    <div class="section-head">
+      <div class="section-label">§ 11 — Speaking Kumaoni</div>
+      <h2 class="section-title">Ten words that <em>open doors</em>.</h2>
+      <p class="section-intro">Most locals speak Hindi, but swap in a Kumaoni word and watch the shopkeeper smile. Your daughter will love teaching them back in Delhi.</p>
+    </div>
+    <div class="glossary">
+      <div class="term"><div class="term-word">Jai Bhole</div><div class="term-meaning">Default Kumaoni greeting. Works everywhere.</div></div>
+      <div class="term"><div class="term-word">Tal</div><div class="term-meaning">Lake. (Bhimtal = Bhim's lake.)</div></div>
+      <div class="term"><div class="term-word">Gaon</div><div class="term-meaning">Village. Jungliagaon = "wild village".</div></div>
+      <div class="term"><div class="term-word">Pahadi</div><div class="term-meaning">"Of the mountains" — used for food, people, fabric.</div></div>
+      <div class="term"><div class="term-word">Harela</div><div class="term-meaning">Kumaoni harvest festival · mid-July.</div></div>
+      <div class="term"><div class="term-word">Phooldei</div><div class="term-meaning">Spring flower festival · mid-March, children lead it.</div></div>
+      <div class="term"><div class="term-word">Madua</div><div class="term-meaning">Finger millet (ragi) — stronger, darker roti.</div></div>
+      <div class="term"><div class="term-word">Buransh</div><div class="term-meaning">Rhododendron flower · makes the April sharbat.</div></div>
+      <div class="term"><div class="term-word">Bugyal</div><div class="term-meaning">High-altitude meadow. A word Himachali folk envy.</div></div>
+      <div class="term"><div class="term-word">Bhulo/Bhuli</div><div class="term-meaning">Brother / Sister — for addressing a young local.</div></div>
+    </div>
+  </section>
+
+  <!-- NIGHT SKY -->
+  <section id="nightsky">
+    <div class="section-head">
+      <div class="section-label">§ 12 — After Dark</div>
+      <h2 class="section-title">The <em>unadvertised</em> sky.</h2>
+      <p class="section-intro">Naukuchiatal has low light pollution — especially above the lake. On a clear new-moon night, you'll see the Milky Way without binoculars. Worth the late bedtime, whoever you're travelling with.</p>
+    </div>
+    <div class="night-sky-section">
+      <div class="sky-grid">
+        <div class="sky-item">
+          <div class="moon"></div>
+          <h5>Best nights</h5>
+          <p>New-moon nights from <strong>November to February</strong>. Clear winter air, no monsoon haze. Orion, Pleiades, Jupiter all visible. Check moon phase before booking.</p>
+        </div>
+        <div class="sky-item">
+          <div class="moon" style="background: radial-gradient(circle at 70% 30%, transparent 30%, var(--amber-soft) 40%, var(--amber) 70%);"></div>
+          <h5>Where to watch</h5>
+          <p>Mukteshwar ridge (47 km drive) is darker than the valley — but Naukuchia House's upper terrace works too. Avoid the main Bhimtal market road (streetlights).</p>
+        </div>
+        <div class="sky-item">
+          <div class="moon" style="background: radial-gradient(circle at 30% 30%, var(--amber-soft), var(--amber) 100%);"></div>
+          <h5>ARIES Observatory, Nainital</h5>
+          <p>The Aryabhatta Research Institute (ARIES) at Manora Peak, Nainital, runs public stargazing evenings through a 14-inch telescope. Day visits: Mon / Wed / Fri 2:30 – 4 PM. Stargazing: typically 6:45 – 8 PM, book in advance. <strong>No entry fee</strong>. 9 km from Nainital town.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget">
+    <div class="section-head">
+      <div class="section-label">§ 13 — The Honest Budget</div>
+      <h2 class="section-title">What a 4-day trip <em>actually costs</em>.</h2>
+      <p class="section-intro">For 2 adults + 1 child, 3 nights. All figures in INR, rounded, and include tips. Pick your tier — the experience gap between them is smaller than you'd think.</p>
+    </div>
+    <div class="budget-tabs">
+      <button class="budget-tab active" data-tab="lux">Luxury · Naukuchia House</button>
+      <button class="budget-tab" data-tab="mid">Mid · Cottages@Village</button>
+      <button class="budget-tab" data-tab="eco">Homestay · Fairyland</button>
+    </div>
+
+    <!-- LUX -->
+    <div class="budget-sheet" id="sheet-lux">
+      <div class="budget-line">
+        <div><div class="budget-name">Shatabdi return · 2A + 1 child, CC class</div><div class="budget-desc">12040 New Delhi–Kathgodam · both ways</div></div>
+        <div class="budget-unit">fixed</div>
+        <div class="budget-amt">₹6,800</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Kathgodam taxi · return transfer</div><div class="budget-desc">Sedan via Gurukripa / MS Taxi · incl. driver tip</div></div>
+        <div class="budget-unit">~₹1,200 × 2 + tip</div>
+        <div class="budget-amt">₹3,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Naukuchia House · Deluxe Lake View</div><div class="budget-desc">3 nights, incl. breakfast · IHCL SeleQtions</div></div>
+        <div class="budget-unit">₹21,240 × 3</div>
+        <div class="budget-amt">₹63,720</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Meals outside the hotel</div><div class="budget-desc">Café lunches + Kumaon Local Kitchen dinner</div></div>
+        <div class="budget-unit">~6 meals</div>
+        <div class="budget-amt">₹8,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Local taxi for day-trips</div><div class="budget-desc">Mukteshwar + Sattal · 2 days with driver</div></div>
+        <div class="budget-unit">₹3,000 × 2</div>
+        <div class="budget-amt">₹6,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Activities &amp; guides</div><div class="budget-desc">Private shikara, birding guide, stargazing</div></div>
+        <div class="budget-unit">varies</div>
+        <div class="budget-amt">₹4,500</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Souvenirs + buffer</div><div class="budget-desc">Apricot oil, Bal Mithai, Kilmora jams, emergencies</div></div>
+        <div class="budget-unit">contingency</div>
+        <div class="budget-amt">₹5,000</div>
+      </div>
+      <div class="budget-total">
+        <div class="budget-total-label">All-in · Luxury tier</div>
+        <div class="budget-total-amt">₹97,020</div>
+      </div>
+      <div class="budget-footnote">Rates verified against Tripadvisor / Booking.com / MakeMyTrip for April 2026. Hotel prices fluctuate ±15% by season; Shatabdi fares are fixed.</div>
+    </div>
+
+    <!-- MID -->
+    <div class="budget-sheet hidden" id="sheet-mid">
+      <div class="budget-line">
+        <div><div class="budget-name">Shatabdi return · 2A + 1 child</div></div>
+        <div class="budget-unit">fixed</div>
+        <div class="budget-amt">₹6,800</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Kathgodam taxi · return</div></div>
+        <div class="budget-unit">both ways</div>
+        <div class="budget-amt">₹3,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Cottages@Village · lake-facing</div><div class="budget-desc">3 nights, incl. breakfast</div></div>
+        <div class="budget-unit">₹8,000 × 3</div>
+        <div class="budget-amt">₹24,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Meals outside</div></div>
+        <div class="budget-unit">~4 meals</div>
+        <div class="budget-amt">₹4,500</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Local taxi (2 days)</div></div>
+        <div class="budget-unit">₹3,000 × 2</div>
+        <div class="budget-amt">₹6,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Activities &amp; guides</div></div>
+        <div class="budget-unit">varies</div>
+        <div class="budget-amt">₹4,500</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Souvenirs + buffer</div></div>
+        <div class="budget-unit">contingency</div>
+        <div class="budget-amt">₹4,000</div>
+      </div>
+      <div class="budget-total">
+        <div class="budget-total-label">All-in · Mid tier</div>
+        <div class="budget-total-amt">₹52,800</div>
+      </div>
+      <div class="budget-footnote">Honest recommendation: this is the sweet spot. Lake-facing cottage + real Kumaoni meals at Aipan + guided day-trips. Feels like luxury without the tariff.</div>
+    </div>
+
+    <!-- ECO -->
+    <div class="budget-sheet hidden" id="sheet-eco">
+      <div class="budget-line">
+        <div><div class="budget-name">Shatabdi return</div></div>
+        <div class="budget-unit">fixed</div>
+        <div class="budget-amt">₹6,800</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Kathgodam taxi · return</div></div>
+        <div class="budget-unit">both ways</div>
+        <div class="budget-amt">₹3,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Fairyland Homestay</div><div class="budget-desc">3 nights, all meals home-cooked</div></div>
+        <div class="budget-unit">₹4,500 × 3</div>
+        <div class="budget-amt">₹13,500</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Meals outside homestay</div></div>
+        <div class="budget-unit">2–3 meals</div>
+        <div class="budget-amt">₹2,500</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Local taxi (1 day)</div></div>
+        <div class="budget-unit">1 day</div>
+        <div class="budget-amt">₹3,000</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Activities &amp; guides</div></div>
+        <div class="budget-unit">varies</div>
+        <div class="budget-amt">₹3,500</div>
+      </div>
+      <div class="budget-line">
+        <div><div class="budget-name">Souvenirs + buffer</div></div>
+        <div class="budget-unit">contingency</div>
+        <div class="budget-amt">₹3,000</div>
+      </div>
+      <div class="budget-total">
+        <div class="budget-total-label">All-in · Homestay tier</div>
+        <div class="budget-total-amt">₹35,300</div>
+      </div>
+      <div class="budget-footnote">For a slow, immersive trip — this is the soul tier. Family-cooked meals, deep sleep, and time that stretches.</div>
+    </div>
+  </section>
+
+  <!-- PACKING -->
+  <section id="packing">
+    <div class="section-head">
+      <div class="section-label">§ 14 — The Packing List</div>
+      <h2 class="section-title">What to carry. <em>What to leave behind.</em></h2>
+      <p class="section-intro">Kumaon in April: warm days, cold mornings, chance of a sudden shower. Pack for 10°C and for 25°C, simultaneously.</p>
+    </div>
+    <div class="pack-grid">
+
+      <div class="pack-category">
+        <div class="pack-icon">◐</div>
+        <h4>Layers</h4>
+        <ul>
+          <li>Fleece + light puffer (nights)</li>
+          <li>2× long-sleeve tees</li>
+          <li>2× tees for warm afternoons</li>
+          <li>Packable rain shell</li>
+          <li>One warm hat / beanie</li>
+          <li>Light scarf (sunrise walks)</li>
+        </ul>
+      </div>
+
+      <div class="pack-category">
+        <div class="pack-icon">☼</div>
+        <h4>For the little ones</h4>
+        <ul>
+          <li>Warm sweater + light jacket</li>
+          <li>Waterproof trail shoes</li>
+          <li>Binoculars (for birding)</li>
+          <li>Small notebook + coloured pencils</li>
+          <li>A book she loves (for café afternoons)</li>
+          <li>Sun hat with chin strap</li>
+          <li>Her own small daypack</li>
+        </ul>
+      </div>
+
+      <div class="pack-category">
+        <div class="pack-icon">△</div>
+        <h4>For hikes</h4>
+        <ul>
+          <li>Broken-in trail shoes (not new)</li>
+          <li>Daypack with side-bottle holders</li>
+          <li>2L water bottles × 2</li>
+          <li>Trekking pole (for Hidimba Parvat)</li>
+          <li>Electrolyte sachets</li>
+          <li>Snack bars · dried fruit</li>
+        </ul>
+      </div>
+
+      <div class="pack-category">
+        <div class="pack-icon">+</div>
+        <h4>Medical</h4>
+        <ul>
+          <li>Child's paracetamol + drops</li>
+          <li>ORS sachets</li>
+          <li>Antiseptic cream + bandaids</li>
+          <li>Altitude not an issue here — skip Diamox</li>
+          <li>Mosquito cream (April evenings)</li>
+          <li>Prescription meds + copies</li>
+        </ul>
+      </div>
+
+      <div class="pack-category">
+        <div class="pack-icon">⁂</div>
+        <h4>Electronics</h4>
+        <ul>
+          <li>Power bank · 10,000 mAh</li>
+          <li>Universal travel adapter</li>
+          <li>Camera (phone is fine)</li>
+          <li>Small torch (forest walks at dusk)</li>
+          <li>Binoculars for adults too</li>
+          <li>Downloaded audiobooks (weak signal)</li>
+        </ul>
+      </div>
+
+      <div class="pack-category">
+        <div class="pack-icon">✕</div>
+        <h4>Leave at home</h4>
+        <ul>
+          <li>Heels, formal shoes</li>
+          <li>Anything dry-clean-only</li>
+          <li>DSLR if you haven't trained on it</li>
+          <li>Guidebook (you have this one)</li>
+          <li>Expectations of mall / nightlife</li>
+          <li>Work laptop · if you can</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- READING LIST -->
+  <section id="reading">
+    <div class="section-head">
+      <div class="section-label">§ 15 — The Reading List</div>
+      <h2 class="section-title">Books to carry. Or <em>carry you there</em>.</h2>
+      <p class="section-intro">A slow trip deserves slow reading. These six are either set in Kumaon, written by people who lived here, or capture the hill-India sensibility. Start one before you leave Delhi.</p>
+    </div>
+    <div class="book-list">
+
+      <div class="book">
+        <div class="book-spine amber"></div>
+        <div>
+          <div class="book-title">The Man-Eaters of Kumaon</div>
+          <div class="book-author">Jim Corbett · 1944</div>
+          <div class="book-note">The definitive text. Corbett lived his whole life in these hills. Don't read at night — but do read the chapter on the Champawat tigress on the train in.</div>
+        </div>
+      </div>
+
+      <div class="book">
+        <div class="book-spine moss"></div>
+        <div>
+          <div class="book-title">The Night Train at Deoli &amp; Other Stories</div>
+          <div class="book-author">Ruskin Bond · 1988</div>
+          <div class="book-note">Short stories of hill-station India — Bond's cadence becomes the cadence of your trip. The title story is 12 pages and worth re-reading twice.</div>
+        </div>
+      </div>
+
+      <div class="book">
+        <div class="book-spine clay"></div>
+        <div>
+          <div class="book-title">The Chipko Movement: A People's History</div>
+          <div class="book-author">Shekhar Pathak · 2021</div>
+          <div class="book-note">History of the forest-hugging protest that began 100 km from here. Explains the local relationship with the oak, the pine, and the outsider. Dense but transformative.</div>
+        </div>
+      </div>
+
+      <div class="book">
+        <div class="book-spine amber"></div>
+        <div>
+          <div class="book-title">A Mountain in Tibet</div>
+          <div class="book-author">Charles Allen · 1982</div>
+          <div class="book-note">If Kumaon leaves you wanting more mountains — this traces the sources of four great rivers. The sensibility is identical to what you'll feel on Day 3.</div>
+        </div>
+      </div>
+
+      <div class="book">
+        <div class="book-spine moss"></div>
+        <div>
+          <div class="book-title">The Room on the Roof</div>
+          <div class="book-author">Ruskin Bond · 1956</div>
+          <div class="book-note">For little ones to grow into. Bond wrote it when he was 17 — tell them that, and tell them the writer still lives in these hills.</div>
+        </div>
+      </div>
+
+      <div class="book">
+        <div class="book-spine clay"></div>
+        <div>
+          <div class="book-title">The Himalayan Arc</div>
+          <div class="book-author">Namita Gokhale (ed.) · 2018</div>
+          <div class="book-note">An anthology — essays, poetry, memoir — from Pakistan to Myanmar along the Himalayan ridge. Read one essay per evening on your hotel balcony.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRACTICAL -->
+  <section id="practical">
+    <div class="section-head">
+      <div class="section-label">§ 16 — Practical &amp; Emergency</div>
+      <h2 class="section-title">The <em>boring but vital</em> page.</h2>
+      <p class="section-intro">Nothing will go wrong. But if something does — especially with children — you want these on one screen. Screenshot this page before you leave.</p>
+    </div>
+    <div class="practical-grid">
+      <div class="practical-cell">
+        <div class="practical-label">Local hospital (minor)</div>
+        <h5>Neelkanth Hospital, Naukuchiatal</h5>
+        <p>Listed on Justdial. Handles everyday medical needs close to the lake — fevers, cuts, basic stabilisation.</p>
+      </div>
+      <div class="practical-cell">
+        <div class="practical-label">Major hospital</div>
+        <h5>B.D. Pandey Government Hospital</h5>
+        <p>Nainital, ~35 km · ~1h drive. Nainital's principal government hospital for trauma and serious care. For anything serious, head here first.</p>
+      </div>
+      <div class="practical-cell">
+        <div class="practical-label">Emergency number</div>
+        <h5>112 — India's unified emergency</h5>
+        <p>Works on all networks (Jio / Airtel / BSNL). Women's helpline <strong>1091</strong>. Child helpline <strong>1098</strong>. Tourist police Uttarakhand <strong>1364</strong>.</p>
+      </div>
+      <div class="practical-cell">
+        <div class="practical-label">Pharmacy</div>
+        <h5>Bhimtal Main Market</h5>
+        <p>Multiple chemists along the Bhimtal bazaar stretch. Most open 9 AM – 9 PM. For child formulations, ask at Naukuchia House reception — they'll direct you to the closest one they use.</p>
+      </div>
+      <div class="practical-cell">
+        <div class="practical-label">Mobile signal</div>
+        <h5>Jio &amp; Airtel</h5>
+        <p>Reliable around the lake and Bhimtal town. Signal thins in Jangalia Gaon and Peora. A pre-paid data plan with one of these will cover 95% of the trip.</p>
+      </div>
+      <div class="practical-cell">
+        <div class="practical-label">ATM + cash</div>
+        <h5>Bhimtal Bazaar</h5>
+        <p>SBI, Bank of Baroda, and PNB ATMs on the main road. Carry ₹8,000–10,000 cash — some village tea-stalls, homestays, and taxi drivers prefer cash over UPI.</p>
+      </div>
+      <div class="practical-cell">
+        <div class="practical-label">Verified taxi services</div>
+        <h5>Gurukripa · MS Taxi · Kathgodam Taxi Service</h5>
+        <p><strong>Gurukripa:</strong> +91-7500047111 (9 AM – 7 PM) · <strong>MS Taxi Kathgodam:</strong> +91-9719336728 · <strong>Kathgodam Taxi Service:</strong> +91-7351721351. Kathgodam → Naukuchiatal ≈ ₹1,200. Book 2 days ahead in peak season.</p>
+      </div>
+      <div class="practical-cell">
+        <div class="practical-label">Altitude / health</div>
+        <h5>No altitude issues</h5>
+        <p>At 1,220 m, AMS isn't a concern. Drink more water than in Delhi — the dry hill air dehydrates faster. For children, keep ORS sachets handy.</p>
+      </div>
+    </div>
+    <p style="margin-top: 20px; font-size: 13px; color: var(--ink-faint); font-style: italic;">All phone numbers above are from public directory listings (Justdial / company websites). Confirm availability before your travel dates.</p>
+  </section>
+
+  <!-- SOURCES / UNDER THE OATH -->
+  <section id="sources">
+    <div class="section-head">
+      <div class="section-label">§ 17 — Under the Oath</div>
+      <h2 class="section-title">Where these facts <em>actually come from</em>.</h2>
+      <p class="section-intro">Real travel publications cite their sources. We do too. Everything below was cross-referenced in April 2026 — names, distances, timings, prices, contacts. If something has changed between our research and your trip, tell us and we'll update Issue №01 in the next revision.</p>
+    </div>
+
+    <div class="oath-card">
+      <h4>An <em>honest note</em> from the editor.</h4>
+      <p>This guide was assembled from public sources (Wikipedia, Tripadvisor, Booking.com, MakeMyTrip, government tourism sites, climate-data.org, the CBSE academic calendar, and the official websites of named establishments). Hotel prices, café reviews, and distances were verified in April 2026 and may shift by ±15% over time.</p>
+      <p>What this guide does <strong>not</strong> have — because they require a phone call or a ground visit — are specific staff names, current-week weather, today's open/closed status of small cafés, and off-menu claims. Those get filled in after each editorial visit.</p>
+      <p>The Slow Map publishes corrections openly and cites contributors by name, with permission.</p>
+      <div class="oath-sig">— The Slow Map, Editorial</div>
+    </div>
+
+    <div class="sources-list">
+      <div class="source-group">
+        <h5>Geography &amp; climate</h5>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Naukuchiatal" target="_blank">Wikipedia · Naukuchiatal</a> — altitude, lake depth, population</li>
+          <li><a href="https://en.climate-data.org/asia/india/uttarakhand/naukuchhiatal-275519/" target="_blank">Climate-data.org · Naukuchiatal</a> — monthly temperature &amp; rainfall</li>
+          <li><a href="https://wanderlog.com/weather/7362/5/naukuchiatal-weather-in-may" target="_blank">Wanderlog · May weather</a> — 21–36°C range, 28% humidity</li>
+          <li><a href="https://nainital.nic.in/tourist-place/naukuchiatal/" target="_blank">Government of Uttarakhand · Nainital District</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h5>Stays (verified listings)</h5>
+        <ul>
+          <li><a href="https://www.seleqtionshotels.com/en-in/hotels/naukuchia-house-naukuchiatal" target="_blank">Naukuchia House · IHCL SeleQtions (official)</a></li>
+          <li><a href="https://www.tripadvisor.in/Hotel_Review-g1047700-d783706-Reviews-The_Lake_Resort-Naukuchiatal_Nainital_District_Uttarakhand.html" target="_blank">The Lake Resort · Tripadvisor #1 of 8</a></li>
+          <li><a href="https://cottagesatvillage.com/" target="_blank">Cottages@Village (official)</a></li>
+          <li><a href="https://www.homestaysofindia.com/uttarakhand-naukuchaital-fairyland-homestay/" target="_blank">Fairyland Homestay · Homestays of India</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h5>Cafés &amp; food</h5>
+        <ul>
+          <li><a href="https://aipan.co.in/" target="_blank">Aipan Restaurant (official)</a> · Naukuchiatal</li>
+          <li><a href="https://www.instagram.com/cafemagicforest/" target="_blank">Café Magic Forest · Instagram</a></li>
+          <li><a href="https://www.tripadvisor.com/Restaurant_Review-g679051-d10024815-Reviews-IHeart_Cafe_Himalayas-Bhimtal_Nainital_District_Uttarakhand.html" target="_blank">iHeart Café · Tripadvisor</a></li>
+          <li><a href="https://www.tripadvisor.com/Restaurant_Review-g679051-d16641195-Reviews-The_Kumaoni_Farm_Cafe_By_Reservation_Only-Bhimtal_Nainital_District_Uttarakhand.html" target="_blank">The Kumaoni Farm Café · Tripadvisor (by reservation)</a></li>
+          <li><a href="https://www.tripadvisor.com/Restaurant_Review-g1162527-d25406671-Reviews-The_Birdsong_Cafe_Mukteshwar-Mukteshwar_Nainital_District_Uttarakhand.html" target="_blank">Birdsong Café · Mukteshwar (Tripadvisor)</a></li>
+          <li><a href="https://www.tripadvisor.in/Restaurant_Review-g1162527-d27185647-Reviews-Cafe_De_Mukteshwar-Mukteshwar_Nainital_District_Uttarakhand.html" target="_blank">Café De Mukteshwar · Tripadvisor #2 of 17</a></li>
+          <li><a href="https://chirpingtales.com/" target="_blank">Chirping Tales · Mukteshwar (official)</a></li>
+          <li><a href="https://www.kilmora.in/home-3/" target="_blank">Kilmora (Kumaun Grameen Udyog · official)</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h5>Hikes, temple &amp; day trips</h5>
+        <ul>
+          <li><a href="https://bhimtal.in/butterfly-research-centre/" target="_blank">Butterfly Research Centre · Bhimtal</a> · entry ~₹40</li>
+          <li><a href="https://www.tripadvisor.in/Attraction_Review-g1162527-d8749428-Reviews-Bhalu_Gaad_Waterfalls-Mukteshwar_Nainital_District_Uttarakhand.html" target="_blank">Bhalu Gaad Waterfall · Tripadvisor</a></li>
+          <li><a href="https://sattalbirding.com/" target="_blank">Sattal Birding · official</a> · 500+ species</li>
+          <li><a href="https://wildkumaon.com/team/" target="_blank">Wild Kumaon · birding guides (Sattal)</a></li>
+          <li><a href="https://www.tripadvisor.in/Attraction_Review-g1047700-d4702056-Reviews-Hanuman_Temple-Naukuchiatal_Nainital_District_Uttarakhand.html" target="_blank">Hanuman Temple (52 ft statue) · Naukuchiatal</a></li>
+          <li><a href="https://templedarshantime.com/kainchi-dham-travel-darshan-guide/" target="_blank">Kainchi Dham · timings &amp; guide</a></li>
+          <li><a href="https://www.euttaranchal.com/tourism/ramgarh.php" target="_blank">Ramgarh (Fruit Bowl) · eUttaranchal</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h5>Observatory &amp; night sky</h5>
+        <ul>
+          <li><a href="https://www.aries.res.in/aspop/arranging-visit" target="_blank">ARIES Observatory · official visit page</a></li>
+          <li><a href="https://nainitaltourism.org.in/aryabhatta-research-institute-of-observational-sciences-aries-nainital" target="_blank">ARIES · Nainital Tourism</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h5>Transport &amp; practical</h5>
+        <ul>
+          <li><a href="https://expresstrainroute.com/trains/12040-new-delhi-kathgodam-shatabdi-express" target="_blank">Shatabdi 12040 · timetable</a> · 06:20 → 11:55</li>
+          <li><a href="https://gurukripataxi.com/taxi-service-in-kathgodam" target="_blank">Gurukripa Taxi · Kathgodam</a> · +91-7500047111</li>
+          <li><a href="https://mstaxikathgodam.com/" target="_blank">MS Taxi Kathgodam</a> · +91-9719336728</li>
+          <li><a href="https://kathgodamtaxi.in/kathgodam-naukuchiatal/" target="_blank">Kathgodam → Naukuchiatal fare reference</a> · ~₹1,200</li>
+          <li><a href="https://www.justdial.com/Bhimtal/Neelkanth-Hospital-Naukuchiatal/9999P5942-5942-170908152606-P7D2_BZDET" target="_blank">Neelkanth Hospital · Naukuchiatal (Justdial)</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h5>Calendar &amp; festivals</h5>
+        <ul>
+          <li><a href="https://saras.cbse.gov.in/oasis/pdf/academic/130017.pdf" target="_blank">CBSE Academic Calendar 2025–26 (PDF)</a></li>
+          <li><a href="https://colorsofuttarakhand.com/festivals/harela-festival-uttarakhand-culture-rituals/" target="_blank">Harela Festival · July 16, 2026</a></li>
+          <li><a href="https://colorsofuttarakhand.com/festivals/phool-dei/" target="_blank">Phool Dei Festival · March</a></li>
+        </ul>
+      </div>
+      <div class="source-group">
+        <h5>Reading list (books cited)</h5>
+        <ul>
+          <li><em>The Man-Eaters of Kumaon</em> · Jim Corbett · 1944 · Oxford University Press</li>
+          <li><em>The Night Train at Deoli</em> · Ruskin Bond · 1988 · Penguin</li>
+          <li><em>The Room on the Roof</em> · Ruskin Bond · 1956</li>
+          <li><em>The Himalayan Arc</em> · ed. Namita Gokhale · 2018 · HarperCollins</li>
+          <li><em>A Mountain in Tibet</em> · Charles Allen · 1982</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURE -->
+  <section id="future" style="border-top: none;">
+    <div class="future">
+      <h3>This is Issue <em>№01</em>.</h3>
+      <p>The Slow Map will cover one quiet corner of India at a time. Each issue built like this one — by travellers, for travellers who prefer mornings to museums.</p>
+      <div class="future-cities">
+        <div class="future-city next">№02 · Coming Next</div>
+        <div class="future-city">Ziro · Arunachal</div>
+        <div class="future-city">Gokarna · quiet beaches</div>
+        <div class="future-city">Spiti · cold desert</div>
+        <div class="future-city">Chettinad · south palaces</div>
+        <div class="future-city">Majuli · river island</div>
+        <div class="future-city">Gurez · Kashmir valley</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <div>
+      <div style="font-family: 'Fraunces', serif; font-size: 18px;">The Slow Map</div>
+      <div class="brand-sub">A Field Guide for Quiet Travellers</div>
+    </div>
+  </div>
+  <p>"The point is not to cover distance. The point is to notice what's actually there."</p>
+  <div class="meta">Issue №01 · Naukuchiatal · Kumaon · Uttarakhand · v2.0 · verified April 2026</div>
+</footer>
+
+<script>
+  // Reading progress bar
+  const progressBar = document.getElementById('progressBar');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progressBar.style.width = (scrolled * 100) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  // Light / dark theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    const isLight = document.body.classList.contains('light');
+    themeToggle.textContent = isLight ? '◑ Dark' : '◐ Light';
+  });
+
+  // Budget tabs
+  document.querySelectorAll('.budget-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const key = tab.getAttribute('data-tab');
+      document.querySelectorAll('.budget-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.budget-sheet').forEach(s => s.classList.add('hidden'));
+      document.getElementById('sheet-' + key).classList.remove('hidden');
+    });
+  });
+
+  // Audience chips — visual highlight only (all content stays visible)
+  document.querySelectorAll('.audience-chips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.audience-chips .chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

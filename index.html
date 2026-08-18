@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- SEO -->
+<title>The Slow Map · One quiet corner of India at a time</title>
+<meta name="description" content="A slow-travel publication. One honest, verified field guide per quiet corner of India — the places the tourist buses skip. New issue every month."/>
+<meta name="theme-color" content="#0b1210"/>
+<link rel="canonical" href="https://theslowmap.netlify.app/"/>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://theslowmap.netlify.app/"/>
+<meta property="og:title" content="The Slow Map · One quiet corner of India at a time"/>
+<meta property="og:description" content="A slow-travel publication. Verified, hand-made field guides to the quiet corners of India — the places the tourist buses skip."/>
+<meta property="og:image" content="https://theslowmap.netlify.app/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="The Slow Map"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="The Slow Map · One quiet corner of India at a time"/>
+<meta name="twitter:description" content="A slow-travel publication. Verified, hand-made field guides to the quiet corners of India."/>
+<meta name="twitter:image" content="https://theslowmap.netlify.app/og-image.png"/>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Slow Map",
+  "url": "https://theslowmap.netlify.app/",
+  "description": "A slow-travel publication covering quiet corners of India.",
+  "publisher": {"@type": "Organization", "name": "The Slow Map", "logo": {"@type": "ImageObject", "url": "https://theslowmap.netlify.app/icon-512-512.png"}},
+  "inLanguage": "en-IN"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b1210;
+  --bg-2: #0f1917;
+  --bg-3: #14231f;
+  --ink: #e9e4d8;
+  --ink-dim: #a8a295;
+  --ink-faint: #6b6a5f;
+  --moss: #6a8f6b;
+  --moss-deep: #3f5d42;
+  --amber: #d9a441;
+  --amber-soft: #e8c37a;
+  --clay: #c47a4a;
+  --rust: #9a4a3a;
+  --line: rgba(233, 228, 216, 0.08);
+  --line-strong: rgba(233, 228, 216, 0.18);
+  --card: rgba(233, 228, 216, 0.03);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(106, 143, 107, 0.1), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(217, 164, 65, 0.04), transparent 60%);
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* Hidden form for Netlify detection */
+.hidden-form { display: none; }
+
+/* TOP */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(11, 18, 16, 0.75);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner { display: flex; justify-content: space-between; align-items: center; padding: 18px 32px; max-width: 1200px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: 'Fraunces', serif; font-weight: 500; font-size: 18px; letter-spacing: 0.02em; }
+.brand-mark { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--amber-soft), var(--amber) 50%, var(--moss-deep) 100%); box-shadow: 0 0 20px rgba(217, 164, 65, 0.3); }
+.brand-sub { color: var(--ink-faint); font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+.topnav { display: flex; gap: 28px; font-size: 13px; align-items: center; }
+.topnav a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+.topnav a:hover { color: var(--amber); }
+@media (max-width: 780px) { .topnav { display: none; } }
+
+/* HERO */
+.hero { padding: 100px 0 60px; text-align: center; }
+.hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .25em; color: var(--amber); text-transform: uppercase; margin-bottom: 22px; display: flex; align-items: center; justify-content: center; gap: 14px; }
+.hero-eyebrow::before, .hero-eyebrow::after { content:''; height:1px; width:60px; background: linear-gradient(90deg, transparent, var(--amber), transparent); }
+.hero h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(56px, 9vw, 128px); line-height: .92; letter-spacing: -.03em; }
+.hero h1 em { color: var(--amber-soft); font-style: italic; }
+.hero-sub { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-dim); font-size: clamp(18px, 2.2vw, 24px); margin-top: 22px; max-width: 640px; margin-left: auto; margin-right: auto; }
+
+.meta-line { display: flex; gap: 32px; justify-content: center; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line-strong); flex-wrap: wrap; }
+.meta-item { text-align: center; }
+.meta-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; }
+.meta-value { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-top: 4px; }
+.meta-value em { color: var(--amber-soft); font-style: italic; }
+
+/* ============ COUNTRY > STATE > CITY BROWSER ============ */
+.browse-section { padding: 80px 0; border-top: 1px solid var(--line); }
+.browse-head { text-align: center; margin-bottom: 40px; }
+.browse-head .section-title { margin: 14px auto 0; }
+.browse-head .section-intro { margin: 14px auto 0; }
+
+.browse-wrap {
+  margin-top: 40px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.browse-path {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  flex-wrap: wrap;
+}
+.browse-path span.crumb { color: var(--amber); }
+.browse-path span.sep { color: var(--ink-faint); opacity: 0.5; }
+
+.browse-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1.8fr;
+  gap: 0;
+  min-height: 360px;
+}
+@media (max-width: 900px) {
+  .browse-grid { grid-template-columns: 1fr; }
+}
+
+.browse-col {
+  padding: 24px 22px;
+  border-right: 1px solid var(--line);
+}
+.browse-col:last-child { border-right: none; }
+@media (max-width: 900px) {
+  .browse-col { border-right: none; border-bottom: 1px solid var(--line); }
+  .browse-col:last-child { border-bottom: none; }
+}
+
+.browse-col-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .25em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.browse-col-num {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--amber);
+  color: var(--bg);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600;
+  font-family: 'Fraunces', serif;
+}
+
+.browse-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all .18s;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  background: transparent;
+  width: 100%;
+  font-weight: 400;
+  text-align: left;
+}
+.browse-option:hover:not(.disabled):not(.active) {
+  border-color: var(--line-strong);
+  background: rgba(233, 228, 216, 0.03);
+}
+.browse-option.active {
+  border-color: var(--amber);
+  background: rgba(217, 164, 65, 0.08);
+  color: var(--amber-soft);
+}
+.browse-option.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.browse-option .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .15em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+.browse-option.active .meta { color: var(--amber); }
+
+.browse-empty {
+  color: var(--ink-faint);
+  font-style: italic;
+  font-size: 13px;
+  padding: 20px 0;
+  font-family: 'Fraunces', serif;
+}
+
+/* city card (live issue in column 3) */
+.browse-city-card {
+  display: block;
+  padding: 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: all .25s;
+  position: relative;
+}
+.browse-city-card:hover {
+  border-color: var(--amber);
+  background: rgba(217, 164, 65, 0.04);
+  transform: translateY(-1px);
+}
+.browse-city-card.coming { opacity: 0.65; }
+.browse-city-card.coming:hover { opacity: 1; border-color: var(--line-strong); background: transparent; transform: none; }
+.browse-city-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.browse-city-tag.live { color: var(--amber); }
+.browse-city-tag.live::before { content: '● '; color: var(--moss); }
+.browse-city-tag.coming { color: var(--ink-faint); }
+.browse-city-tag.coming::before { content: '○ '; }
+.browse-city-name {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+.browse-city-name em { color: var(--amber-soft); font-style: italic; }
+.browse-city-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .15em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* INDIA MAP */
+.india-section { padding: 80px 0 40px; border-top: 1px solid var(--line); text-align: center; }
+.section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .25em; color: var(--amber); text-transform: uppercase; margin-bottom: 14px; }
+.section-title { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -.02em; max-width: 720px; margin: 0 auto; }
+.section-title em { color: var(--amber-soft); font-style: italic; }
+.section-intro { color: var(--ink-dim); font-size: 16px; max-width: 620px; margin: 14px auto 0; }
+
+.india-map { max-width: 480px; margin: 50px auto 0; display: block; }
+.india-map svg { width: 100%; height: auto; }
+
+.states-row { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 30px; }
+.state-pill {
+  padding: 10px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+.state-pill strong { color: var(--amber); font-weight: 500; }
+
+/* ISSUES GRID */
+.issues-section { padding: 80px 0; border-top: 1px solid var(--line); }
+.issues-head { text-align: center; margin-bottom: 60px; }
+.issues-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .issues-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .issues-grid { grid-template-columns: 1fr; } }
+
+.issue-card {
+  position: relative;
+  padding: 32px 28px;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  transition: all .35s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  overflow: hidden;
+  min-height: 360px;
+}
+.issue-card:hover { transform: translateY(-4px); border-color: var(--amber); background: rgba(217, 164, 65, 0.04); }
+.issue-card.coming { opacity: 0.75; }
+.issue-card.coming:hover { opacity: 1; border-color: var(--moss); }
+
+.issue-num { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 64px; line-height: .85; color: var(--amber-soft); letter-spacing: -.04em; margin-bottom: 4px; }
+.issue-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; margin-bottom: 20px; }
+.issue-status.live { color: var(--amber); }
+.issue-status.live::before { content: '● '; color: #6a8f6b; }
+.issue-status.coming { color: var(--ink-faint); }
+.issue-status.coming::before { content: '○ '; }
+
+.issue-city { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 400; letter-spacing: -.02em; margin-bottom: 4px; line-height: 1.1; }
+.issue-city em { color: var(--amber-soft); font-style: italic; }
+.issue-state { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 16px; }
+
+.issue-shadow {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-dim);
+  font-size: 14px;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+.issue-shadow strong { color: var(--amber); font-weight: 500; font-style: normal; letter-spacing: .1em; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; }
+
+.issue-doodle {
+  position: absolute;
+  top: 24px; right: 24px;
+  width: 60px; height: 60px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.issue-arrow { margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; color: var(--amber); text-transform: uppercase; }
+.issue-arrow::after { content: ' →'; }
+.issue-card.coming .issue-arrow { color: var(--ink-faint); }
+.issue-card.coming .issue-arrow::after { content: ' · soon'; }
+
+/* TRIP COMBINATORS */
+.combos-section { padding: 80px 0; border-top: 1px solid var(--line); }
+.combos-head { text-align: center; margin-bottom: 50px; }
+.combos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+@media (max-width: 780px) { .combos-grid { grid-template-columns: 1fr; } }
+
+.combo-card {
+  position: relative;
+  padding: 32px 28px;
+  background:
+    radial-gradient(ellipse at top right, rgba(196, 122, 74, 0.06), transparent 60%),
+    var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  transition: all .35s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  overflow: hidden;
+  min-height: 240px;
+}
+.combo-card:hover { transform: translateY(-3px); border-color: var(--clay); }
+.combo-card.coming { opacity: 0.7; }
+.combo-card.coming:hover { opacity: 1; border-color: var(--line-strong); }
+
+.combo-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .25em; color: var(--clay); text-transform: uppercase; margin-bottom: 16px; }
+.combo-card.coming .combo-tag { color: var(--ink-faint); }
+
+.combo-title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; letter-spacing: -.02em; margin-bottom: 6px; line-height: 1.15; }
+.combo-title em { color: var(--amber-soft); font-style: italic; }
+.combo-chain { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-dim); font-size: 16px; margin-bottom: 14px; }
+.combo-chain .plus { color: var(--clay); font-style: normal; margin: 0 6px; }
+.combo-meta { display: flex; gap: 16px; margin-bottom: 16px; }
+.combo-meta span { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .15em; color: var(--ink-faint); text-transform: uppercase; }
+.combo-meta span strong { color: var(--amber); font-weight: 500; }
+.combo-card p { color: var(--ink-dim); font-size: 14px; line-height: 1.5; }
+.combo-arrow { margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .15em; color: var(--clay); text-transform: uppercase; }
+.combo-arrow::after { content: ' →'; }
+.combo-card.coming .combo-arrow { color: var(--ink-faint); }
+.combo-card.coming .combo-arrow::after { content: ' · soon'; }
+
+/* small route doodle in combo card */
+.combo-doodle { position: absolute; top: 28px; right: 24px; width: 80px; height: 40px; opacity: 0.5; pointer-events: none; }
+
+/* MANIFESTO */
+.manifesto { padding: 100px 0; border-top: 1px solid var(--line); text-align: center; }
+.manifesto-quote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: clamp(24px, 3.5vw, 36px); line-height: 1.3; color: var(--ink); max-width: 820px; margin: 0 auto; }
+.manifesto-quote em { color: var(--amber-soft); }
+.manifesto-sig { margin-top: 30px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .3em; color: var(--ink-faint); text-transform: uppercase; }
+
+/* NEWSLETTER */
+.newsletter {
+  margin: 0 0 60px;
+  padding: 60px 40px;
+  background:
+    radial-gradient(ellipse at top left, rgba(217, 164, 65, 0.08), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(63, 93, 66, 0.08), transparent 60%),
+    var(--bg-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  text-align: center;
+}
+.newsletter h3 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 400; margin-bottom: 12px; letter-spacing: -.02em; }
+.newsletter h3 em { color: var(--amber-soft); font-style: italic; }
+.newsletter p { color: var(--ink-dim); max-width: 540px; margin: 0 auto 28px; font-size: 15px; }
+.newsletter-form { display: flex; gap: 10px; max-width: 500px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+.newsletter input[type="email"] { flex: 1; min-width: 240px; padding: 14px 18px; background: transparent; border: 1px solid var(--line-strong); border-radius: 2px; color: var(--ink); font-family: 'Inter', sans-serif; font-size: 14px; transition: border-color .2s; }
+.newsletter input[type="email"]:focus { outline: none; border-color: var(--amber); }
+.newsletter input[type="email"]::placeholder { color: var(--ink-faint); }
+.newsletter button { padding: 14px 24px; background: var(--amber); color: var(--bg); border: none; border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: all .2s; font-weight: 500; }
+.newsletter button:hover { background: var(--amber-soft); transform: translateY(-1px); }
+.newsletter-note { margin-top: 18px; color: var(--ink-faint); font-size: 12px; font-style: italic; }
+.newsletter-success { display: none; padding: 20px; color: var(--moss); font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; }
+
+/* DOODLE STYLE */
+.doodle { stroke: var(--amber-soft); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* FOOTER */
+footer { padding: 50px 0 40px; text-align: center; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 13px; }
+footer .brand { justify-content: center; margin-bottom: 16px; }
+footer p { max-width: 600px; margin: 0 auto; font-family: 'Fraunces', serif; font-style: italic; }
+footer .meta-foot { margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint); }
+
+/* SHARE BAR */
+.share-bar { position: fixed; right: 20px; bottom: 20px; z-index: 90; display: flex; flex-direction: column; gap: 8px; background: rgba(11, 18, 16, 0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line-strong); padding: 10px; border-radius: 100px; }
+.share-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; color: var(--ink-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; text-decoration: none; }
+.share-btn:hover { color: var(--amber); border-color: var(--amber); transform: translateY(-1px); }
+.share-btn svg { width: 18px; height: 18px; }
+.share-btn.copied { color: var(--moss); border-color: var(--moss); }
+@media (max-width: 780px) { .share-bar { right: 14px; bottom: 14px; } .share-btn { width: 36px; height: 36px; } }
+
+</style>
+</head>
+<body>
+
+<!-- Hidden form for Netlify -->
+<form name="newsletter" netlify netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email"/>
+  <input name="bot-field"/>
+</form>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" style="text-decoration: none; color: inherit;" class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <div>The Slow Map</div>
+        <div class="brand-sub">A Publication · India</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="#browse">Browse</a>
+      <a href="#issues">Issues</a>
+      <a href="#combos">Combined Trips</a>
+      <a href="#manifesto">Manifesto</a>
+      <a href="#subscribe">Subscribe</a>
+    </nav>
+  </div>
+</div>
+
+<!-- SHARE BAR -->
+<div class="share-bar" aria-label="Share The Slow Map">
+  <a class="share-btn" href="https://wa.me/?text=The%20Slow%20Map%20%E2%80%94%20a%20slow-travel%20publication%20for%20quiet%20corners%20of%20India.%20https%3A%2F%2Ftheslowmap.netlify.app%2F" target="_blank" rel="noopener" title="Share on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1s-.7.9-.9 1.1-.3.2-.6.1c-.3-.1-1.2-.4-2.2-1.3-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5L9.7 7.8c-.2-.4-.3-.4-.6-.4H8.8c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1.1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.3c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3C4.4 15 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/></svg></a>
+  <a class="share-btn" href="https://twitter.com/intent/tweet?text=The%20Slow%20Map%20%E2%80%94%20a%20slow-travel%20publication%20for%20quiet%20corners%20of%20India&amp;url=https%3A%2F%2Ftheslowmap.netlify.app%2F" target="_blank" rel="noopener" title="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+  <button class="share-btn" id="copyLinkBtn" title="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></svg></button>
+</div>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">A Slow-Travel Publication · India</div>
+  <h1>One quiet corner<br>of India at <em>a time</em>.</h1>
+  <p class="hero-sub">Honest, verified, hand-made field guides for the places the tourist buses skip. No algorithms. No sponsors pretending to be reviews. Just slow mornings, good food, and the walk behind the waterfall.</p>
+
+  <div class="meta-line">
+    <div class="meta-item"><div class="meta-label">Issues live</div><div class="meta-value">03<em> · 2 countries</em></div></div>
+    <div class="meta-item"><div class="meta-label">India states</div><div class="meta-value">1<em>/5</em></div></div>
+    <div class="meta-item"><div class="meta-label">International</div><div class="meta-value">Thailand <em>live</em></div></div>
+    <div class="meta-item"><div class="meta-label">Published</div><div class="meta-value">Monthly</div></div>
+  </div>
+</section>
+
+<!-- COUNTRY > STATE > CITY BROWSER -->
+<section class="browse-section" id="browse">
+  <div class="browse-head">
+    <div class="section-label">§ Browse the Map</div>
+    <h2 class="section-title">Pick a <em>country</em>, state, city.</h2>
+    <p class="section-intro">The full catalogue. Adding new issues = one line in a data file, so this browser always stays current. Click to drill down.</p>
+  </div>
+
+  <div class="browse-wrap">
+    <div class="browse-path">
+      <span id="pathCountry" class="crumb">—</span>
+      <span class="sep">→</span>
+      <span id="pathState" class="crumb">—</span>
+      <span class="sep">→</span>
+      <span id="pathCity" class="crumb">—</span>
+    </div>
+    <div class="browse-grid">
+      <div class="browse-col">
+        <div class="browse-col-label"><span class="browse-col-num">1</span>Country</div>
+        <div id="col-country"></div>
+      </div>
+      <div class="browse-col">
+        <div class="browse-col-label"><span class="browse-col-num">2</span>State</div>
+        <div id="col-state"><div class="browse-empty">Pick a country first.</div></div>
+      </div>
+      <div class="browse-col">
+        <div class="browse-col-label"><span class="browse-col-num">3</span>City / Issue</div>
+        <div id="col-city"><div class="browse-empty">Pick a state to see cities.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDIA MAP -->
+<section class="india-section">
+  <div class="section-label">§ India, visually</div>
+  <h2 class="section-title">The <em>five states</em> we start with.</h2>
+  <p class="section-intro">Every mega-destination has a shadow — a quieter village or valley 30 to 90 minutes away. That's where we go. Year 1 covers all five states below.</p>
+
+  <div class="india-map">
+    <svg viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg" aria-label="Map of India highlighting five target states">
+      <!-- Simplified India outline -->
+      <path class="doodle" stroke-width="1.5" opacity="0.35" d="M 90,40 L 110,25 L 150,20 L 200,25 L 260,30 L 310,50 L 340,90 L 350,130 L 340,170 L 330,210 L 340,250 L 320,290 L 280,330 L 240,370 L 200,400 L 170,420 L 150,430 L 130,420 L 120,400 L 110,370 L 100,330 L 90,290 L 80,250 L 70,220 L 60,190 L 55,160 L 60,130 L 75,95 L 85,70 Z" fill="rgba(233,228,216,0.02)"/>
+
+      <!-- State regions highlighted -->
+      <!-- Himachal (north) -->
+      <ellipse cx="175" cy="70" rx="35" ry="20" class="doodle" stroke="#d9a441" fill="#d9a441" fill-opacity="0.08" stroke-width="1.5"/>
+      <text x="175" y="74" text-anchor="middle" fill="#e8c37a" font-family="Fraunces, serif" font-style="italic" font-size="11">Himachal</text>
+
+      <!-- Uttarakhand (below Himachal, slightly east) -->
+      <ellipse cx="210" cy="100" rx="30" ry="18" class="doodle" stroke="#d9a441" fill="#d9a441" fill-opacity="0.12" stroke-width="1.8"/>
+      <text x="210" y="104" text-anchor="middle" fill="#e8c37a" font-family="Fraunces, serif" font-style="italic" font-size="11">Uttarakhand</text>
+
+      <!-- Rajasthan (west) -->
+      <ellipse cx="135" cy="155" rx="45" ry="32" class="doodle" stroke="#d9a441" fill="#d9a441" fill-opacity="0.08" stroke-width="1.5"/>
+      <text x="135" y="159" text-anchor="middle" fill="#e8c37a" font-family="Fraunces, serif" font-style="italic" font-size="11">Rajasthan</text>
+
+      <!-- Goa (southwest coast) -->
+      <circle cx="130" cy="285" r="12" class="doodle" stroke="#d9a441" fill="#d9a441" fill-opacity="0.08" stroke-width="1.5"/>
+      <text x="130" y="288" text-anchor="middle" fill="#e8c37a" font-family="Fraunces, serif" font-style="italic" font-size="10">Goa</text>
+
+      <!-- Kerala (south) -->
+      <ellipse cx="155" cy="365" rx="20" ry="30" class="doodle" stroke="#d9a441" fill="#d9a441" fill-opacity="0.08" stroke-width="1.5"/>
+      <text x="155" y="370" text-anchor="middle" fill="#e8c37a" font-family="Fraunces, serif" font-style="italic" font-size="11">Kerala</text>
+
+      <!-- Two flag pins on Uttarakhand (Naukuchiatal + Landour) -->
+      <g transform="translate(215, 100)">
+        <line x1="0" y1="0" x2="0" y2="-16" stroke="#d9a441" stroke-width="1.8"/>
+        <path d="M 0,-16 L 8,-12 L 0,-9 Z" fill="#d9a441"/>
+        <circle cx="0" cy="0" r="2.5" fill="#d9a441"/>
+      </g>
+      <g transform="translate(200, 105)">
+        <line x1="0" y1="0" x2="0" y2="-16" stroke="#d9a441" stroke-width="1.8"/>
+        <path d="M 0,-16 L 8,-12 L 0,-9 Z" fill="#d9a441"/>
+        <circle cx="0" cy="0" r="2.5" fill="#d9a441"/>
+      </g>
+
+      <!-- Dashed lines showing future issue order -->
+      <g fill="none" stroke="#d9a441" stroke-width="1" stroke-dasharray="3 3" opacity="0.4">
+        <path d="M 210,100 Q 190,85 175,70"/>
+        <path d="M 175,70 Q 150,120 135,155"/>
+        <path d="M 135,155 Q 145,230 155,365"/>
+        <path d="M 155,365 Q 145,325 130,285"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="states-row">
+    <div class="state-pill"><strong>Uttarakhand</strong> · 5.95 cr visitors / yr</div>
+    <div class="state-pill"><strong>Himachal</strong> · 1.81 cr / yr</div>
+    <div class="state-pill"><strong>Rajasthan</strong> · 23 cr / yr</div>
+    <div class="state-pill"><strong>Kerala</strong> · 2.22 cr / yr</div>
+    <div class="state-pill"><strong>Goa</strong> · 1.04 cr / yr</div>
+  </div>
+</section>
+
+<!-- ISSUES GRID -->
+<section id="issues" class="issues-section">
+  <div class="issues-head">
+    <div class="section-label">§ The Issues</div>
+    <h2 class="section-title">One issue. <em>One quiet corner.</em> Every month.</h2>
+  </div>
+
+  <div class="issues-grid">
+
+    <!-- ISSUE 01 · LIVE -->
+    <a href="naukuchiatal.html" class="issue-card">
+      <div class="issue-doodle">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle">
+            <!-- mountains -->
+            <path d="M 4,42 L 18,22 L 26,32 L 38,16 L 50,30 L 56,42 Z" fill="currentColor" fill-opacity="0.15"/>
+            <!-- lake with boat -->
+            <path d="M 8,50 L 52,50 L 48,56 L 12,56 Z" fill="currentColor" fill-opacity="0.25"/>
+            <line x1="28" y1="49" x2="28" y2="45"/>
+            <path d="M 26,49 q 4,2 8,0" fill="currentColor" fill-opacity="0.2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="issue-num">01</div>
+      <div class="issue-status live">Live · April 2026</div>
+      <div class="issue-city"><em>Naukuchia</em>tal</div>
+      <div class="issue-state">Uttarakhand · Kumaon</div>
+      <div class="issue-shadow"><strong>Shadow of</strong><br>Nainital · 5.95 cr-visitor state</div>
+      <div class="issue-arrow">Read Issue №01</div>
+    </a>
+
+    <!-- ISSUE 02 -->
+    <a href="landour.html" class="issue-card">
+      <div class="issue-doodle">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle">
+            <!-- colonial cottage on ridge -->
+            <path d="M 20,30 L 30,18 L 40,30 L 40,46 L 20,46 Z" fill="currentColor" fill-opacity="0.12"/>
+            <rect x="27" y="36" width="6" height="10"/>
+            <!-- chimney with smoke -->
+            <rect x="34" y="22" width="3" height="8" fill="currentColor" fill-opacity="0.2"/>
+            <path d="M 35,18 q -2,-4 0,-8" opacity="0.5"/>
+            <!-- pines -->
+            <path d="M 10,46 l -2,-6 l 2,1 l 0,-5 l 2,5 l 2,-1 l -2,6 z" fill="currentColor" opacity="0.6"/>
+            <path d="M 50,46 l -2,-6 l 2,1 l 0,-5 l 2,5 l 2,-1 l -2,6 z" fill="currentColor" opacity="0.6"/>
+          </g>
+        </svg>
+      </div>
+      <div class="issue-num">02</div>
+      <div class="issue-status live">Live · April 2026</div>
+      <div class="issue-city"><em>Landour</em></div>
+      <div class="issue-state">Uttarakhand · Garhwal</div>
+      <div class="issue-shadow"><strong>Shadow of</strong><br>Mussoorie · Ruskin Bond country</div>
+      <div class="issue-arrow">Read Issue №02</div>
+    </a>
+
+    <!-- ISSUE 03 -->
+    <div class="issue-card coming">
+      <div class="issue-doodle">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle">
+            <!-- valley with river -->
+            <path d="M 6,20 L 20,36 L 40,36 L 54,20" opacity="0.4"/>
+            <path d="M 6,44 L 20,40 L 40,40 L 54,44" fill="currentColor" fill-opacity="0.2"/>
+            <!-- river -->
+            <path d="M 14,38 q 8,6 16,0 q 8,-6 16,0" stroke-width="2"/>
+            <!-- trout -->
+            <path d="M 30,40 l 4,-1 l 2,1 l -2,1 z M 34,40 l 3,0" />
+            <!-- pines -->
+            <path d="M 10,32 l -2,-6 l 2,1 l 0,-5 l 2,5 l 2,-1 l -2,6 z" fill="currentColor" opacity="0.6"/>
+            <path d="M 50,32 l -2,-6 l 2,1 l 0,-5 l 2,5 l 2,-1 l -2,6 z" fill="currentColor" opacity="0.6"/>
+          </g>
+        </svg>
+      </div>
+      <div class="issue-num">03</div>
+      <div class="issue-status coming">Next · July 2026</div>
+      <div class="issue-city"><em>Tirthan</em> Valley</div>
+      <div class="issue-state">Himachal · Kullu</div>
+      <div class="issue-shadow"><strong>Shadow of</strong><br>Manali · the river not the road</div>
+      <div class="issue-arrow">Tell me when it's out</div>
+    </div>
+
+    <!-- ISSUE 04 -->
+    <div class="issue-card coming">
+      <div class="issue-doodle">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle">
+            <!-- haveli silhouette + stepwell -->
+            <rect x="12" y="24" width="36" height="20" fill="currentColor" fill-opacity="0.12"/>
+            <path d="M 18,24 L 20,18 L 22,24 M 30,24 L 32,16 L 34,24 M 42,24 L 44,18 L 46,24"/>
+            <!-- arched doorways -->
+            <path d="M 16,44 L 16,34 q 2,-4 4,-4 q 2,0 4,4 L 24,44"/>
+            <path d="M 36,44 L 36,34 q 2,-4 4,-4 q 2,0 4,4 L 44,44"/>
+            <!-- stepwell steps -->
+            <path d="M 8,50 L 52,50 M 12,54 L 48,54"/>
+          </g>
+        </svg>
+      </div>
+      <div class="issue-num">04</div>
+      <div class="issue-status coming">Coming · Oct 2026</div>
+      <div class="issue-city"><em>Bundi</em></div>
+      <div class="issue-state">Rajasthan · Hadoti</div>
+      <div class="issue-shadow"><strong>Shadow of</strong><br>Jaipur · blue town, stepwells, color</div>
+      <div class="issue-arrow">Tell me when it's out</div>
+    </div>
+
+    <!-- ISSUE 05 -->
+    <div class="issue-card coming">
+      <div class="issue-doodle">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle">
+            <!-- rolling hills + pine + paraglider -->
+            <path d="M 4,44 q 10,-18 22,-14 q 12,4 18,-6 q 6,-10 12,0 L 56,50 L 4,50 Z" fill="currentColor" fill-opacity="0.15"/>
+            <!-- tea terraces -->
+            <path d="M 8,38 L 26,34 M 10,44 L 28,40" opacity="0.4"/>
+            <!-- paraglider -->
+            <path d="M 38,12 q 6,-2 12,0" stroke-width="1.8"/>
+            <line x1="40" y1="13" x2="42" y2="22"/>
+            <line x1="48" y1="13" x2="46" y2="22"/>
+            <circle cx="44" cy="24" r="1.5" fill="currentColor"/>
+          </g>
+        </svg>
+      </div>
+      <div class="issue-num">05</div>
+      <div class="issue-status coming">Coming · Nov 2026</div>
+      <div class="issue-city"><em>Vagamon</em></div>
+      <div class="issue-state">Kerala · Idukki</div>
+      <div class="issue-shadow"><strong>Shadow of</strong><br>Munnar · pines &amp; paragliders</div>
+      <div class="issue-arrow">Tell me when it's out</div>
+    </div>
+
+    <!-- ISSUE 06 -->
+    <div class="issue-card coming">
+      <div class="issue-doodle">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle">
+            <!-- palm + wave + sun -->
+            <circle cx="46" cy="18" r="6" fill="currentColor" fill-opacity="0.3"/>
+            <!-- palm tree -->
+            <line x1="18" y1="48" x2="18" y2="24"/>
+            <path d="M 18,24 q -10,-4 -14,-12 M 18,24 q -2,-12 -8,-16 M 18,24 q 10,-4 14,-12 M 18,24 q 2,-12 8,-16"/>
+            <!-- wave -->
+            <path d="M 4,46 q 6,-4 12,0 q 6,4 12,0 q 6,-4 12,0 q 6,4 12,0" stroke-width="1.8"/>
+            <path d="M 4,52 q 8,-2 16,0 q 8,2 16,0 q 8,-2 16,0" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="issue-num">06</div>
+      <div class="issue-status coming">Coming · Jan 2027</div>
+      <div class="issue-city"><em>Patnem</em></div>
+      <div class="issue-state">Goa · South</div>
+      <div class="issue-shadow"><strong>Shadow of</strong><br>North Goa · empty-beach season</div>
+      <div class="issue-arrow">Tell me when it's out</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRIP COMBINATORS -->
+<section id="combos" class="combos-section">
+  <div class="combos-head">
+    <div class="section-label">§ Trip Combinators</div>
+    <h2 class="section-title">Doing more than <em>one corner</em>?</h2>
+    <p class="section-intro">For longer trips — when you want to string two issues into one real journey. Each combinator stitches together full guides you can read on their own.</p>
+  </div>
+
+  <div class="combos-grid">
+
+    <!-- UTTARAKHAND COMBO · LIVE -->
+    <a href="uttarakhand-10-days.html" class="combo-card">
+      <div class="combo-doodle">
+        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle" stroke="#c47a4a" fill="none" stroke-width="1.5" stroke-linecap="round">
+            <!-- cottage -->
+            <rect x="8" y="18" width="14" height="10" fill="#c47a4a" fill-opacity="0.25"/>
+            <path d="M 6,18 L 15,10 L 24,18"/>
+            <!-- dashed bridge -->
+            <path d="M 26,24 Q 40,20 54,24" stroke-dasharray="2 2"/>
+            <!-- lake -->
+            <path d="M 56,24 L 62,20 L 70,22 L 72,28 L 64,30 L 56,28 Z" fill="#c47a4a" fill-opacity="0.25"/>
+          </g>
+        </svg>
+      </div>
+      <div class="combo-tag">Combinator №01 · Live</div>
+      <div class="combo-title">The Uttarakhand <em>10-Day</em> Slow Trip</div>
+      <div class="combo-chain">Landour <span class="plus">+</span> Naukuchiatal</div>
+      <div class="combo-meta">
+        <span>10 <strong>days</strong></span>
+        <span>~900 <strong>km</strong></span>
+        <span>2 <strong>issues</strong></span>
+        <span>₹83k–₹2L</span>
+      </div>
+      <p>Start on a colonial ridge in Garhwal. End by a nine-cornered lake in Kumaon. One transition day through Rishikesh ties them together.</p>
+      <div class="combo-arrow">Read the itinerary</div>
+    </a>
+
+    <!-- KERALA COMBO · COMING -->
+    <div class="combo-card coming">
+      <div class="combo-doodle">
+        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle" fill="none" stroke-width="1.5">
+            <!-- pine hill -->
+            <path d="M 8,18 l -2,-4 l 2,0 l 0,-4 l 2,4 l 2,0 l -2,4 z" fill="currentColor" opacity="0.6"/>
+            <path d="M 14,22 l -2,-5 l 2,0 l 0,-5 l 2,5 l 2,0 l -2,5 z" fill="currentColor" opacity="0.6"/>
+            <!-- dashed bridge -->
+            <path d="M 22,26 Q 38,22 54,26" stroke-dasharray="2 2"/>
+            <!-- palm + wave -->
+            <line x1="62" y1="26" x2="62" y2="12"/>
+            <path d="M 62,12 q -6,-2 -8,-6 M 62,12 q 6,-2 8,-6"/>
+            <path d="M 56,32 q 4,-2 8,0 q 4,2 8,0"/>
+          </g>
+        </svg>
+      </div>
+      <div class="combo-tag">Combinator №02 · Coming</div>
+      <div class="combo-title">The Kerala <em>12-Day</em> Slow Trip</div>
+      <div class="combo-chain">Vagamon <span class="plus">+</span> Marari Beach</div>
+      <div class="combo-meta">
+        <span>12 <strong>days</strong></span>
+        <span>2 <strong>issues</strong></span>
+        <span>Nov 2026</span>
+      </div>
+      <p>Pine hills of Vagamon above Munnar, then slow down by the unbusy backwater-beach at Marari. Ready after Kerala issue ships.</p>
+      <div class="combo-arrow">Tell me when it's out</div>
+    </div>
+
+    <!-- HIMACHAL COMBO · COMING -->
+    <div class="combo-card coming">
+      <div class="combo-doodle">
+        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle" fill="none" stroke-width="1.5">
+            <!-- mountain -->
+            <path d="M 4,28 L 14,14 L 22,20 L 30,10 L 38,28 Z" fill="currentColor" opacity="0.25"/>
+            <!-- dashed bridge -->
+            <path d="M 40,24 Q 52,20 62,24" stroke-dasharray="2 2"/>
+            <!-- second mountain -->
+            <path d="M 58,28 L 68,16 L 76,28 Z" fill="currentColor" opacity="0.25"/>
+          </g>
+        </svg>
+      </div>
+      <div class="combo-tag">Combinator №03 · Coming</div>
+      <div class="combo-title">The Himachal <em>14-Day</em> Slow Trip</div>
+      <div class="combo-chain">Tirthan <span class="plus">+</span> Jibhi</div>
+      <div class="combo-meta">
+        <span>14 <strong>days</strong></span>
+        <span>2 <strong>issues</strong></span>
+        <span>Aug 2026</span>
+      </div>
+      <p>River, fly-fishing, and pine-hut quiet across the Tirthan-Jibhi valley. A proper Manali alternative done right. Ready after Tirthan issue.</p>
+      <div class="combo-arrow">Tell me when it's out</div>
+    </div>
+
+    <!-- RAJASTHAN COMBO · COMING -->
+    <div class="combo-card coming">
+      <div class="combo-doodle">
+        <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+          <g class="doodle" fill="none" stroke-width="1.5">
+            <!-- haveli -->
+            <rect x="6" y="18" width="14" height="10" fill="currentColor" opacity="0.25"/>
+            <path d="M 10,18 L 10,14 M 16,18 L 16,14"/>
+            <!-- dashed bridge -->
+            <path d="M 22,24 Q 38,20 54,24" stroke-dasharray="2 2"/>
+            <!-- lake palace silhouette -->
+            <path d="M 56,26 L 74,26 L 72,20 L 68,18 L 62,18 L 58,20 Z" fill="currentColor" opacity="0.25"/>
+            <path d="M 62,18 L 62,12 M 68,18 L 68,12"/>
+          </g>
+        </svg>
+      </div>
+      <div class="combo-tag">Combinator №04 · Coming</div>
+      <div class="combo-title">The Rajasthan <em>Slow</em> Circuit</div>
+      <div class="combo-chain">Bundi <span class="plus">+</span> Dungarpur</div>
+      <div class="combo-meta">
+        <span>12 <strong>days</strong></span>
+        <span>2 <strong>issues</strong></span>
+        <span>Dec 2026</span>
+      </div>
+      <p>Blue-painted Bundi with the stepwells, then the quietest royal town in Rajasthan — Dungarpur. No crowds, no camel-selfies, just old stone.</p>
+      <div class="combo-arrow">Tell me when it's out</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto" class="manifesto">
+  <div class="section-label">§ The Manifesto</div>
+  <div style="height: 30px;"></div>
+  <p class="manifesto-quote">"The point is not to cover distance.<br>The point is to <em>notice what's actually there</em>."</p>
+  <div class="manifesto-sig">The Slow Map · Editorial · April 2026</div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="subscribe">
+  <div class="newsletter">
+    <h3>Get the <em>next issue</em> when it's out.</h3>
+    <p>One carefully-made field guide every month. No sales. No sponsor emails. Just the next quiet corner, once it's ready.</p>
+    <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleSubscribe(event)">
+      <input type="hidden" name="form-name" value="newsletter"/>
+      <p style="display:none;"><label>Don't fill this: <input name="bot-field"/></label></p>
+      <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address"/>
+      <button type="submit">Tell me when it's out</button>
+    </form>
+    <div class="newsletter-success" id="subSuccess">Thank you. You'll only hear from us when there's a new issue.</div>
+    <div class="newsletter-note">Join a quiet list. Unsubscribe any time.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <div>
+      <div style="font-family: 'Fraunces', serif; font-size: 18px;">The Slow Map</div>
+      <div class="brand-sub">A Publication · India</div>
+    </div>
+  </div>
+  <p>"We travel slowly, on purpose."</p>
+  <div class="meta-foot">Issue №01 live · Issues №02–06 scheduled · v3.0 · April 2026</div>
+</footer>
+
+</div>
+
+<script>
+  // ============ THE SLOW MAP · DATA MODEL ============
+  // Adding a new issue? Just add one entry under the right state. That's it.
+  const slowMap = {
+    india: {
+      name: 'India',
+      live: true,
+      states: {
+        uttarakhand: {
+          name: 'Uttarakhand',
+          region: 'Kumaon + Garhwal',
+          cities: [
+            { num: '01', name: 'Naukuchiatal', region: 'Kumaon · shadow of Nainital', url: 'naukuchiatal.html', status: 'live', date: 'Apr 2026' },
+            { num: '02', name: 'Landour',      region: 'Garhwal · shadow of Mussoorie', url: 'landour.html',       status: 'live', date: 'Apr 2026' }
+          ]
+        },
+        himachal: {
+          name: 'Himachal Pradesh',
+          region: 'Kullu + Kangra',
+          cities: [
+            { num: '03', name: 'Tirthan Valley', region: 'Kullu · shadow of Manali', status: 'coming', date: 'Jul 2026' }
+          ]
+        },
+        rajasthan: {
+          name: 'Rajasthan',
+          region: 'Hadoti + Shekhawati',
+          cities: [
+            { num: '04', name: 'Bundi', region: 'Hadoti · shadow of Jaipur', status: 'coming', date: 'Oct 2026' }
+          ]
+        },
+        kerala: {
+          name: 'Kerala',
+          region: 'Idukki + Alappuzha',
+          cities: [
+            { num: '05', name: 'Vagamon', region: 'Idukki · shadow of Munnar', status: 'coming', date: 'Nov 2026' }
+          ]
+        },
+        goa: {
+          name: 'Goa',
+          region: 'Konkan',
+          cities: [
+            { num: '06', name: 'Patnem', region: 'South · shadow of North Goa', status: 'coming', date: 'Jan 2027' }
+          ]
+        }
+      }
+    },
+    thailand: {
+      name: 'Thailand',
+      live: true,
+      states: {
+        phuket: {
+          name: 'Phuket Province',
+          region: 'Andaman · Southern Thailand',
+          cities: [
+            { num: '03', name: 'Phuket', region: 'Koh Yao Noi + Old Town · shadow of Patong', url: 'phuket.html', status: 'live', date: 'Apr 2026' }
+          ]
+        }
+      }
+    },
+    nepal:    { name: 'Nepal',     live: false, states: {} },
+    bhutan:   { name: 'Bhutan',    live: false, states: {} },
+    srilanka: { name: 'Sri Lanka', live: false, states: {} }
+  };
+
+  // ============ BROWSER STATE ============
+  let sel = { country: 'india', state: 'uttarakhand' };
+
+  function countLiveIssues(country) {
+    if (!country.states) return 0;
+    return Object.values(country.states).reduce((acc, s) => acc + s.cities.filter(c => c.status === 'live').length, 0);
+  }
+  function countStateIssues(state) {
+    return state.cities.filter(c => c.status === 'live').length;
+  }
+
+  function renderCountries() {
+    const col = document.getElementById('col-country');
+    col.innerHTML = '';
+    Object.entries(slowMap).forEach(([id, c]) => {
+      const live = countLiveIssues(c);
+      const btn = document.createElement('button');
+      btn.className = 'browse-option' + (id === sel.country ? ' active' : '') + (!c.live ? ' disabled' : '');
+      btn.innerHTML = `<span>${c.name}</span><span class="meta">${c.live ? live + ' issue' + (live !== 1 ? 's' : '') : 'soon'}</span>`;
+      if (c.live) btn.onclick = () => { sel.country = id; sel.state = null; renderCountries(); renderStates(); renderCities(); updatePath(); };
+      col.appendChild(btn);
+    });
+  }
+
+  function renderStates() {
+    const col = document.getElementById('col-state');
+    col.innerHTML = '';
+    const country = slowMap[sel.country];
+    if (!country || !country.live || !Object.keys(country.states).length) {
+      col.innerHTML = '<div class="browse-empty">This country ships later. Subscribe below.</div>';
+      return;
+    }
+    Object.entries(country.states).forEach(([id, s]) => {
+      const live = countStateIssues(s);
+      const btn = document.createElement('button');
+      btn.className = 'browse-option' + (id === sel.state ? ' active' : '');
+      btn.innerHTML = `<span>${s.name}</span><span class="meta">${live > 0 ? live + ' live' : 'coming'}</span>`;
+      btn.onclick = () => { sel.state = id; renderStates(); renderCities(); updatePath(); };
+      col.appendChild(btn);
+    });
+  }
+
+  function renderCities() {
+    const col = document.getElementById('col-city');
+    col.innerHTML = '';
+    const country = slowMap[sel.country];
+    if (!country || !sel.state) {
+      col.innerHTML = '<div class="browse-empty">Pick a state to see cities.</div>';
+      return;
+    }
+    const state = country.states[sel.state];
+    if (!state || !state.cities.length) {
+      col.innerHTML = '<div class="browse-empty">No cities yet. Subscribe below.</div>';
+      return;
+    }
+    state.cities.forEach(c => {
+      const card = document.createElement(c.status === 'live' ? 'a' : 'div');
+      card.className = 'browse-city-card' + (c.status === 'coming' ? ' coming' : '');
+      if (c.status === 'live') { card.href = c.url; }
+      card.innerHTML = `
+        <div class="browse-city-tag ${c.status}">Issue №${c.num} · ${c.status === 'live' ? 'Live' : c.date}</div>
+        <div class="browse-city-name"><em>${c.name}</em></div>
+        <div class="browse-city-sub">${c.region}</div>
+      `;
+      col.appendChild(card);
+    });
+  }
+
+  function updatePath() {
+    const country = slowMap[sel.country];
+    document.getElementById('pathCountry').textContent = country ? country.name : '—';
+    document.getElementById('pathState').textContent = (country && sel.state && country.states[sel.state]) ? country.states[sel.state].name : '—';
+    document.getElementById('pathCity').textContent = '—';
+  }
+
+  // Initialize browser
+  renderCountries(); renderStates(); renderCities(); updatePath();
+
+  // Copy link
+  const copyBtn = document.getElementById('copyLinkBtn');
+  if (copyBtn) copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('https://theslowmap.netlify.app/');
+      copyBtn.classList.add('copied');
+      setTimeout(() => copyBtn.classList.remove('copied'), 2000);
+    } catch (e) {
+      const el = document.createElement('textarea'); el.value='https://theslowmap.netlify.app/';
+      document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+      copyBtn.classList.add('copied'); setTimeout(() => copyBtn.classList.remove('copied'), 2000);
+    }
+  });
+
+  // Newsletter
+  function handleSubscribe(e) {
+    const form = e.target;
+    const data = new FormData(form);
+    fetch('/', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: new URLSearchParams(data).toString() })
+      .then(() => { form.style.display='none'; document.getElementById('subSuccess').style.display='block'; })
+      .catch(() => { form.style.display='none'; document.getElementById('subSuccess').style.display='block'; });
+    e.preventDefault(); return false;
+  }
+</script>
+
+</body>
+</html>

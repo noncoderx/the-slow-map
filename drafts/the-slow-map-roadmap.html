@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Slow Map · The 5-Year Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b1210;
+  --bg-2: #0f1917;
+  --ink: #e9e4d8;
+  --ink-dim: #a8a295;
+  --ink-faint: #6b6a5f;
+  --moss: #6a8f6b;
+  --moss-deep: #3f5d42;
+  --amber: #d9a441;
+  --amber-soft: #e8c37a;
+  --clay: #c47a4a;
+  --rust: #9a4a3a;
+  --line: rgba(233, 228, 216, 0.08);
+  --line-strong: rgba(233, 228, 216, 0.18);
+  --card: rgba(233, 228, 216, 0.03);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(106, 143, 107, 0.1), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(217, 164, 65, 0.04), transparent 60%);
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+/* ==== BRAND ==== */
+.brand-top { padding: 24px 32px; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 12px; font-family: 'Fraunces', serif; font-size: 16px; }
+.brand-mark { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--amber-soft), var(--amber) 50%, var(--moss-deep) 100%); box-shadow: 0 0 14px rgba(217,164,65,.25); }
+.brand-top small { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; margin-left: 8px; }
+
+/* ==== HERO ==== */
+.hero { padding: 70px 0 40px; text-align: center; }
+.hero-eye { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .25em; color: var(--amber); text-transform: uppercase; margin-bottom: 22px; }
+.hero h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(52px, 8vw, 108px); line-height: .95; letter-spacing: -.03em; }
+.hero h1 em { color: var(--amber-soft); font-style: italic; }
+.hero-sub { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-dim); font-size: 22px; margin-top: 18px; }
+
+/* ==== THE NORTH STAR BIG CARD ==== */
+.north {
+  margin: 50px 0;
+  padding: 60px 40px;
+  background:
+    radial-gradient(ellipse at top left, rgba(217,164,65,.1), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(106,143,107,.08), transparent 60%),
+    var(--bg-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  text-align: center;
+  position: relative;
+}
+.north::before { content: '★ THE NORTH STAR'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .3em; color: var(--amber); }
+.north-big { font-family: 'Fraunces', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.1; letter-spacing: -.02em; }
+.north-big em { color: var(--amber-soft); font-style: italic; }
+.north-foot { margin-top: 24px; color: var(--ink-dim); font-size: 15px; font-style: italic; font-family: 'Fraunces', serif; }
+
+/* ==== SECTION ==== */
+section { padding: 70px 0; border-top: 1px solid var(--line); }
+.section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .25em; color: var(--amber); text-transform: uppercase; margin-bottom: 14px; }
+.section-title { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(34px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -.02em; max-width: 800px; margin-bottom: 14px; }
+.section-title em { color: var(--amber-soft); font-style: italic; }
+.section-intro { color: var(--ink-dim); font-size: 17px; max-width: 720px; }
+
+/* ==== WHERE WE ARE ==== */
+.where-bar {
+  margin: 50px 0 0;
+  padding: 40px 30px;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+}
+.where-visual { position: relative; height: 80px; margin: 10px 0 30px; }
+.where-track { position: absolute; top: 40px; left: 20px; right: 20px; height: 2px; background: linear-gradient(90deg, var(--amber) 0%, var(--line-strong) 4%, var(--line-strong) 100%); }
+.where-marker { position: absolute; top: 26px; left: 20px; width: 30px; height: 30px; border-radius: 50%; border: 3px solid var(--amber); background: var(--bg); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); font-weight: 500; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(217,164,65,.5); } 50% { box-shadow: 0 0 0 10px rgba(217,164,65,0); } }
+.where-end { position: absolute; top: 30px; right: 20px; width: 22px; height: 22px; border-radius: 50%; background: var(--moss-deep); border: 2px solid var(--moss); }
+.where-labels { display: flex; justify-content: space-between; padding: 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .15em; color: var(--ink-faint); text-transform: uppercase; }
+.where-labels .now { color: var(--amber); }
+
+/* ==== PUSHBACK CARD ==== */
+.pushback {
+  margin: 40px 0 0;
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(196, 122, 74, .06), transparent);
+  border: 1px dashed var(--clay);
+  border-radius: 2px;
+}
+.pushback-q { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; color: var(--clay); margin-bottom: 14px; }
+.pushback-q::before { content: '"'; font-size: 48px; line-height: 0; vertical-align: -6px; margin-right: 6px; }
+.pushback-q::after { content: '"'; font-size: 48px; line-height: 0; vertical-align: -6px; margin-left: 4px; }
+.pushback-a { font-family: 'Fraunces', serif; font-size: 22px; color: var(--amber-soft); margin-top: 6px; }
+.pushback-a strong { font-weight: 500; }
+.pushback p { color: var(--ink-dim); font-size: 15px; margin-top: 16px; }
+
+/* ==== DISTRIBUTION MAP (solar system) ==== */
+.distribution {
+  margin: 50px 0 0;
+  text-align: center;
+  position: relative;
+  padding: 30px 0;
+}
+.dist-svg { width: 100%; max-width: 700px; margin: 0 auto; display: block; }
+.dist-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 30px; }
+@media (max-width: 780px) { .dist-grid { grid-template-columns: repeat(2, 1fr); } }
+.channel {
+  padding: 20px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  transition: all .3s;
+}
+.channel:hover { border-color: var(--amber); background: rgba(217,164,65,.04); }
+.channel-icon { width: 36px; height: 36px; margin: 0 auto 10px; }
+.channel-name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 16px; margin-bottom: 4px; }
+.channel-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .15em; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
+.channel-note { font-size: 12px; color: var(--ink-dim); line-height: 1.5; }
+.channel.sun { border-color: var(--amber); background: rgba(217,164,65,.06); }
+.channel.sun .channel-name { color: var(--amber-soft); }
+
+.introvert-note {
+  margin-top: 30px;
+  padding: 24px;
+  background: rgba(106,143,107,.05);
+  border-left: 3px solid var(--moss);
+  border-radius: 0 2px 2px 0;
+}
+.introvert-note strong { color: var(--moss); font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; }
+.introvert-note p { margin-top: 8px; color: var(--ink-dim); font-size: 14px; }
+
+/* ==== 5 YEAR TIMELINE ==== */
+.years { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 40px; }
+@media (max-width: 900px) { .years { grid-template-columns: 1fr; } }
+.year {
+  padding: 28px 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  position: relative;
+  transition: all .3s;
+}
+.year:hover { transform: translateY(-3px); border-color: var(--amber); }
+.year-num { font-family: 'Fraunces', serif; font-size: 72px; font-weight: 300; line-height: .8; color: var(--amber-soft); margin-bottom: 4px; letter-spacing: -.04em; }
+.year-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; margin-bottom: 14px; }
+.year h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; margin-bottom: 10px; line-height: 1.2; }
+.year ul { list-style: none; font-size: 13px; color: var(--ink-dim); }
+.year li { padding: 5px 0; border-bottom: 1px dashed var(--line); }
+.year li:last-child { border-bottom: none; }
+.year-money { margin-top: 14px; padding-top: 14px; border-top: 2px solid var(--amber); font-family: 'Fraunces', serif; font-size: 19px; color: var(--amber-soft); font-weight: 500; }
+.year-money small { display: block; font-size: 10px; color: var(--ink-faint); letter-spacing: .15em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; font-weight: 400; margin-top: 3px; }
+.year.target { border-color: var(--amber); background: rgba(217,164,65,.05); }
+.year.target::after { content: '★ YOUR TARGET'; position: absolute; top: -10px; right: 12px; background: var(--bg); padding: 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .2em; color: var(--amber); }
+
+/* ==== RULES ==== */
+.rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line-strong); border: 1px solid var(--line-strong); margin-top: 40px; }
+@media (max-width: 780px) { .rules { grid-template-columns: 1fr; } }
+.rule { background: var(--bg); padding: 28px 24px; }
+.rule-n { font-family: 'Fraunces', serif; font-style: italic; font-size: 40px; color: var(--amber-soft); font-weight: 300; line-height: .8; margin-bottom: 10px; }
+.rule h5 { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+.rule p { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+
+/* ==== NEXT MOVE ==== */
+.next-move {
+  margin-top: 60px;
+  padding: 60px 40px;
+  background:
+    radial-gradient(ellipse at center, rgba(217,164,65,.12), transparent 70%),
+    var(--bg-2);
+  border: 2px solid var(--amber);
+  border-radius: 2px;
+  text-align: center;
+  position: relative;
+}
+.next-move::before { content: '→ THIS WEEK'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .3em; color: var(--amber); }
+.next-move h3 { font-family: 'Fraunces', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 400; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 20px; }
+.next-move h3 em { color: var(--amber-soft); font-style: italic; }
+.next-move p { color: var(--ink-dim); max-width: 620px; margin: 0 auto 24px; font-size: 16px; }
+.cities-pick { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+.city-chip { padding: 16px 24px; border: 1px solid var(--line-strong); border-radius: 100px; font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); background: transparent; }
+.city-chip.star { border-color: var(--amber); color: var(--amber-soft); background: rgba(217,164,65,.06); }
+.city-chip small { display: block; font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 9px; letter-spacing: .15em; color: var(--ink-faint); margin-top: 2px; text-transform: uppercase; }
+
+/* ==== FOOTER ==== */
+footer { padding: 60px 0 40px; text-align: center; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 13px; margin-top: 20px; }
+footer p { font-family: 'Fraunces', serif; font-style: italic; max-width: 580px; margin: 0 auto 10px; }
+footer .meta { margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; }
+
+/* decorative dots */
+.dots { text-align: center; padding: 30px 0; color: var(--amber); letter-spacing: 16px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<!-- BRAND TOP -->
+<div class="brand-top">
+  <div class="brand-mark"></div>
+  <div style="font-family: 'Fraunces', serif;">The Slow Map</div>
+  <small>The 5-Year Map · v1.0</small>
+</div>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero" style="border-top: none;">
+  <div class="hero-eye">For your eyes only · April 2026</div>
+  <h1>Where we are.<br>Where <em>we're going</em>.</h1>
+  <div class="hero-sub">The whole plan, on one page.</div>
+</section>
+
+<!-- NORTH STAR -->
+<div class="north">
+  <div class="north-big">In 5 years, The Slow Map is <em>3–4×</em> your current salary.<br>But only if you <em>still love making it</em>.</div>
+  <div class="north-foot">₹8–10L today → ₹25–40L+ per year by 2031. Joy is the first gate. Money follows craft — never the other way round.</div>
+</div>
+
+<!-- WHERE WE ARE -->
+<section>
+  <div class="section-label">§ 1 — Where we are today</div>
+  <h2 class="section-title">Day <em>3</em> of a 1,825-day journey.</h2>
+  <p class="section-intro">Issue №01 is live. Newsletter is set up. Preview card, SEO, share buttons — all done. That's more than 90% of "people who thought about starting a publication" ever do. But we're at the very start of the road.</p>
+
+  <div class="where-bar">
+    <div class="where-visual">
+      <div class="where-track"></div>
+      <div class="where-marker">▲</div>
+      <div class="where-end"></div>
+    </div>
+    <div class="where-labels">
+      <div class="now">TODAY · APR 2026</div>
+      <div>YEAR 2</div>
+      <div>YEAR 3</div>
+      <div>YEAR 4</div>
+      <div>TARGET · 2031</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUSHBACK -->
+<section>
+  <div class="section-label">§ 2 — Your question, answered honestly</div>
+  <h2 class="section-title">"Isn't a blog <em>outdated</em>?"</h2>
+
+  <div class="pushback">
+    <div class="pushback-q">A blog alone in 2026 is dead. Social media, YouTube, AIEO — that's where people actually find things.</div>
+    <div class="pushback-a"><strong>You are 100% right.</strong> A website alone gets you 20% of the way. The real map has 5 channels — and the website is just the sun at the centre.</div>
+    <p>Here's the modern distribution map. Every channel has a different job. You don't need all five on Day 1 — we add them one by one over two years.</p>
+  </div>
+</section>
+
+<!-- DISTRIBUTION MAP -->
+<section style="border-top: none; padding-top: 20px;">
+  <div class="distribution">
+    <svg class="dist-svg" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- orbits -->
+      <ellipse cx="350" cy="150" rx="140" ry="70" fill="none" stroke="#6b6a5f" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.5"/>
+      <ellipse cx="350" cy="150" rx="240" ry="110" fill="none" stroke="#6b6a5f" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.4"/>
+      <ellipse cx="350" cy="150" rx="320" ry="140" fill="none" stroke="#6b6a5f" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.3"/>
+
+      <!-- Sun / Website -->
+      <circle cx="350" cy="150" r="38" fill="url(#sungrad)"/>
+      <defs>
+        <radialGradient id="sungrad" cx="0.4" cy="0.4">
+          <stop offset="0" stop-color="#e8c37a"/>
+          <stop offset="0.7" stop-color="#d9a441"/>
+          <stop offset="1" stop-color="#3f5d42"/>
+        </radialGradient>
+      </defs>
+      <text x="350" y="145" text-anchor="middle" fill="#0b1210" font-family="Fraunces, serif" font-weight="500" font-size="13">Website</text>
+      <text x="350" y="160" text-anchor="middle" fill="#0b1210" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2">HOME BASE</text>
+
+      <!-- Inner orbit: Newsletter -->
+      <circle cx="490" cy="150" r="20" fill="#14231f" stroke="#d9a441" stroke-width="1.5"/>
+      <text x="490" y="154" text-anchor="middle" fill="#e8c37a" font-family="Fraunces, serif" font-size="10">Newsletter</text>
+
+      <!-- Mid orbit: Instagram, YouTube -->
+      <circle cx="260" cy="60" r="22" fill="#14231f" stroke="#6a8f6b" stroke-width="1.3"/>
+      <text x="260" y="64" text-anchor="middle" fill="#e9e4d8" font-family="Fraunces, serif" font-size="11">Instagram</text>
+
+      <circle cx="540" cy="250" r="22" fill="#14231f" stroke="#6a8f6b" stroke-width="1.3"/>
+      <text x="540" y="254" text-anchor="middle" fill="#e9e4d8" font-family="Fraunces, serif" font-size="11">YouTube</text>
+
+      <!-- Outer orbit: AIEO, SEO, Pinterest -->
+      <circle cx="40" cy="180" r="20" fill="#14231f" stroke="#c47a4a" stroke-width="1.3"/>
+      <text x="40" y="184" text-anchor="middle" fill="#e9e4d8" font-family="Fraunces, serif" font-size="11">AIEO</text>
+
+      <circle cx="660" cy="110" r="18" fill="#14231f" stroke="#c47a4a" stroke-width="1.2"/>
+      <text x="660" y="114" text-anchor="middle" fill="#e9e4d8" font-family="Fraunces, serif" font-size="10">Pinterest</text>
+
+      <circle cx="160" cy="260" r="18" fill="#14231f" stroke="#c47a4a" stroke-width="1.2"/>
+      <text x="160" y="264" text-anchor="middle" fill="#e9e4d8" font-family="Fraunces, serif" font-size="10">SEO</text>
+    </svg>
+  </div>
+
+  <div class="dist-grid">
+    <div class="channel sun">
+      <svg class="channel-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="12" stroke="#d9a441"/><circle cx="18" cy="18" r="4" fill="#d9a441"/></svg>
+      <div class="channel-name">Website</div>
+      <div class="channel-role">HOME BASE</div>
+      <div class="channel-note">theslowmap.netlify.app — where everything lives forever. Built.</div>
+    </div>
+    <div class="channel">
+      <svg class="channel-icon" viewBox="0 0 36 36" fill="none" stroke="#d9a441" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="24" height="18" rx="2"/><path d="M6 12l12 8 12-8"/></svg>
+      <div class="channel-name">Newsletter</div>
+      <div class="channel-role">OWNED AUDIENCE</div>
+      <div class="channel-note">Substack. The only list that's truly yours.</div>
+    </div>
+    <div class="channel">
+      <svg class="channel-icon" viewBox="0 0 36 36" fill="none" stroke="#6a8f6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="24" height="24" rx="5"/><circle cx="18" cy="18" r="6"/><circle cx="25" cy="11" r="1.5" fill="#6a8f6b"/></svg>
+      <div class="channel-name">Instagram</div>
+      <div class="channel-role">VISUAL DISCOVERY</div>
+      <div class="channel-note">No face needed. Typography carousels, maps, food close-ups.</div>
+    </div>
+    <div class="channel">
+      <svg class="channel-icon" viewBox="0 0 36 36" fill="none" stroke="#6a8f6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="28" height="20" rx="4"/><path d="M15 14l8 4-8 4z" fill="#6a8f6b"/></svg>
+      <div class="channel-name">YouTube</div>
+      <div class="channel-role">LONG TAIL · NO FACE</div>
+      <div class="channel-note">Cinematic b-roll + your voice-over. The Atlantic style. Ages like wine.</div>
+    </div>
+    <div class="channel">
+      <svg class="channel-icon" viewBox="0 0 36 36" fill="none" stroke="#c47a4a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="10"/><path d="M18 8v4M18 24v4M8 18h4M24 18h4M11 11l3 3M22 22l3 3M11 25l3-3M22 14l3-3"/></svg>
+      <div class="channel-name">AIEO</div>
+      <div class="channel-role">NEW FRONTIER</div>
+      <div class="channel-note">Getting cited by ChatGPT, Perplexity, Claude when people ask about India travel.</div>
+    </div>
+  </div>
+
+  <div class="introvert-note">
+    <strong>Important — all of this works without showing your face.</strong>
+    <p>Instagram = typography + photography carousels. YouTube = slow cinematic footage + your voice narrating. AIEO = structured writing (the thing you already do). Pinterest = 100% visual-only, huge for travel. Introverts have actually won this decade — the best publications are built by people who never did a single live video.</p>
+  </div>
+</section>
+
+<div class="dots">· · · · ·</div>
+
+<!-- 5 YEAR TIMELINE -->
+<section>
+  <div class="section-label">§ 3 — The 5-year timeline</div>
+  <h2 class="section-title">Each year has <em>one job</em>.</h2>
+  <p class="section-intro">Simple version: keep writing, stop checking stats, let money show up in Year 2. Don't quit your job till Year 4. Don't even think about it till then.</p>
+
+  <div class="years">
+
+    <div class="year">
+      <div class="year-num">1</div>
+      <div class="year-tag">NOW · APR 2027</div>
+      <h4>Just keep publishing.</h4>
+      <ul>
+        <li>8 issues</li>
+        <li>1,500 subscribers</li>
+        <li>Instagram live · 300 posts</li>
+        <li>YouTube live · 4 videos</li>
+        <li>Joy = #1 KPI</li>
+      </ul>
+      <div class="year-money">₹5k–30k/mo<small>side income · affiliates</small></div>
+    </div>
+
+    <div class="year">
+      <div class="year-num">2</div>
+      <div class="year-tag">APR 2028</div>
+      <h4>Start earning.</h4>
+      <ul>
+        <li>15 issues</li>
+        <li>5,000 subscribers</li>
+        <li>Paid tier launches</li>
+        <li>One partnership</li>
+        <li>AIEO compounding</li>
+      </ul>
+      <div class="year-money">₹60k–2L/mo<small>meaningful side income</small></div>
+    </div>
+
+    <div class="year">
+      <div class="year-num">3</div>
+      <div class="year-tag">APR 2029</div>
+      <h4>Match your salary.</h4>
+      <ul>
+        <li>22 issues</li>
+        <li>12,000 subs · 1,200 paid</li>
+        <li>First print edition</li>
+        <li>YouTube: 10k subs</li>
+      </ul>
+      <div class="year-money">₹2.5–5L/mo<small>replaces your CTC</small></div>
+    </div>
+
+    <div class="year">
+      <div class="year-num">4</div>
+      <div class="year-tag">APR 2030</div>
+      <h4>Part-time the day job.</h4>
+      <ul>
+        <li>30 issues</li>
+        <li>Curated-trips launches</li>
+        <li>One contributing writer</li>
+        <li>Book annual sells out</li>
+      </ul>
+      <div class="year-money">₹6–12L/mo<small>serious business</small></div>
+    </div>
+
+    <div class="year target">
+      <div class="year-num">5</div>
+      <div class="year-tag">APR 2031</div>
+      <h4>Full-time, if you want.</h4>
+      <ul>
+        <li>40+ issues</li>
+        <li>Real team of 3</li>
+        <li>Trips, books, subs, YT</li>
+        <li>Your CTC × 3–4</li>
+      </ul>
+      <div class="year-money">₹10–25L/mo<small>₹1.2–3 crore/yr</small></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RULES -->
+<section>
+  <div class="section-label">§ 4 — The rules that keep it fun</div>
+  <h2 class="section-title">Six rules. <em>Break them and it dies.</em></h2>
+  <p class="section-intro">Every publication that lost its soul broke one of these. Every one that kept growing slowly did not.</p>
+
+  <div class="rules">
+    <div class="rule">
+      <div class="rule-n">i.</div>
+      <h5>Keep your day job till Year 3.</h5>
+      <p>Financial pressure is the #1 killer of editorial quality. Runway is your secret weapon.</p>
+    </div>
+    <div class="rule">
+      <div class="rule-n">ii.</div>
+      <h5>One issue a month. Not more, not less.</h5>
+      <p>More and quality dies. Less and readers forget you. One per month for 60 months = a real body of work.</p>
+    </div>
+    <div class="rule">
+      <div class="rule-n">iii.</div>
+      <h5>Never take outside money.</h5>
+      <p>No VC, no angel, not even friends. Outside cash demands growth that kills the soul.</p>
+    </div>
+    <div class="rule">
+      <div class="rule-n">iv.</div>
+      <h5>If you stop enjoying it, pause.</h5>
+      <p>Don't grind. Rested writing is 10× better than tired writing. Readers can feel the difference.</p>
+    </div>
+    <div class="rule">
+      <div class="rule-n">v.</div>
+      <h5>Hand-verify everything.</h5>
+      <p>The whole thesis is trust. One fabricated detail on one issue undoes five years of slow work.</p>
+    </div>
+    <div class="rule">
+      <div class="rule-n">vi.</div>
+      <h5>Don't hire until Year 4.</h5>
+      <p>The day you hire, you become a manager. Make as long as you can before you manage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT MOVE -->
+<section style="border-top: none;">
+  <div class="section-label">§ 5 — The next move</div>
+  <h2 class="section-title">This week. <em>Pick a city.</em></h2>
+  <p class="section-intro">The single move that changes perception from "one guide" to "a publication" is Issue №02. Everything else waits.</p>
+
+  <div class="next-move">
+    <h3>Which city is Issue <em>№02</em>?</h3>
+    <p>My vote: Ziro, Arunachal. Almost no English coverage, a music festival angle, deeply photogenic, zero competition — you own it. But the right answer is the one you're actually excited to write.</p>
+    <div class="cities-pick">
+      <div class="city-chip star">Ziro<small>my pick</small></div>
+      <div class="city-chip">Majuli<small>river island</small></div>
+      <div class="city-chip">Spiti<small>cold desert</small></div>
+      <div class="city-chip">Chettinad<small>south palaces</small></div>
+      <div class="city-chip">Gurez<small>kashmir valley</small></div>
+      <div class="city-chip">or yours<small>surprise me</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>"The point isn't to cover distance. The point is to notice what's actually there."</p>
+  <div class="meta">The Slow Map · The 5-Year Map · v1.0 · For your eyes only</div>
+</footer>
+
+</div>
+
+</body>
+</html>

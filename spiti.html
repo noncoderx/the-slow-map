@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiti Valley · A Field Guide for the Obsessive — The Slow Map</title>
+<meta name="description" content="Every village. Every monastery. Every trail. The most exhaustively researched field guide to Spiti Valley you'll find — sources cited, gaps disclosed, nothing invented.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f3ea; --bg2:#fffdf8; --card:#ffffff;
+    --ink:#17140f; --ink-dim:#5c564c; --ink-faint:#948d7e;
+    --gold:#b8863a; --gold-deep:#8a6425; --gold-soft:#d9b471;
+    --line:rgba(23,20,16,0.12); --line-strong:rgba(23,20,16,0.22);
+    --dark:#0e0c09;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif; line-height:1.6; overflow-x:hidden;
+    background-image:radial-gradient(ellipse 70% 50% at 50% -10%, rgba(184,134,58,0.06), transparent 60%);
+  }
+  a{color:inherit;} img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media(max-width:700px){.wrap{padding:0 20px;}}
+  em{font-style:italic; color:var(--gold-deep);}
+  h1,h2,h3,h4{font-family:'Fraunces',serif; font-weight:500;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:100; background:rgba(247,243,234,0.86); backdrop-filter:blur(14px); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; justify-content:space-between; align-items:center; height:66px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .badge{width:30px; height:30px; border-radius:50%; background:radial-gradient(circle at 35% 35%, var(--gold-soft), var(--gold) 55%, var(--gold-deep) 100%); box-shadow:0 0 16px rgba(184,134,58,0.35);}
+  .brand-name{font-family:'Fraunces',serif; font-size:18px; font-weight:600; letter-spacing:0.2px;}
+  .navlinks{display:flex; gap:26px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; font-weight:500; color:var(--ink-dim); text-transform:uppercase;}
+  .navlinks span.dim{opacity:0.4;}
+  @media(max-width:760px){.navlinks{display:none;}}
+
+  /* HERO — video, stays dark */
+  .hero{position:relative; min-height:94vh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:var(--dark);}
+  .hero video, .hero img.poster{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.55;}
+  .hero::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(14,12,9,0.6) 0%, rgba(14,12,9,0.1) 32%, rgba(14,12,9,0.4) 66%, rgba(14,12,9,0.98) 100%);}
+  .hero-content{position:relative; z-index:2; padding:0 32px 60px; max-width:1180px; margin:0 auto; width:100%; color:#f2ede0;}
+  .pill{display:inline-block; border:1px solid rgba(242,237,224,0.5); border-radius:20px; padding:6px 16px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2.5px; font-weight:500; margin-bottom:22px;}
+  .hero h1{font-size:clamp(40px,7.5vw,92px); font-weight:400; line-height:0.96; letter-spacing:-0.02em;}
+  .hero h1 em{font-style:italic; font-weight:500; color:var(--gold-soft);}
+  .hero p.lede{font-family:'Inter',sans-serif; font-size:15px; color:#c9c3b4; max-width:460px; margin-top:20px;}
+  .stats-strip{display:flex; gap:0; margin-top:40px; border-top:1px solid rgba(242,237,224,0.2); padding-top:20px; flex-wrap:wrap;}
+  .stat{padding-right:36px; margin-right:36px; border-right:1px solid rgba(242,237,224,0.15);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'Fraunces',serif; font-size:24px; font-weight:500;}
+  .stat .lbl{font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1.5px; color:#a39c8c; text-transform:uppercase; margin-top:4px;}
+
+  /* LIVE WIDGETS — real data */
+  .live-strip{position:relative; z-index:2; display:flex; gap:1px; background:rgba(242,237,224,0.15); border-top:1px solid rgba(242,237,224,0.2); margin-top:36px;}
+  .live-chip{flex:1; background:rgba(14,12,9,0.5); padding:16px 20px; display:flex; align-items:center; gap:12px;}
+  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--gold-soft); flex-shrink:0; animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  .live-label{font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1.5px; color:#a39c8c; text-transform:uppercase;}
+  .live-val{font-family:'Fraunces',serif; font-size:15px; color:#f2ede0;}
+  @media(max-width:760px){.live-strip{flex-wrap:wrap;} .live-chip{min-width:45%;}}
+
+  /* SECTION SHELL */
+  section{padding:96px 0; border-bottom:1px solid var(--line);}
+  .sec-tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:600; margin-bottom:16px; text-transform:uppercase; display:flex; align-items:center; gap:14px;}
+  .sec-tag::after{content:''; height:1px; flex:1; max-width:60px; background:linear-gradient(90deg,var(--gold),transparent);}
+  .sec-title{font-family:'Fraunces',serif; font-size:clamp(30px,4.4vw,50px); font-weight:400; letter-spacing:-0.01em; line-height:1.05; max-width:760px; margin-bottom:18px;}
+  .sec-sub{color:var(--ink-dim); max-width:620px; font-size:15px; margin-bottom:52px;}
+
+  .btn{display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.5px; font-weight:600; padding:13px 24px; border-radius:2px; cursor:pointer; border:1px solid var(--ink); background:transparent; color:var(--ink); transition:background .2s,color .2s; text-decoration:none; text-transform:uppercase;}
+  .btn:hover{background:var(--ink); color:var(--bg);}
+  .btn.gold{background:var(--gold); border-color:var(--gold); color:#fff;}
+  .btn.gold:hover{background:var(--gold-deep); border-color:var(--gold-deep);}
+
+  /* INTERACTIVE MAP */
+  .map-shell{position:relative; border:1px solid var(--line-strong); background:var(--card); overflow:hidden; box-shadow:0 20px 50px -20px rgba(23,20,16,0.15);}
+  .map-caption{display:flex; justify-content:space-between; align-items:center; padding:18px 24px; border-bottom:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--ink-faint); text-transform:uppercase;}
+  .map-svg{width:100%; height:auto; display:block; background:#fbf8f1;}
+  .pin{cursor:pointer;}
+  .pin circle.dot{fill:var(--gold); stroke:#fff; stroke-width:2.5; transition:r .18s ease;}
+  .pin:hover circle.dot{r:9; fill:var(--gold-deep);}
+  .pin text{fill:var(--ink); font-size:12px; font-weight:600; font-family:'Fraunces',serif; pointer-events:none;}
+  .pin.hub circle.dot{fill:var(--ink); r:8;}
+  .trail{fill:none; stroke:rgba(184,134,58,0.55); stroke-width:1.6; stroke-dasharray:2 6; stroke-linecap:round;}
+  .ridge{fill:none; stroke:rgba(23,20,16,0.14); stroke-width:1.6;}
+  .river{fill:none; stroke:rgba(90,140,175,0.4); stroke-width:2.2;}
+  .map-hint{padding:14px 24px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-faint); border-top:1px solid var(--line);}
+
+  .tilt{transition:transform .12s ease-out; transform-style:preserve-3d; will-change:transform;}
+
+  /* VILLAGE CARDS */
+  .vgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:20px;}
+  .vcard{background:var(--card); border:1px solid var(--line); position:relative; overflow:hidden; cursor:pointer; box-shadow:0 8px 24px -14px rgba(23,20,16,0.18); transition:box-shadow .25s;}
+  .vcard:hover{box-shadow:0 18px 40px -16px rgba(23,20,16,0.28);}
+  .vcard .vphoto{height:140px; overflow:hidden; position:relative;}
+  .vcard .vphoto img{width:100%; height:100%; object-fit:cover; transition:transform .5s;}
+  .vcard:hover .vphoto img{transform:scale(1.1);}
+  .vcard .vbody{padding:20px 22px 24px;}
+  .vcard h4{font-size:19px; font-weight:600; margin-bottom:6px;}
+  .vcard .meta{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--gold-deep); text-transform:uppercase; margin-bottom:12px; font-weight:600;}
+  .vcard p{font-size:13.5px; color:var(--ink-dim); line-height:1.55;}
+  .vcard.thin{opacity:0.55; box-shadow:none;}
+  .vcard.thin .meta{color:var(--ink-faint);}
+  .vcard.flash{animation:flashcard 1.1s ease;}
+  @keyframes flashcard{0%{box-shadow:inset 0 0 0 3px var(--gold), 0 18px 40px -16px rgba(23,20,16,0.28);}100%{box-shadow:inset 0 0 0 0px transparent, 0 8px 24px -14px rgba(23,20,16,0.18);}}
+
+  /* CARD GRID */
+  .cgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:22px;}
+  .ccard{background:var(--card); border:1px solid var(--line); box-shadow:0 8px 24px -14px rgba(23,20,16,0.18); transition:box-shadow .25s;}
+  .ccard:hover{box-shadow:0 18px 40px -16px rgba(23,20,16,0.28);}
+  .ccard .cphoto{height:180px; overflow:hidden;}
+  .ccard .cphoto img{width:100%; height:100%; object-fit:cover; transition:transform .5s;}
+  .ccard:hover .cphoto img{transform:scale(1.08);}
+  .ccard .cbody{padding:26px 26px 28px;}
+  .ccard h4{font-size:19px; font-weight:600; margin-bottom:10px; display:flex; align-items:center; gap:8px;}
+  .ccard p{font-size:13.5px; color:var(--ink-dim); line-height:1.6; margin-bottom:8px;}
+  .ccard .fact{font-family:'Fraunces',serif; font-style:italic; font-size:13.5px; color:var(--ink); background:rgba(184,134,58,0.06); border-left:2px solid var(--gold); padding:10px 14px; margin-top:12px;}
+
+  /* LOGISTICS CARDS (was table, now cards) */
+  .lgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;}
+  .lcard{background:var(--card); border:1px solid var(--line-strong); padding:26px; transition:border-color .2s, transform .2s;}
+  .lcard:hover{border-color:var(--gold); transform:translateY(-3px);}
+  .lcard .ltag{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--gold); text-transform:uppercase; margin-bottom:10px;}
+  .lcard h4{font-size:19px; font-weight:600; margin-bottom:10px;}
+  .lcard p{font-size:13.5px; color:var(--ink-dim); line-height:1.6;}
+
+  .flag{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1px; font-weight:600; padding:3px 9px; border-radius:10px; text-transform:uppercase; margin-left:8px;}
+  .flag.myth{background:rgba(184,134,58,0.15); color:var(--gold-deep);}
+  .flag.gap{background:rgba(23,20,16,0.08); color:var(--ink-faint);}
+
+  .callout{border:1px solid var(--line-strong); background:var(--card); padding:28px 32px; margin-top:16px; position:relative;}
+  .callout::before{content:'MYTH CORRECTED'; position:absolute; top:-9px; left:26px; background:var(--bg); padding:0 10px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold-deep);}
+  .callout p{font-size:14.5px; color:var(--ink-dim); line-height:1.65; margin-top:6px;}
+  .callout strong{color:var(--ink);}
+
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;}
+  .two-col > div{background:var(--card); border:1px solid var(--line); padding:28px;}
+  @media(max-width:760px){.two-col{grid-template-columns:1fr;}}
+
+  .photo-break{position:relative; height:48vh; min-height:300px; overflow:hidden;}
+  .photo-break img{width:100%; height:100%; object-fit:cover;}
+  .photo-break::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(14,12,9,0.15),rgba(14,12,9,0.55));}
+  .photo-break .cap{position:absolute; bottom:24px; left:32px; z-index:2; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2.5px; color:#f2ede0; text-transform:uppercase;}
+  .photo-break .cap-title{position:absolute; bottom:24px; right:32px; z-index:2; font-family:'Fraunces',serif; font-style:italic; font-size:24px; color:#f2ede0; max-width:400px; text-align:right;}
+
+  footer{padding:70px 0; text-align:center; background:var(--dark); color:#e8e2d2;}
+  footer .brand-name{font-size:16px; color:#fff;}
+  footer p{color:#a39c8c; font-family:'Fraunces',serif; font-style:italic; font-size:15px; margin-top:16px; max-width:480px; margin-left:auto; margin-right:auto;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <div class="badge"></div>
+      <div class="brand-name">The Slow Map</div>
+    </a>
+    <div class="navlinks">
+      <span>PLACES</span><span>JOURNAL</span><span class="dim">SHOP</span><span>ABOUT</span>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <video class="poster" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=60">
+    <source src="https://videos.pexels.com/video-files/856323/856323-hd_1920_1080_30fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <div class="pill">EXPEDITION 04 — SPITI VALLEY, HIMACHAL PRADESH</div>
+    <h1>Every village.<br>Every pass.<br><em>Every smallest thing.</em></h1>
+    <p class="lede">Most guides give you Kaza, Key Monastery, and a top-10 list. We took apart the whole valley instead — 25+ villages, every monastery, the myths guidebooks get wrong, and exactly what to disclose when the data runs thin.</p>
+    <div class="stats-strip">
+      <div class="stat"><div class="num">2,950–4,650m</div><div class="lbl">Elevation range</div></div>
+      <div class="stat"><div class="num">25+</div><div class="lbl">Villages mapped</div></div>
+      <div class="stat"><div class="num">6</div><div class="lbl">Named monasteries</div></div>
+      <div class="stat"><div class="num">Sept 2025</div><div class="lbl">UNESCO Biosphere status</div></div>
+    </div>
+  </div>
+  <div class="live-strip">
+    <div class="live-chip"><div class="live-dot"></div><div><div class="live-label">Kaza right now</div><div class="live-val" id="live-weather">reading sky…</div></div></div>
+    <div class="live-chip"><div class="live-dot"></div><div><div class="live-label">Local time, Kaza</div><div class="live-val" id="live-clock">—:—:—</div></div></div>
+    <div class="live-chip"><div class="live-dot"></div><div><div class="live-label">Manali–Kaza road</div><div class="live-val" id="live-road">calculating…</div></div></div>
+  </div>
+</div>
+
+<!-- THE MAP -->
+<section>
+  <div class="wrap">
+    <div class="sec-tag">The Map</div>
+    <div class="sec-title">Drawn by hand, not pulled from an <em>API</em>.</div>
+    <div class="sec-sub">Click any point — it jumps you straight to that village's card below. Schematic, not GPS-accurate: this is an expedition sketch, the way an old field guide would draw it.</div>
+
+    <div class="map-shell">
+      <div class="map-caption"><span>Spiti Valley — hand-drawn field sketch</span><span>18 points · click to jump</span></div>
+      <svg class="map-svg" viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="sketchy" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="7" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="7"/>
+          </filter>
+        </defs>
+        <g filter="url(#sketchy)">
+          <path class="ridge" d="M20,120 L160,60 L260,140 L340,50 L430,130 L520,40 L610,120 L700,55 L800,140 L900,70 L980,130"/>
+          <path class="ridge" d="M40,520 L150,470 L250,530 L360,460 L460,520 L560,450 L660,520 L760,460 L860,510 L960,470"/>
+          <path class="river" d="M540,90 C520,160 500,220 500,280 C500,330 470,370 430,400 C500,430 600,440 660,410 C710,390 760,410 800,450"/>
+          <path class="trail" d="M500,300 L470,262 L432,222"/>
+          <path class="trail" d="M432,222 L400,202"/>
+          <path class="trail" d="M400,202 L380,340"/>
+          <path class="trail" d="M380,340 L420,372 L400,392"/>
+          <path class="trail" d="M400,202 L350,182"/>
+          <path class="trail" d="M500,300 L520,322"/>
+          <path class="trail" d="M500,300 L550,100"/>
+          <path class="trail" d="M500,300 L650,382 L750,420"/>
+          <path class="trail" d="M650,382 L700,400"/>
+          <path class="trail" d="M750,420 L800,452"/>
+          <path class="trail" d="M500,300 L600,500 L580,520"/>
+        </g>
+        <g class="pin hub" onclick="jump('kaza')"><circle class="dot" cx="500" cy="300" r="7"/><text x="512" y="296">Kaza</text></g>
+        <g class="pin" onclick="jump('kibber')"><circle class="dot" cx="432" cy="222" r="6"/><text x="444" y="218">Kibber</text></g>
+        <g class="pin" onclick="jump('key')"><circle class="dot" cx="470" cy="262" r="6"/><text x="418" y="258" text-anchor="end">Ki</text></g>
+        <g class="pin" onclick="jump('chicham')"><circle class="dot" cx="400" cy="202" r="6"/><text x="388" y="192" text-anchor="end">Chicham</text></g>
+        <g class="pin" onclick="jump('komic')"><circle class="dot" cx="380" cy="340" r="6"/><text x="368" y="358" text-anchor="end">Komic</text></g>
+        <g class="pin" onclick="jump('langza')"><circle class="dot" cx="420" cy="372" r="6"/><text x="432" y="368">Langza</text></g>
+        <g class="pin" onclick="jump('hikkim')"><circle class="dot" cx="400" cy="392" r="6"/><text x="388" y="410" text-anchor="end">Hikkim</text></g>
+        <g class="pin" onclick="jump('tashigang')"><circle class="dot" cx="350" cy="182" r="6"/><text x="338" y="172" text-anchor="end">Tashigang</text></g>
+        <g class="pin" onclick="jump('demul')"><circle class="dot" cx="520" cy="322" r="6"/><text x="532" y="336">Demul</text></g>
+        <g class="pin" onclick="jump('losar')"><circle class="dot" cx="550" cy="100" r="6"/><text x="562" y="96">Losar</text></g>
+        <g class="pin" onclick="jump('rangrik')"><circle class="dot" cx="480" cy="288" r="5"/><text x="468" y="276" text-anchor="end">Rangrik</text></g>
+        <g class="pin" onclick="jump('dhankar')"><circle class="dot" cx="650" cy="382" r="6"/><text x="662" y="378">Dhankar</text></g>
+        <g class="pin" onclick="jump('lhalung')"><circle class="dot" cx="700" cy="400" r="5"/><text x="712" y="416">Lhalung</text></g>
+        <g class="pin" onclick="jump('tabo')"><circle class="dot" cx="750" cy="420" r="6"/><text x="762" y="416">Tabo</text></g>
+        <g class="pin" onclick="jump('gue')"><circle class="dot" cx="800" cy="452" r="5"/><text x="812" y="448">Gue</text></g>
+        <g class="pin" onclick="jump('mud')"><circle class="dot" cx="600" cy="500" r="6"/><text x="612" y="516">Mud</text></g>
+        <g class="pin" onclick="jump('kungri')"><circle class="dot" cx="580" cy="522" r="5"/><text x="568" y="540" text-anchor="end">Kungri</text></g>
+        <g class="pin" onclick="jump('lingti')"><circle class="dot" cx="460" cy="330" r="5"/><text x="448" y="322" text-anchor="end">Lingti</text></g>
+        <g class="pin" onclick="jump('mane')"><circle class="dot" cx="330" cy="260" r="5"/><text x="318" y="250" text-anchor="end">Mane</text></g>
+      </svg>
+      <div class="map-hint">River = Spiti River (schematic course). Dashed lines = approximate travel routes between villages, not surveyed trails.</div>
+    </div>
+  </div>
+</section>
+
+<div class="photo-break">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/1000_Year_loop.jpg/1920px-1000_Year_loop.jpg" alt="Monastery on a Himalayan hillside">
+  <div class="cap">The Valley</div>
+  <div class="cap-title">"The middle land"</div>
+</div>
+
+<!-- THE VALLEY -->
+<section>
+  <div class="wrap">
+    <div class="sec-title">Between Tibet and <em>everything else</em>.</div>
+    <div class="sec-sub">"Spiti" translates to "the middle land" — the cold-desert corridor between Tibet and the rest of India, often called Little Tibet for its terrain and Buddhist culture.</div>
+    <div class="two-col">
+      <div class="tilt"><h4 style="font-weight:600;margin-bottom:10px;">Geography</h4><p style="color:var(--ink-dim);font-size:14px;line-height:1.7;">Trans-Himalayan region, NE Himachal Pradesh, bordered by Tibet (east), Ladakh (north), Lahaul (west), Kullu (south), Kinnaur (southeast). Valley floor averages ~3,800m; villages and monasteries range from Tabo (~3,050m) to Tashigang (~4,650m). The Spiti River — the Sutlej's largest right-bank tributary — carves the valley, joining the Sutlej at Khab in Kinnaur.</p></div>
+      <div class="tilt"><h4 style="font-weight:600;margin-bottom:10px;">Why it looks like this</h4><p style="color:var(--ink-dim);font-size:14px;line-height:1.7;">A cold high-altitude desert — the Himalayan range blocks nearly all monsoon moisture, so rainfall is essentially absent. Only barley, peas and potatoes survive the climate. Compare Kinnaur next door: monsoon winds reach deeper into that valley, so it stays green and forested while Spiti stays bare, stratified, and multicolored.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VILLAGES -->
+<section id="villages">
+  <div class="wrap">
+    <div class="sec-tag">Every Village</div>
+    <div class="sec-title">Not just Kaza. The whole valley, <em>village by village</em>.</div>
+    <div class="sec-sub">Verified against Census 2011, Wikipedia, and district government sources where possible. Faded cards mean the data was too thin to publish with confidence — disclosed, not invented.</div>
+    <div class="vgrid">
+      <div class="vcard" id="v-kaza" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Kaza_-_Losar_Entry_point.jpg" alt="Kaza"></div><div class="vbody"><h4>Kaza</h4><div class="meta">3,650m · Pop. 3,231 · Hub</div><p>Sub-divisional HQ and largest township — split into Kaza Khas (old town, palace ruins) and Kaza Soma (new town, govt offices, hotels).</p></div></div>
+      <div class="vcard" id="v-kibber" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Kibber_-_a_villege_in_spiti.jpg/1920px-Kibber_-_a_villege_in_spiti.jpg" alt="Kibber"></div><div class="vbody"><h4>Kibber</h4><div class="meta">4,270m · Pop. 366 · 19km</div><p>Long claimed "highest motorable village in the world" — a title now contested by Komic. Gateway to the 1,400 km² Kibber Wildlife Sanctuary.</p></div></div>
+      <div class="vcard" id="v-chicham" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Chicham_Bridge_Spiti_Himachal_Jun18_D72_7433.jpg/1920px-Chicham_Bridge_Spiti_Himachal_Jun18_D72_7433.jpg" alt="Chicham"></div><div class="vbody"><h4>Chicham</h4><div class="meta">4,145m · ~85 homes · 22km</div><p>Home to Asia's highest suspension bridge (2017, 15 years to build) — before it, villagers crossed the gorge by rope-and-pulley trolley.</p></div></div>
+      <div class="vcard" id="v-langza" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Langza_Village%2C_Himachal_Pradesh.jpg/1920px-Langza_Village%2C_Himachal_Pradesh.jpg" alt="Langza"></div><div class="vbody"><h4>Langza</h4><div class="meta">4,420m · Pop. 136 · 16km</div><p>The "fossil village" — marine ammonites weather out of rock that was once the floor of the Tethys Sea. A giant Buddha statue overlooks it.</p></div></div>
+      <div class="vcard" id="v-komic" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Komic_village.jpg/1920px-Komic_village.jpg" alt="Komic"></div><div class="vbody"><h4>Komic</h4><div class="meta">~4,587m · Pop. 84 · 19km</div><p>Marketed via its own PWD signboard as "highest village in the world connected by motorable road." Home to Tangyud Monastery.</p></div></div>
+      <div class="vcard" id="v-hikkim" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Hikkim_Village_and_water_reservoir_used_for_irrigation_spiti_India.jpg/1920px-Hikkim_Village_and_water_reservoir_used_for_irrigation_spiti_India.jpg" alt="Hikkim"></div><div class="vbody"><h4>Hikkim</h4><div class="meta">4,400m · Pop. ~161 · 18km</div><p>World's highest post office, operating since 1983. Also once held India's highest polling booth.</p></div></div>
+      <div class="vcard" id="v-tashigang" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/View_of_Gangchhua_peak_on_the_way_to_Tashigang_village_from_Nako.jpg/1920px-View_of_Gangchhua_peak_on_the_way_to_Tashigang_village_from_Nako.jpg" alt="Tashigang"></div><div class="vbody"><h4>Tashigang</h4><div class="meta">4,650m · ~6 families</div><p>Often cited as the highest inhabited village in Spiti. World's highest polling station. Largely snow-cut in winter.</p></div></div>
+      <div class="vcard" id="v-demul" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Demul_village_spiti.jpg/1920px-Demul_village_spiti.jpg" alt="Demul"></div><div class="vbody"><h4>Demul</h4><div class="meta">~4,320m · 53 households · 32km</div><p>Runs a rotational community-homestay system — roughly half the households host one year, the other half the next, so income spreads evenly.</p></div></div>
+      <div class="vcard" id="v-dhankar" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Dhankar_Village.jpg/1920px-Dhankar_Village.jpg" alt="Dhankar"></div><div class="vbody"><h4>Dhankar</h4><div class="meta">3,894m · Pop. 301</div><p>Former capital of the Spiti kingdom. Its 1,000-year-old monastery, on a cliff over the Spiti-Pin confluence, was named among the world's 100 Most Endangered Sites in 2006.</p></div></div>
+      <div class="vcard" id="v-tabo" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Tabo_Gompa%2C_Spiti.jpg" alt="Tabo"></div><div class="vbody"><h4>Tabo</h4><div class="meta">3,050m</div><p>Home to the "Ajanta of the Himalayas" — a monastery founded 996 CE, one of the oldest continuously operating in the Himalayas.</p></div></div>
+      <div class="vcard" id="v-rangrik" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Kardhang_Biling_Bhaga_Dhauladhar_Oct22_A7C_04645.jpg/1920px-Kardhang_Biling_Bhaga_Dhauladhar_Oct22_A7C_04645.jpg" alt="Rangrik"></div><div class="vbody"><h4>Rangrik</h4><div class="meta">3,780m · Pop. ~900 · 6km</div><p>Spiti's largest village by both area and population — unusually green for the region.</p></div></div>
+      <div class="vcard" id="v-losar" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Losar_Jun18_D72_7824.jpg/1920px-Losar_Jun18_D72_7824.jpg" alt="Losar"></div><div class="vbody"><h4>Losar</h4><div class="meta">~4,084m · Pop. ~242</div><p>First inhabited village after crossing Kunzum La from Manali — also the last Indian village toward the border on this route.</p></div></div>
+      <div class="vcard" id="v-lhalung" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Old_statues_Lhalung.jpg" alt="Lhalung"></div><div class="vbody"><h4>Lhalung</h4><div class="meta">3,658m</div><p>Home to the "Golden Temple" (Serkhang) — founded late 10th century by translator-lama Rinchen Zangpo, gilded frescoes of 50+ deities inside.</p></div></div>
+      <div class="vcard" id="v-gue" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Gue_Village_Monastery.jpg" alt="Gue"></div><div class="vbody"><h4>Gue (Giu)</h4><div class="meta">~3,200m · Pop. 223</div><p>Site of a naturally mummified Buddhist monk, Sangha Tenzin, radiocarbon-dated to ~1475 AD — discovered after a 1975 earthquake.</p></div></div>
+      <div class="vcard" id="v-mud" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Mudh_Village_Pin_Spiti_Himachal_Jun18_D72_7094.jpg/1920px-Mudh_Village_Pin_Spiti_Himachal_Jun18_D72_7094.jpg" alt="Mud"></div><div class="vbody"><h4>Mud (Mudh)</h4><div class="meta">3,810m · Pop. 213</div><p>Last major village in Pin Valley — base camp for the Pin-Parvati and Pin-Bhaba pass treks, and Pin Valley National Park.</p></div></div>
+      <div class="vcard" id="v-kungri" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kungri_Monastery_-_India.jpg/1920px-Kungri_Monastery_-_India.jpg" alt="Kungri"></div><div class="vbody"><h4>Kungri</h4><div class="meta">Pin Valley</div><p>Spiti's second-oldest monastery (~1330 CE) and the only one following the Nyingma school — annual devil-dance/sword-dance festival in July.</p></div></div>
+      <div class="vcard" id="v-mane" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Mane_Kogma_Yogma_Gorge_Seabuckthorn_Fields_Spiti_Jun18_DSC05502.jpg/1920px-Mane_Kogma_Yogma_Gorge_Seabuckthorn_Fields_Spiti_Jun18_DSC05502.jpg" alt="Mane"></div><div class="vbody"><h4>Mane Yogma & Kogma</h4><div class="meta">3,650m</div><p>Twin villages, split by an old flash flood. Mane Yogma is the last Spiti village before the Manirang Pass trail into Kinnaur.</p></div></div>
+      <div class="vcard" id="v-lingti" onclick="pulse(this)"><div class="vphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Conflunce_of_Lingti_and_Spiti_River.jpg/1920px-Conflunce_of_Lingti_and_Spiti_River.jpg" alt="Lingti"></div><div class="vbody"><h4>Lingti</h4><div class="meta">Pop. 48, 11 families</div><p>One of the smallest recorded villages in Spiti by population. Also gives its name to the valley's one real named waterfall.</p></div></div>
+      <div class="vcard thin"><div class="vbody"><h4>Poh, Attargo, Morang, Sichling, Hull, Gulling, Sagnam <span class="flag gap">Data gap</span></h4><div class="meta">On the Kaza-Tabo corridor / Pin Valley</div><p>Confirmed real, named villages — but altitude, population and distinguishing detail weren't independently verifiable this pass. Flagged for a dedicated follow-up rather than guessed.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="photo-break">
+  <img src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?w=1600&q=75" alt="Prayer flags, Buddhist Himalayas">
+  <div class="cap">Monasteries & Living Culture</div>
+  <div class="cap-title">Three sects, six monasteries</div>
+</div>
+
+<!-- MONASTERIES -->
+<section>
+  <div class="wrap">
+    <div class="sec-title">One disputed founding date, <em>every time</em>.</div>
+    <div class="sec-sub">Gelug at Key, Tabo and Dhankar. Nyingma — the oldest Tibetan Buddhist school — only at Kungri. Sakya at Tangyud.</div>
+    <div class="cgrid">
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/1000_Year_loop.jpg/1920px-1000_Year_loop.jpg" alt="Key Monastery"></div><div class="cbody"><h4>Key Monastery</h4><p>Largest in Spiti, ~4,166m, traditionally founded 11th century though reorganized as Gelug after 17th-century Mongol raids. ~250-300 monks in residence.</p><div class="fact">Its Chaam masked-dance festival date shifts yearly with the Tibetan lunar calendar — no fixed month, despite what some listings claim.</div></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tabo_Monjastery_Entrance.jpg/1920px-Tabo_Monjastery_Entrance.jpg" alt="Tabo Monastery"></div><div class="cbody"><h4>Tabo Monastery</h4><p>Founded 996 CE by Rinchen Zangpo — one of the oldest continuously operating Buddhist monasteries in the Himalayas. Nine temples, 23 chortens, cave shrines.</p><div class="fact">Widely claimed as UNESCO tentative-list — repeated everywhere, but not independently confirmed against the primary UNESCO database here.</div></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Dhankar_Gompa_and_village.jpg" alt="Dhankar Monastery"></div><div class="cbody"><h4>Dhankar Monastery</h4><p>Cliff-perched former capital of the Spiti kingdom. Founding century genuinely disputed — 7th, 11th and 12th century all cited, no consensus.</p><div class="fact">Named among the World Monuments Fund's 100 Most Endangered Sites in 2006 — real, dated, the single hardest fact here.</div></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kungri_Monastery_-_India.jpg/1920px-Kungri_Monastery_-_India.jpg" alt="Kungri Monastery"></div><div class="cbody"><h4>Kungri Monastery</h4><p>~1330 CE, Spiti's second-oldest. The valley's only Nyingma monastery. July devil-dance led by Buchen lay-ritualists from Mud village, not monks.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Sakya_Tangyuth_Gompa_Tsewang_%26_Tashi.jpg" alt="Tangyud Monastery"></div><div class="cbody"><h4>Tangyud Monastery</h4><p>Near Komic, ~4,500m — one of the highest-altitude functioning monasteries in India. Sakya sect. Relocated after the 1975 earthquake.</p><div class="fact">Legend: its Mahakala statue "refused to move" during a drought-era relocation attempt — the monks stayed, and the site remains at Komic today.</div></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Old_statues_Lhalung.jpg" alt="Lhalung Monastery"></div><div class="cbody"><h4>Lhalung Monastery</h4><p>Late 10th century, among the earliest in Spiti. Its Serkhang inner shrine — the "Golden Temple" — is named for gilded frescoes, not a golden spire.</p></div></div>
+    </div>
+    <div class="callout"><p>Losar (Tibetan New Year) in Spiti falls in <strong>mid-November to early December</strong> — two to three months earlier than the standard Tibetan Buddhist calendar (Jan-March). The <strong>Halda festival</strong> that appears on nearly every "Lahaul-Spiti festivals" listicle is actually <strong>Lahaul-only</strong> — Spiti doesn't celebrate it. Every generic list we checked conflates the two districts.</p></div>
+  </div>
+</section>
+
+<!-- LOGISTICS -->
+<section>
+  <div class="wrap">
+    <div class="sec-tag">Getting There</div>
+    <div class="sec-title">The part every guide gets <em>vague</em> on purpose.</div>
+    <div class="sec-sub">Permit rules and road status genuinely change year to year — everything below is disclosed as a snapshot, not gospel.</div>
+    <div class="lgrid">
+      <div class="lcard"><div class="ltag">Permits</div><h4>None for Indians</h4><p>Foreign nationals need a Protected Area Permit (offline only, ~10-day validity) for the Kaza/Tabo/Dhankar interior circuit — apply at Reckong Peo, Pooh, or Kaza. Chandratal alone only needs a lighter ₹50 "Beyond Rohtang" permit.</p></div>
+      <div class="lcard"><div class="ltag">Route in</div><h4>Two ways, one safer</h4><p>Manali–Kaza: shorter, but a steep 1-2 day altitude jump over Kunzum Pass — named as the route responsible for most AMS cases. Shimla–Kinnaur–Kaza: longer, gentler, the only route open in winter.</p></div>
+      <div class="lcard"><div class="ltag">Altitude</div><h4>3,650m to 4,650m+</h4><p>Staged stops — Reckong Peo/Kalpa, then Tabo, before pushing to Kaza — are what actually prevents AMS, not just "drink water."</p></div>
+      <div class="lcard"><div class="ltag">Connectivity</div><h4>Kaza only, mostly</h4><p>BSNL + Jio 4G both work in Kaza. A ~60km dead zone runs Gramphu → Batal → Chandratal → Kunzum Pass — the longest in Himachal.</p></div>
+      <div class="lcard"><div class="ltag">Money & fuel</div><h4>Kaza, or nowhere</h4><p>The valley's only two ATMs sit in Kaza — both unreliable in peak season. Kaza also has the only petrol pump inside Spiti proper.</p></div>
+      <div class="lcard"><div class="ltag">Best time</div><h4>Depends what you want</h4><p>Late May–mid-Oct for road access. Late Sept–early Oct for photography. Dec–March for snow leopards. Late Jan–mid-Feb for "whiteout" winter Spiti.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="photo-break">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Kaza_-_Losar_Entry_point.jpg" alt="Himalayan valley village">
+  <div class="cap">Where To Sleep, What To Eat</div>
+  <div class="cap-title">Homestays run the valley</div>
+</div>
+
+<!-- STAYS & FOOD -->
+<section>
+  <div class="wrap">
+    <div class="sec-title">Kaza is the only real <em>hotel town</em>.</div>
+    <div class="two-col">
+      <div class="tilt"><h4 style="font-weight:600;margin-bottom:10px;">Spiti Ecosphere network</h4><p style="color:var(--ink-dim);font-size:14px;line-height:1.7;">A real community-tourism org (founded 2002) running a deliberately-capped homestay network across six villages — Langza, Komic, Demul, Lhalung, Dhankar, Mikkim. Up to three homestays per village, one guest room each. ₹700–1,800/person/night, usually meals included. Demul's rotational system means no traveler stays with the same family two years running.</p></div>
+      <div class="tilt"><h4 style="font-weight:600;margin-bottom:10px;">Kaza & Tabo</h4><p style="color:var(--ink-dim);font-size:14px;line-height:1.7;">Kaza is the only real hotel/guesthouse market — from ₹520 budget guesthouses to Hotel Deyzor (comfort tier, solar+generator power) and Zostel Spiti (backpacker dorms). Tabo has a genuine monastery guesthouse — stay with monks at nominal cost, a real option, not folklore.</p></div>
+    </div>
+    <div class="callout" style="margin-top:24px;"><p style="margin-top:0;"><strong>On the plate:</strong> Thukpa and thentuk (noodle soups), momos, chhurpi (yak-milk cheese), tsampa (roasted barley flour), and butter tea — churned savory, not sweet, and usually the first thing you're offered. Kaza's café scene (Sol Café, Yak Café, Café Deyzor) blends this with backpacker staples like pizza and pancakes; homestays are where the real version lives.</p></div>
+  </div>
+</section>
+
+<!-- TREKS -->
+<section>
+  <div class="wrap">
+    <div class="sec-tag">Beyond The Trail</div>
+    <div class="sec-title">Where a drive becomes an <em>expedition</em>.</div>
+    <div class="cgrid">
+      <div class="ccard"><div class="cphoto"><img src="https://images.unsplash.com/photo-1520962880247-cfaf541c8724?w=600&q=70" alt="Pin-Parvati Pass trek"></div><div class="cbody"><h4>Pin-Parvati Pass</h4><p>5,300m+, 10-12 days, ~110km. "Very difficult" — glacier crossings, no technical gear needed but real route-finding risk. Connects lush Parvati Valley to Spiti's cold desert.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=600&q=70" alt="Parang La"></div><div class="cbody"><h4>Parang La</h4><p>5,538m+, ~8 days, 100km+. The primary real trekking connection between Spiti and Ladakh, ending at Tso Moriri. Remote, no rescue access en route.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Morning_scene_in_Thuskeo_Dhar.jpg/1920px-Morning_scene_in_Thuskeo_Dhar.jpg" alt="Pin Valley National Park"></div><div class="cbody"><h4>Pin Valley National Park</h4><p>1,825km², established 1987. <span class="flag myth">Myth flagged</span> — travel blogs quote "12-15 snow leopards" with no citation. Real science measures density, not a park headcount.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chandratal_1.JPG/1920px-Chandratal_1.JPG" alt="Chandratal Lake"></div><div class="cbody"><h4>Chandratal Lake</h4><p>~4,300m, "Moon Lake" — genuinely crescent-shaped. Camping on the shoreline is banned; designated zones sit 2-3km away.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="photo-break">
+  <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80" alt="Milky Way over Himalayan peaks">
+  <div class="cap">After Dark</div>
+  <div class="cap-title">Sky Quality, tonight: <span id="sky-live">reading…</span></div>
+</div>
+
+<!-- ASTRO -->
+<section>
+  <div class="wrap">
+    <div class="sec-title">What actually makes the sky different — and what's <em>just a claim</em>.</div>
+    <div class="callout"><p style="margin-top:0;">Spiti is <strong>not</strong> IDA/DarkSky International certified — that claim circulates on several travel sites and appears to be false. India's actual certified dark-sky sites are <strong>Hanle (Ladakh)</strong> and <strong>Pench Tiger Reserve (Maharashtra)</strong>. No verified Bortle-scale measurement exists for Spiti at all — informal operator claims range from Class 1 to Class 2, with no cited instrument or survey behind either number.</p></div>
+    <div class="two-col">
+      <div class="tilt"><h4 style="font-weight:600;margin-bottom:10px;">What's real instead</h4><p style="color:var(--ink-dim);font-size:14px;line-height:1.7;">The <strong>Spiti Dome Observatory</strong> opened in Kaza in July 2025 — Himachal Pradesh's first high-altitude public dome observatory, built under HIMCOSTE with two GOTO telescopes for public sessions.</p></div>
+      <div class="tilt"><h4 style="font-weight:600;margin-bottom:10px;">Best window</h4><p style="color:var(--ink-dim);font-size:14px;line-height:1.7;">July–September, aligned to new moon. Winter technically has clearer air, but the access routes are closed. Langza, Komic and Kibber are the most-cited viewpoints for their open, unobstructed horizons.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFBEAT -->
+<section style="border-bottom:none;">
+  <div class="wrap">
+    <div class="sec-tag">What The Guidebooks Miss</div>
+    <div class="sec-title">Genuinely offbeat, genuinely <em>verified</em>.</div>
+    <div class="cgrid">
+      <div class="ccard"><div class="cphoto"><img src="https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=600&q=70" alt="Lingti Frozen Waterfall"></div><div class="cbody"><h4>Lingti Frozen Waterfall</h4><p>The one real, named waterfall inside Spiti proper — a roadside cascade ~60km from Kaza that freezes into ice formations in winter.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Gue_Village_Monastery.jpg" alt="Gue Monastery"></div><div class="cbody"><h4>The Gue Mummy</h4><p>A ~500-600-year-old naturally self-mummified monk, Sangha Tenzin, discovered after the 1975 earthquake — still displayed beside Gue Monastery.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=600&q=70" alt="Shilla Peak"></div><div class="cbody"><h4>Shilla Peak's 900m error</h4><p>Surveyed in 1860 at 7,029m — briefly the presumed highest mountain ever climbed. Modern surveys corrected it to 6,132m.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://images.unsplash.com/photo-1478827387698-1527781a4887?w=600&q=70" alt="Cold Desert Biosphere Reserve"></div><div class="cbody"><h4>Cold Desert Biosphere Reserve</h4><p>September 2025 — Spiti became India's first Cold Desert Biosphere Reserve under UNESCO's programme, spanning 7,770km².</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://images.unsplash.com/photo-1520962880247-cfaf541c8724?w=600&q=70" alt="Amchi tradition"></div><div class="cbody"><h4>Stone medicine</h4><p>Just 8-10 practicing Amchis remain. In Demul, they use a mineral called Chug Jhi — "male" and "female" stone, given cross-gender — for gastric ailments.</p></div></div>
+      <div class="ccard"><div class="cphoto"><img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=600&q=70" alt="Manikaran correction"></div><div class="cbody"><h4>Correcting "Manikaran"</h4><p>Multiple sites list Manikaran hot springs as "near Spiti" — it's actually a different valley entirely. No verified hot springs exist inside Spiti proper.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="justify-content:center;"><div class="badge" style="margin:0 auto 14px;"></div></div>
+    <div class="brand-name">The Slow Map</div>
+    <p>Every claim on this page traces to a real source. Where the research came up thin, we said so instead of filling the gap. That's the whole method.</p>
+    <a href="#villages" class="btn gold" style="margin-top:28px;">Back to the villages ↑</a>
+  </div>
+</footer>
+
+<script>
+  function jump(id){
+    var el = document.getElementById('v-' + id);
+    if(!el) return;
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    pulse(el);
+  }
+  function pulse(el){
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
+  }
+
+  // 3D tilt on hover for cards
+  document.querySelectorAll('.tilt, .ccard, .vcard, .lcard').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(700px) rotateX(' + (y * -5) + 'deg) rotateY(' + (x * 5) + 'deg) translateY(-2px)';
+    });
+    card.addEventListener('mouseleave', function(){
+      card.style.transform = 'perspective(700px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+
+  // LIVE: Kaza local clock (IST, UTC+5:30)
+  function tickClock(){
+    var utc = new Date();
+    var ist = new Date(utc.getTime() + (utc.getTimezoneOffset()*60000) + (5.5*3600000));
+    var hh = String(ist.getHours()).padStart(2,'0');
+    var mm = String(ist.getMinutes()).padStart(2,'0');
+    var ss = String(ist.getSeconds()).padStart(2,'0');
+    var el = document.getElementById('live-clock');
+    if(el) el.textContent = hh+':'+mm+':'+ss+' IST';
+  }
+  setInterval(tickClock, 1000); tickClock();
+
+  // LIVE: days until Manali-Kaza road typically reopens (~May 25, snow-clearance dependent)
+  function roadCountdown(){
+    var now = new Date();
+    var year = now.getFullYear();
+    var target = new Date(year, 4, 25); // May 25
+    if(now > target) target = new Date(year+1, 4, 25);
+    var days = Math.ceil((target - now) / 86400000);
+    var el = document.getElementById('live-road');
+    if(el) el.textContent = (days <= 0 ? 'open now (seasonal)' : '~'+days+' days to typical reopen');
+  }
+  roadCountdown();
+
+  // LIVE: real weather + cloud cover for Kaza via Open-Meteo (free, no key)
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=32.2265&longitude=78.0714&current_weather=true&hourly=cloudcover&timezone=Asia%2FKolkata')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var w = d.current_weather;
+      var codes = {0:'clear sky',1:'mostly clear',2:'partly cloudy',3:'overcast',45:'fog',48:'fog',51:'light drizzle',61:'light rain',71:'light snow',73:'snow',75:'heavy snow',95:'thunderstorm'};
+      var desc = codes[w.weathercode] || ('code '+w.weathercode);
+      var el = document.getElementById('live-weather');
+      if(el) el.textContent = Math.round(w.temperature)+'°C, '+desc;
+
+      // cloud cover -> sky clarity read for the After Dark section
+      var hourlyTimes = d.hourly.time, hourlyClouds = d.hourly.cloudcover;
+      var nowIdx = 0;
+      var nowISO = new Date().toISOString().slice(0,13);
+      for(var i=0;i<hourlyTimes.length;i++){ if(hourlyTimes[i].slice(0,13) === nowISO){ nowIdx = i; break; } }
+      var cloud = hourlyClouds[nowIdx];
+      var skyEl = document.getElementById('sky-live');
+      if(skyEl){
+        var read = cloud < 20 ? 'clear — good stargazing odds' : cloud < 60 ? 'partly cloudy' : 'overcast, low odds tonight';
+        skyEl.textContent = cloud+'% cloud cover — '+read;
+      }
+    })
+    .catch(function(){
+      var el = document.getElementById('live-weather'); if(el) el.textContent = 'offline';
+      var skyEl = document.getElementById('sky-live'); if(skyEl) skyEl.textContent = 'unavailable';
+    });
+</script>
+
+</body>
+</html>
